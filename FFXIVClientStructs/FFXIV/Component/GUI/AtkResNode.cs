@@ -331,7 +331,8 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B 8C 24")]
     public partial void SetPriority(ushort priority);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 75 7F")]
+    //[MemberFunction("E8 ?? ?? ?? ?? 3C 01 75 7F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 0F 85 AD")]
     public partial bool IsVisible();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 08 48 83 EE 01 75 D5 48 8B 4C 24 ??")]

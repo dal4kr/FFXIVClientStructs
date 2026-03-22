@@ -1,3 +1,7 @@
+# This file is for the KR server client.
+# For the global server client,
+# https://raw.githubusercontent.com/aers/FFXIVClientStructs/refs/heads/main/ida/data.yml
+
 version: 2026.03.07.0000.0000
 
 globals:
@@ -109,6 +113,7 @@ classes:
 #oldfail       0x1409866D0: SetupDefaultTarget # inlined at 0x140942529
       # 0x140AC1F90: AddCharacterToGPose
       0x140988690: RemoveCharacterFromGPose
+
   Client::Game::UI::ContentsFinderQueueInfo:
     funcs:
       0x140B28E20: QueueDuties
@@ -151,6 +156,9 @@ classes:
     vfuncs:
       1: Destroy
       2: UpdateFromTimeline
+    funcs:
+      0x14063E4E0: IsVisible
+      0x14063E510: ToggleVisibility
   Client::UI::RaptureAtkModule:
     vtbls:
       - ea: 0x141EA1578

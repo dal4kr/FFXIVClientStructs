@@ -241,7 +241,6 @@ Error: Component::GUI::AtkResNode.SetXShort not found bad sig? E8 ?? ?? ?? ?? 4A
 Error: Component::GUI::AtkResNode.SetYShort not found bad sig? E8 ?? ?? ?? ?? 41 8B 54 9C
 Error: Component::GUI::AtkResNode.GetHeight not found bad sig? E8 ?? ?? ?? ?? 66 03 85
 Error: Component::GUI::AtkResNode.GetRotation not found bad sig? E8 ?? ?? ?? ?? 44 0F 28 8C 24 ?? ?? ?? ?? 48 8D 9F
-Error: Component::GUI::AtkResNode.IsVisible not found bad sig? E8 ?? ?? ?? ?? 3C 01 75 7F
 Error: Component::GUI::AtkResNode.GetTimelineLabel not found bad sig? E8 ?? ?? ?? ?? 66 41 3B C4 75
 Error: Component::GUI::AtkResNode.DisableTimeline not found bad sig? E8 ?? ?? ?? ?? 33 FF 39 BD
 Error: Client::Game::Control::TargetSystem.GetTargetObjectId not found bad sig? E8 ?? ?? ?? ?? 4C 8B F8 33 F6 EB
