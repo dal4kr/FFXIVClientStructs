@@ -30,6 +30,7 @@ public unsafe partial struct MacroEncoder {
         return null;
     }
 
+    // TODO: fix signature
     [MemberFunction("E8 ?? ?? ?? ?? FF CE 89 74 24")]
     public partial int EncodeParameter(Utf8String* output, Utf8String* param, byte type, int* outExtraParams);
 

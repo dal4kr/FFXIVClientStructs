@@ -435,3 +435,6 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+
+ida/data.global.yml

@@ -3,6 +3,8 @@
 # @menupath Tools.Scripts.ffxiv_exdgetters
 # @runtime PyGhidra
 
+# KR modification: Only works on Windows with IDA 9.0
+
 from json import load
 from os import getenv
 from os.path import join
@@ -59,7 +61,7 @@ if api is None:
 
                     if ea == 0xFFFFFFFFFFFFFFFF:
                         break
-                    
+
                     if sheetSearchPattern == None:
                         sheetEa = ea + sheetSearchOffset
                     else:
@@ -154,13 +156,13 @@ if api is None:
                 else:
                     self.delete_enum_members(enum_id)
                     idc.set_enum_bf(enum_id, False)
-                    
+
                 self.set_enum_width(enum_id, width)
                 if width == 1:
                     if idaapi.IDA_SDK_VERSION < 900:
                         self.add_enum_member(enum_id, f"{sheet_name}.tmp", self.get_enum_default_mask(enum_id))
                     self.set_enum_as_bf(enum_id)
-                        
+
                 for key in values:
                     self.add_enum_member(enum_id, f"{sheet_name}.{values[key]}", key)
 
@@ -235,7 +237,7 @@ if api is None:
                     yield ea
                     ea = ea + 1
                     ea = self.search_binary(ea, pattern, ida_search.SEARCH_DOWN)
-            
+
             def comment_rows(self, pattern: dict[str, int], values: dict[int, str]):
                 for pattern_key in pattern:
                     for ea in list(self.get_all_eas(pattern_key)):
@@ -244,203 +246,207 @@ if api is None:
                             sheetName = values[sheetIdx]
                             ida_bytes.set_cmt(ea, "Sheet: {0} ({1})".format(sheetName, sheetIdx), 0)
                         except Exception as e:
-                            print(f"An unexpected error occurred at 0x{hex(ea)}: {e}")
+                            print(f"An unexpected error occurred at {hex(ea)}: {e}")
                 pass
 
         api = IdaApi()
 
-if api is None:
-    try:
-        import ghidra
-        import re
-        try:
-            from ghidra.ghidra_builtins import * # ghidra-stubs
-        except ImportError:
-            pass
+# if api is None:
+#     try:
+#         import ghidra
+#         import re
+#         try:
+#             from ghidra.ghidra_builtins import * # ghidra-stubs
+#         except ImportError:
+#             pass
 
-        from ghidra.program.model.data import *
-        from ghidra.program.model.listing import *
-        from ghidra.program.model.symbol import SourceType
-        from ghidra.app.util import SymbolPathParser
-        from java.util import ArrayList
+#         from ghidra.program.model.data import *
+#         from ghidra.program.model.listing import *
+#         from ghidra.program.model.symbol import SourceType
+#         from ghidra.app.util import SymbolPathParser
+#         from java.util import ArrayList
 
-    except ImportError:
-        print("Warning: Unable to load Ghidra")
-    else:
-        # noinspection PyUnresolvedReferences
-        class GhidraApi(BaseApi):
-            def create_enum_struct(self, name, values, width = 0):
-                # type: (str, dict[int, str], int) -> None
-                path = self.get_datatype_path(name)
-                enum_dt = EnumDataType(path.getCategoryPath(), path.getDataTypeName(), width or 8)
-                is_sheets_enum = name == "Component::Exd::SheetsEnum"
-                for enum_value, enum_name in values.items():
-                    if monitor.isCancelled():
-                        break
-                    if not is_sheets_enum and "_" in enum_name:
-                        enum_name = "".join(enum_name.split("_")[1:])
-                    enum_dt.add(enum_name, enum_value)
-                if width == 0:
-                    enum_dt.setLength(enum_dt.getMinimumPossibleLength())
-                if enum_dt.getName(0) is None:
-                    enum_dt.add("None", 0)
-                dt = currentProgram.getDataTypeManager().getDataType(path)
-                if dt is None:
-                    currentProgram.getDataTypeManager().addDataType(enum_dt, None)
-                else:
-                    dt.replaceWith(enum_dt)
+#     except ImportError:
+#         print("Warning: Unable to load Ghidra")
+#     else:
+#         # noinspection PyUnresolvedReferences
+#         class GhidraApi(BaseApi):
+#             def create_enum_struct(self, name, values, width = 0):
+#                 # type: (str, dict[int, str], int) -> None
+#                 path = self.get_datatype_path(name)
+#                 enum_dt = EnumDataType(path.getCategoryPath(), path.getDataTypeName(), width or 8)
+#                 is_sheets_enum = name == "Component::Exd::SheetsEnum"
+#                 for enum_value, enum_name in values.items():
+#                     if monitor.isCancelled():
+#                         break
+#                     if not is_sheets_enum and "_" in enum_name:
+#                         enum_name = "".join(enum_name.split("_")[1:])
+#                     enum_dt.add(enum_name, enum_value)
+#                 if width == 0:
+#                     enum_dt.setLength(enum_dt.getMinimumPossibleLength())
+#                 if enum_dt.getName(0) is None:
+#                     enum_dt.add("None", 0)
+#                 dt = currentProgram.getDataTypeManager().getDataType(path)
+#                 if dt is None:
+#                     currentProgram.getDataTypeManager().addDataType(enum_dt, None)
+#                 else:
+#                     dt.replaceWith(enum_dt)
 
-            def create_struct(self, name, fields):
-                # type: (str, dict[str, str]) -> None
-                dt_path = self.get_datatype_path(name)
-                struct = StructureDataType(dt_path.getCategoryPath(), dt_path.getDataTypeName(), 0)
-                struct.setExplicitMinimumAlignment(4)
-                for [offset, [type_name, field_name]] in fields.items():
-                    if monitor.isCancelled():
-                        break
-                    field_dt = currentProgram.getDataTypeManager().getDataType(self.get_datatype_path(type_name))
-                    if field_dt is None:
-                        print(f"Warning: Data type {name} field {field_name} has missing type {type_name} ({dt_path})")
-                        continue
-                    struct.insertAtOffset(offset, field_dt, -1, field_name, None)
-                dt = currentProgram.getDataTypeManager().getDataType(dt_path)
-                if dt is None:
-                    currentProgram.getDataTypeManager().addDataType(struct, None)
-                else:
-                    dt.replaceWith(struct)
+#             def create_struct(self, name, fields):
+#                 # type: (str, dict[str, str]) -> None
+#                 dt_path = self.get_datatype_path(name)
+#                 struct = StructureDataType(dt_path.getCategoryPath(), dt_path.getDataTypeName(), 0)
+#                 struct.setExplicitMinimumAlignment(4)
+#                 for [offset, [type_name, field_name]] in fields.items():
+#                     if monitor.isCancelled():
+#                         break
+#                     field_dt = currentProgram.getDataTypeManager().getDataType(self.get_datatype_path(type_name))
+#                     if field_dt is None:
+#                         print(f"Warning: Data type {name} field {field_name} has missing type {type_name} ({dt_path})")
+#                         continue
+#                     struct.insertAtOffset(offset, field_dt, -1, field_name, None)
+#                 dt = currentProgram.getDataTypeManager().getDataType(dt_path)
+#                 if dt is None:
+#                     currentProgram.getDataTypeManager().addDataType(struct, None)
+#                 else:
+#                     dt.replaceWith(struct)
 
-            def set_func_name(self, ea, name, cmt):
-                # type: (int, str, str) -> None
-                func = getFunctionAt(ea)
-                if func is not None:
-                    func.setName(None, SourceType.DEFAULT)
-                    func.setName(name, SourceType.USER_DEFINED)
-                    func.setComment(cmt)
+#             def set_func_name(self, ea, name, cmt):
+#                 # type: (int, str, str) -> None
+#                 func = getFunctionAt(ea)
+#                 if func is not None:
+#                     func.setName(None, SourceType.DEFAULT)
+#                     func.setName(name, SourceType.USER_DEFINED)
+#                     func.setComment(cmt)
 
-            def process_pattern(self, pattern):
-                # type: (str) -> None
-                (suffix, _) = exd_func_patterns[pattern]
-                pattern = "".join(["\\x" + x if x != "?" else "." for x in pattern.split(" ")])
-                if suffix is not None:
-                    print(f"Finding exd funcs of {suffix}... please wait.")
-                self.do_pattern(pattern, suffix)
+#             def process_pattern(self, pattern):
+#                 # type: (str) -> None
+#                 (suffix, _) = exd_func_patterns[pattern]
+#                 pattern = "".join(["\\x" + x if x != "?" else "." for x in pattern.split(" ")])
+#                 if suffix is not None:
+#                     print(f"Finding exd funcs of {suffix}... please wait.")
+#                 self.do_pattern(pattern, suffix)
 
-            def do_pattern(self, pattern, suffix):
-                # type: (string, string) -> None
-                block = currentProgram.getMemory().getBlock(".text")
-                address_set = currentProgram.getAddressFactory().getAddressSet(block.getStart(), block.getEnd())
-                result_list = findBytes(address_set, pattern, 8192, 1)
-                for ea in result_list:
-                    if monitor.isCancelled():
-                        break
-                    sheet_index = self.get_sheet_index(ea)
-                    sheet_name = exd_map.get(sheet_index)
-                    if sheet_name is None:
-                        print(f"Warning: sheet index {sheet_index} is undefined at {ea}")
-                        continue
-                    func_name = f"Component::Exd::ExdModule.Get{sheet_name}{suffix}"
-                    self.set_func_name(ea, func_name, f"Sheet: {sheet_name} ({sheet_index})")
-                    if suffix == "SheetIndex":
-                        return
+#             def do_pattern(self, pattern, suffix):
+#                 # type: (string, string) -> None
+#                 block = currentProgram.getMemory().getBlock(".text")
+#                 address_set = currentProgram.getAddressFactory().getAddressSet(block.getStart(), block.getEnd())
+#                 result_list = findBytes(address_set, pattern, 8192, 1)
+#                 for ea in result_list:
+#                     if monitor.isCancelled():
+#                         break
+#                     sheet_index = self.get_sheet_index(ea)
+#                     sheet_name = exd_map.get(sheet_index)
+#                     if sheet_name is None:
+#                         print(f"Warning: sheet index {sheet_index} is undefined at {ea}")
+#                         continue
+#                     func_name = f"Component::Exd::ExdModule.Get{sheet_name}{suffix}"
+#                     self.set_func_name(ea, func_name, f"Sheet: {sheet_name} ({sheet_index})")
+#                     if suffix == "SheetIndex":
+#                         return
 
-                    return_type = PointerDataType(VoidDataType.dataType)
-                    if suffix == "RowCount":
-                        return_type = IntegerDataType()
-                    else:
-                        path = self.get_datatype_path(f"{exd_struct_map[sheet_index]}")
-                        dt = currentProgram.getDataTypeManager().getDataType(path)
-                        if dt is not None:
-                            return_type = PointerDataType(dt)
+#                     return_type = PointerDataType(VoidDataType.dataType)
+#                     if suffix == "RowCount":
+#                         return_type = IntegerDataType()
+#                     else:
+#                         path = self.get_datatype_path(f"{exd_struct_map[sheet_index]}")
+#                         dt = currentProgram.getDataTypeManager().getDataType(path)
+#                         if dt is not None:
+#                             return_type = PointerDataType(dt)
 
-                    return_var = ReturnParameterImpl(return_type, currentProgram)
-                    arg_vars = ArrayList()
-                    arg_vars.add(ParameterImpl("rowId", UnsignedIntegerDataType(), currentProgram))
-                    if suffix == "RowAndSubRowId":
-                        arg_vars.add(ParameterImpl("subRowId", UnsignedIntegerDataType(), currentProgram))
-                    elif suffix == "RowCount":
-                        arg_vars.clear()
+#                     return_var = ReturnParameterImpl(return_type, currentProgram)
+#                     arg_vars = ArrayList()
+#                     arg_vars.add(ParameterImpl("rowId", UnsignedIntegerDataType(), currentProgram))
+#                     if suffix == "RowAndSubRowId":
+#                         arg_vars.add(ParameterImpl("subRowId", UnsignedIntegerDataType(), currentProgram))
+#                     elif suffix == "RowCount":
+#                         arg_vars.clear()
 
-                    update_type = Function.FunctionUpdateType.DYNAMIC_STORAGE_ALL_PARAMS
-                    getFunctionAt(ea).updateFunction("__fastcall", return_var, arg_vars, update_type, False, SourceType.USER_DEFINED)
+#                     update_type = Function.FunctionUpdateType.DYNAMIC_STORAGE_ALL_PARAMS
+#                     getFunctionAt(ea).updateFunction("__fastcall", return_var, arg_vars, update_type, False, SourceType.USER_DEFINED)
 
-            def get_sheet_index(self, ea):
-                # type: (Address) -> int
-                func = getFunctionAt(ea)
-                if func is None and disassemble(ea):
-                    func = createFunction(ea, None)
-                if func is None:
-                    return -1
-                min_address = func.getBody().getMinAddress().getOffset()
-                instructions = currentProgram.getListing().getInstructions(func.getBody(), True)
-                for insn in instructions:
-                    if monitor.isCancelled():
-                        break
-                    if insn.getFlowType().isCall():
-                        return self.get_rdx_arg(insn, min_address)
-                return -1
+#             def get_sheet_index(self, ea):
+#                 # type: (Address) -> int
+#                 func = getFunctionAt(ea)
+#                 if func is None and disassemble(ea):
+#                     func = createFunction(ea, None)
+#                 if func is None:
+#                     return -1
+#                 min_address = func.getBody().getMinAddress().getOffset()
+#                 instructions = currentProgram.getListing().getInstructions(func.getBody(), True)
+#                 for insn in instructions:
+#                     if monitor.isCancelled():
+#                         break
+#                     if insn.getFlowType().isCall():
+#                         return self.get_rdx_arg(insn, min_address)
+#                 return -1
 
-            def get_rdx_arg(self, insn, min_address):
-                # type: (Instruction, int) -> int
-                target = insn.getRegister("RDX")
-                while insn is not None and insn.getMinAddress().getOffset() >= min_address:
-                    if monitor.isCancelled():
-                        break
-                    insn = insn.getPrevious()
-                    if insn is None:
-                        break
-                    outp = insn.getResultObjects()
-                    if outp.length == 0 or outp[0] != target:
-                        continue
-                    value = insn.getScalar(1)
-                    if value is not None:
-                        return value.getValue()
-                return -1
+#             def get_rdx_arg(self, insn, min_address):
+#                 # type: (Instruction, int) -> int
+#                 target = insn.getRegister("RDX")
+#                 while insn is not None and insn.getMinAddress().getOffset() >= min_address:
+#                     if monitor.isCancelled():
+#                         break
+#                     insn = insn.getPrevious()
+#                     if insn is None:
+#                         break
+#                     outp = insn.getResultObjects()
+#                     if outp.length == 0 or outp[0] != target:
+#                         continue
+#                     value = insn.getScalar(1)
+#                     if value is not None:
+#                         return value.getValue()
+#                 return -1
 
-            def get_datatype_path(self, name):
-                # type: (str) -> DataTypePath
-                if name == "__int8": name = "char"
-                if name == "__int16": name = "short"
-                if name == "__int32": name = "int"
-                if name == "__int64": name = "longlong"
-                if name == "unsigned __int8" or name == "unsigned char": name = "byte"
-                if name == "unsigned __int16" or name == "unsigned short": name = "ushort"
-                if name == "unsigned __int32" or name == "unsigned int": name = "uint"
-                if name == "unsigned __int64" or name == "unsigned long long": name = "ulonglong"
-                path_parts = SymbolPathParser.parse(name)
-                return DataTypePath("/" + "/".join(path_parts[:-1]), path_parts[-1])
-            
-            def comment_rows(self, pattern: dict[str, int], values: dict[int, str]):
-                pass
+#             def get_datatype_path(self, name):
+#                 # type: (str) -> DataTypePath
+#                 if name == "__int8": name = "char"
+#                 if name == "__int16": name = "short"
+#                 if name == "__int32": name = "int"
+#                 if name == "__int64": name = "longlong"
+#                 if name == "unsigned __int8" or name == "unsigned char": name = "byte"
+#                 if name == "unsigned __int16" or name == "unsigned short": name = "ushort"
+#                 if name == "unsigned __int32" or name == "unsigned int": name = "uint"
+#                 if name == "unsigned __int64" or name == "unsigned long long": name = "ulonglong"
+#                 path_parts = SymbolPathParser.parse(name)
+#                 return DataTypePath("/" + "/".join(path_parts[:-1]), path_parts[-1])
 
-        api = GhidraApi()
+#             def comment_rows(self, pattern: dict[str, int], values: dict[int, str]):
+#                 pass
+
+#         api = GhidraApi()
 
 if api is None:
     print("Warning: No API available, exiting.")
     exit(1)
 
 
-if sys.platform.startswith("linux"):
-    launcher_ini = join(getenv("HOME"), ".xlcore", "launcher.ini")
-    game_path = None
+game_path = None
+# if sys.platform.startswith("linux"):
+#     launcher_ini = join(getenv("HOME"), ".xlcore", "launcher.ini")
+#     game_path = None
 
-    f = open(launcher_ini, "r")
-    try:
-        for line in f:
-            if line.startswith("GamePath="):
-                game_path = line.split("=", 1)[1].strip()
-                break
-    finally:
-        f.close()
+#     f = open(launcher_ini, "r")
+#     try:
+#         for line in f:
+#             if line.startswith("GamePath="):
+#                 game_path = line.split("=", 1)[1].strip()
+#                 break
+#     finally:
+#         f.close()
 
-    if not game_path:
-        raise ValueError("GamePath key not found in {0}".format(launcher_ini))
-else:
-    f = open(join(getenv("APPDATA"), "XIVLauncher", "launcherConfigV3.json"), "r")
-    try:
-        config = load(f)
-    finally:
-        f.close()
-    game_path = config["GamePath"]
+#     if not game_path:
+#         raise ValueError("GamePath key not found in {0}".format(launcher_ini))
+# else:
+#     f = open(join(getenv("APPDATA"), "XIVLauncher", "launcherConfigV3.json"), "r")
+#     try:
+#         config = load(f)
+#     finally:
+#         f.close()
+#     game_path = config["GamePath"]
+
+if game_path is None:
+    game_path = "C:\\Program Files (x86)\\FINAL FANTASY XIV - KOREA"
 
 game_data = GameData(join(game_path, "game"))
 

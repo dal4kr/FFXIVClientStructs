@@ -6885,13 +6885,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-  - name: OnReceiveZonePacket
-    offset: 8
-  - name: OnReceiveChatPacket
-    offset: 16
   member_functions: []
 - type: Application::Network::WorkDefinitions::Base
   name: Base
@@ -6899,9 +6892,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Application::Network::ZoneLoginCallbackInterface
   name: ZoneLoginCallbackInterface
@@ -7087,15 +7077,6 @@ structs:
   - type: Client::Game::Character::Character*
     name: OwnerObject
     offset: 8
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-  - name: Initialize
-    offset: 8
-  - name: Terminate
-    offset: 16
-  - name: Update
-    offset: 24
   member_functions: []
 - type: Client::Game::Character::CustomizeData
   name: CustomizeData
@@ -7843,7 +7824,6 @@ structs:
   - type: Client::Game::Character::Character*
     name: Parent
     offset: 456
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 8B BC 24 ?? ?? ?? ?? 4C 8D 9C 24 ?? ?? ?? ?? 49 8B 5B 40
     return_type: void
@@ -7948,7 +7928,6 @@ structs:
   union: False
   size: 192
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::CurrencyManager::ContentCurrencyItem
   name: ContentCurrencyItem
@@ -8134,525 +8113,6 @@ structs:
   - type: Client::Game::Event::EventSceneModule*
     name: EventSceneModule
     offset: 8
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-  - name: ContinueBattleBGM
-    offset: 8
-  - name: ContinueEventBGM
-    offset: 16
-  - name: StopEventBGM
-    offset: 24
-  - name: ContinueEventBGMUntilWarp
-    offset: 32
-  - name: LastingBGM
-    offset: 40
-  - name: ResetBGM
-    offset: 48
-  - name: DisableSceneSkip
-    offset: 56
-  - name: EnableSceneSkip
-    offset: 64
-  - name: PlayCutScene
-    offset: 72
-  - name: GetCutSceneMultiResult
-    offset: 80
-  - name: FadeIn
-    offset: 88
-  - name: FadeOut
-    offset: 96
-  - name: IsEventTutorialFlag
-    offset: 104
-  - name: PlaySharedGroupTimeline
-    offset: 112
-  - name: CheckSharedGroupTimelineState
-    offset: 120
-  - name: SetSharedGroupTimelineState
-    offset: 128
-  - name: WaitForSharedGroupTimeline
-    offset: 136
-  - name: PlayQuestGimmickReaction
-    offset: 144
-  - name: ResetGimmickSharedGroupTimelineStateByIndexes
-    offset: 152
-  - name: PlaySharedGroupTimelineSkippable
-    offset: 160
-  - name: Talk
-    offset: 168
-  - name: TalkAsync
-    offset: 176
-  - name: SystemTalk
-    offset: 184
-  - name: CloseTalk
-    offset: 192
-  - name: OK
-    offset: 200
-  - name: YesNo
-    offset: 208
-  - name: YesNoCount
-    offset: 216
-  - name: YesNoCheck
-    offset: 224
-  - name: YesNoAddon
-    offset: 232
-  - name: YesNoAddonCheck
-    offset: 240
-  - name: YesNoStartFate
-    offset: 248
-  - name: YesNoItem
-    offset: 256
-  - name: YesNoItemCheck
-    offset: 264
-  - name: Menu
-    offset: 272
-  - name: List
-    offset: 280
-  - name: Letter
-    offset: 288
-  - name: LeveAccepted
-    offset: 296
-  - name: LeveCompleted
-    offset: 304
-  - name: LeveStart
-    offset: 312
-  - name: LeveSuccess
-    offset: 320
-  - name: LeveFailed
-    offset: 328
-  - name: ScreenImage
-    offset: 336
-  - name: ScreenImageAndTextSimple
-    offset: 344
-  - name: LoadEventPicture
-    offset: 352
-  - name: WaitForLoadEventPicture
-    offset: 360
-  - name: EventPicture
-    offset: 368
-  - name: EventPictureOffset
-    offset: 376
-  - name: LearningAction
-    offset: 384
-  - name: LearningQuestRewardAction
-    offset: 392
-  - name: LearningTrait
-    offset: 400
-  - name: BattleTalk
-    offset: 408
-  - name: Prompt
-    offset: 416
-  - name: PromptName
-    offset: 424
-  - name: NpcRepair
-    offset: 432
-  - name: CutSceneReplay
-    offset: 440
-  - name: CompanyChest
-    offset: 448
-  - name: FreeCompanyExchange
-    offset: 456
-  - name: FreeCompanyCrestEditor
-    offset: 464
-  - name: FreeCompanyCrestDecal
-    offset: 472
-  - name: MateriaMeld
-    offset: 480
-  - name: Materialize
-    offset: 488
-  - name: SuspendedMateriaExchange
-    offset: 496
-  - name: SuspendedMateriaSell
-    offset: 504
-  - name: LegacyItemStorage
-    offset: 512
-  - name: HousingKickStorage
-    offset: 520
-  - name: Cabinet
-    offset: 528
-  - name: ItemSearchWidget
-    offset: 536
-  - name: ScenarioMessage
-    offset: 544
-  - name: LogMessage
-    offset: 552
-  - name: BalloonTalk
-    offset: 560
-  - name: ScreenGC
-    offset: 568
-  - name: Inventory
-    offset: 576
-  - name: CloseInventory
-    offset: 584
-  - name: GrandCompanyRankUp
-    offset: 592
-  - name: FCOrganizeSheet
-    offset: 600
-  - name: TripleTriadCardToCoin
-    offset: 608
-  - name: GoldSaucerBuyCoin
-    offset: 616
-  - name: InputNumeric
-    offset: 624
-  - name: ContentFinder
-    offset: 632
-  - name: ContentFinderByCondition
-    offset: 640
-  - name: HousingPortal
-    offset: 648
-  - name: HousingGardeningPlant
-    offset: 656
-  - name: HousingGardeningPlantFertilizer
-    offset: 664
-  - name: RefreshMonsterNote
-    offset: 672
-  - name: GrayoutMenu
-    offset: 680
-  - name: IconMenu
-    offset: 688
-  - name: GridMenu
-    offset: 696
-  - name: ResultMenu
-    offset: 704
-  - name: CancelNpcTrade
-    offset: 712
-  - name: NpcTrade
-    offset: 720
-  - name: MateriaTrade
-    offset: 728
-  - name: RelicSphereUpgrade
-    offset: 736
-  - name: HousingPersonalRoomPortal
-    offset: 744
-  - name: MiniGame
-    offset: 752
-  - name: MobHuntBoard
-    offset: 760
-  - name: HousingBuddyList
-    offset: 768
-  - name: HousingBuddySelectReward
-    offset: 776
-  - name: HousingBuddySelectFood
-    offset: 784
-  - name: HousingBuddyMenu
-    offset: 792
-  - name: Wedding
-    offset: 800
-  - name: HousingWheelControlMenu
-    offset: 808
-  - name: HousingWheelSelectEnergy
-    offset: 816
-  - name: HouseRetainerSaleHistory
-    offset: 824
-  - name: HouseRetainerSaleItem
-    offset: 832
-  - name: OpenSelectString
-    offset: 840
-  - name: SkyIslandAetherialExchange
-    offset: 848
-  - name: TutorialContent
-    offset: 856
-  - name: HousingPlantPotSeed
-    offset: 864
-  - name: HousingPlantPotFertilize
-    offset: 872
-  - name: LogMessageContentOpen
-    offset: 880
-  - name: MentorQualified
-    offset: 888
-  - name: MentorConfirm
-    offset: 896
-  - name: OpenLuaUI
-    offset: 904
-  - name: ShortTalk
-    offset: 912
-  - name: ShortTalkWithLineVoice
-    offset: 920
-  - name: CloseShortTalk
-    offset: 928
-  - name: FakeNotice
-    offset: 936
-  - name: Wait
-    offset: 944
-  - name: WaitForPan
-    offset: 952
-  - name: WaitForFade
-    offset: 960
-  - name: WaitForDolly
-    offset: 968
-  - name: WaitForZoom
-    offset: 976
-  - name: WaitForGyro
-    offset: 984
-  - name: WaitForOrbit
-    offset: 992
-  - name: PlayScreenShake
-    offset: 1000
-  - name: StopScreenShake
-    offset: 1008
-  - name: PlaySE
-    offset: 1016
-  - name: MakeRetainer
-    offset: 1024
-  - name: HairMake
-    offset: 1032
-  - name: WaitForBuildHouse
-    offset: 1040
-  - name: Logout
-    offset: 1048
-  - name: Shutdown
-    offset: 1056
-  - name: SetNpcTradeItem
-    offset: 1064
-  - name: PlayStaffRoll
-    offset: 1072
-  - name: PlayToBeContinued
-    offset: 1080
-  - name: UpdownPan
-    offset: 1088
-  - name: UpdownPan2
-    offset: 1096
-  - name: SidePan
-    offset: 1104
-  - name: SidePan2
-    offset: 1112
-  - name: UpdownDolly
-    offset: 1120
-  - name: SideDolly
-    offset: 1128
-  - name: Zoom
-    offset: 1136
-  - name: Gyro
-    offset: 1144
-  - name: Orbit
-    offset: 1152
-  - name: ChangeBGMVolume
-    offset: 1160
-  - name: ChangeEnvSoundVolume
-    offset: 1168
-  - name: ResetEnvSoundVolume
-    offset: 1176
-  - name: PlayCamera
-    offset: 1184
-  - name: PlayTwoShotCamera
-    offset: 1192
-  - name: PlayLandscapeCamera
-    offset: 1200
-  - name: PlayIdleCamera
-    offset: 1208
-  - name: PlayWorldPositionCamera
-    offset: 1216
-  - name: PlayTargetRelationCamera
-    offset: 1224
-  - name: PlayTargetAdjustCamera
-    offset: 1232
-  - name: FollowLookAt
-    offset: 1240
-  - name: CameraCollisionMode
-    offset: 1248
-  - name: PlayHandShake
-    offset: 1256
-  - name: StopHandShake
-    offset: 1264
-  - name: PlayBGM
-    offset: 1272
-  - name: PlayBGMWithVolume
-    offset: 1280
-  - name: StopBGM
-    offset: 1288
-  - name: InvisibleStandCharacter
-    offset: 1296
-  - name: InvisibleStandObject
-    offset: 1304
-  - name: RevisibleStandObject
-    offset: 1312
-  - name: DOF
-    offset: 1320
-  - name: DisableDOF
-    offset: 1328
-  - name: ColorFilter
-    offset: 1336
-  - name: DisableColorFilter
-    offset: 1344
-  - name: Vignetting
-    offset: 1352
-  - name: DisableVignetting
-    offset: 1360
-  - name: Weather
-    offset: 1368
-  - name: GetWeather
-    offset: 1376
-  - name: ChangeWeather
-    offset: 1384
-  - name: WaitForChangeWeather
-    offset: 1392
-  - name: WorldTime
-    offset: 1400
-  - name: GetHouseSize
-    offset: 1408
-  - name: PlayHousingCamera
-    offset: 1416
-  - name: WaitForFeedBuddy
-    offset: 1424
-  - name: WaitForIdleCamera
-    offset: 1432
-  - name: GroupPose
-    offset: 1440
-  - name: PlayEventVfx
-    offset: 1448
-  - name: StopEventVfx
-    offset: 1456
-  - name: KickTriggerEventVfx
-    offset: 1464
-  - name: WhiteFadeIn
-    offset: 1472
-  - name: WhiteFadeOut
-    offset: 1480
-  - name: WaitForWhiteFade
-    offset: 1488
-  - name: PlayTargetAimingCamera
-    offset: 1496
-  - name: PlayDirectionalAimingCamera
-    offset: 1504
-  - name: StopAimingCamera
-    offset: 1512
-  - name: SetEventTutorialFlag
-    offset: 1520
-  - name: Position
-    offset: 1528
-  - name: PositionCamera
-    offset: 1536
-  - name: ResetPosition
-    offset: 1544
-  - name: Visible
-    offset: 1552
-  - name: Direction
-    offset: 1560
-  - name: Distance
-    offset: 1568
-  - name: PlayActionTimeline
-    offset: 1576
-  - name: CancelActionTimeline
-    offset: 1584
-  - name: CancelActionTimelineAll
-    offset: 1592
-  - name: WaitForActionTimeline
-    offset: 1600
-  - name: WaitForActionTimelineLoad
-    offset: 1608
-  - name: PlayEmote
-    offset: 1616
-  - name: CancelEmote
-    offset: 1624
-  - name: WaitForEmote
-    offset: 1632
-  - name: TurnTo
-    offset: 1640
-  - name: TurnFromLayout
-    offset: 1648
-  - name: TurnToObject
-    offset: 1656
-  - name: NoLookAtTurnToObject
-    offset: 1664
-  - name: TurnToLayout
-    offset: 1672
-  - name: TurnToCamera
-    offset: 1680
-  - name: TurnToDefault
-    offset: 1688
-  - name: WaitForTurn
-    offset: 1696
-  - name: Idle
-    offset: 1704
-  - name: LookAt
-    offset: 1712
-  - name: LookAtEID
-    offset: 1720
-  - name: LookAtLayout
-    offset: 1728
-  - name: LookAtCamera
-    offset: 1736
-  - name: LookAtTwoHead
-    offset: 1744
-  - name: LookAtLayoutTwoHead
-    offset: 1752
-  - name: WaitForLookAt
-    offset: 1760
-  - name: EyeLookAt
-    offset: 1768
-  - name: EyeLookAtYawPitch
-    offset: 1776
-  - name: Move
-    offset: 1784
-  - name: WaitForMove
-    offset: 1792
-  - name: PathMove
-    offset: 1800
-  - name: WaitForPathMove
-    offset: 1808
-  - name: FootStep
-    offset: 1816
-  - name: EndEventRollback
-    offset: 1824
-  - name: PlayVfx
-    offset: 1832
-  - name: EnableVfx
-    offset: 1848
-  - name: DisableVfx
-    offset: 1856
-  - name: Transparency
-    offset: 1864
-  - name: WaitForTransparency
-    offset: 1872
-  - name: WalkIn
-    offset: 1880
-  - name: WalkOut
-    offset: 1888
-  - name: PathWalkIn
-    offset: 1896
-  - name: PathWalkOut
-    offset: 1904
-  - name: PathCurveWalkOut
-    offset: 1912
-  - name: PathCurveWalkIn
-    offset: 1920
-  - name: FlyIn
-    offset: 1928
-  - name: FlyOut
-    offset: 1936
-  - name: BattleMode
-    offset: 1944
-  - name: BattleModeEx
-    offset: 1952
-  - name: EquipWeapon
-    offset: 1960
-  - name: EquipArmor
-    offset: 1968
-  - name: Equip
-    offset: 1976
-  - name: EquipQuestModel
-    offset: 1984
-  - name: NpcEquip
-    offset: 1992
-  - name: AutoShake
-    offset: 2000
-  - name: AutoShakeBugFix236127
-    offset: 2008
-  - name: SetMount
-    offset: 2016
-  - name: SetFlying
-    offset: 2024
-  - name: IsSwimming
-    offset: 2032
-  - name: SetLodHigh
-    offset: 2040
-  - name: SetGlassesAccessories
-    offset: 2048
-  - name: IsItemObtainable
-    offset: 2056
-  - name: CheckItemsObtainable
-    offset: 2064
-  - name: CheckItemsObtainableRareCheck
-    offset: 2072
   member_functions: []
 - type: Client::Game::Event::EventSceneTaskInterface
   name: EventSceneTaskInterface
@@ -8666,9 +8126,6 @@ structs:
   - type: char
     name: Flags
     offset: 12
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Client::Game::Event::SceneData
   name: SceneData
@@ -8735,7 +8192,6 @@ structs:
   - type: Client::Game::Gauge::AstrologianDraw
     name: CurrentDraw
     offset: 10
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::BardGauge
   name: BardGauge
@@ -8758,7 +8214,6 @@ structs:
   - type: Client::Game::Gauge::SongFlags
     name: SongFlags
     offset: 15
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::BlackMageGauge
   name: BlackMageGauge
@@ -8781,7 +8236,6 @@ structs:
   - type: Client::Game::Gauge::EnochianFlags
     name: EnochianFlags
     offset: 13
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::DancerGauge
   name: DancerGauge
@@ -8803,7 +8257,6 @@ structs:
   - type: char
     name: StepIndex
     offset: 14
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::DarkKnightGauge
   name: DarkKnightGauge
@@ -8826,7 +8279,6 @@ structs:
   - type: unsigned __int16
     name: DeliriumStep
     offset: 16
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::DragoonGauge
   name: DragoonGauge
@@ -8846,7 +8298,6 @@ structs:
   - type: char
     name: FirstmindsFocusCount
     offset: 12
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::GunbreakerGauge
   name: GunbreakerGauge
@@ -8863,7 +8314,6 @@ structs:
   - type: char
     name: AmmoComboStep
     offset: 12
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::JobGauge
   name: JobGauge
@@ -8871,19 +8321,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-  - name: Init
-    offset: 8
-  - name: Tick
-    offset: 16
-  - name: ReceivePacketValues
-    offset: 24
-  - name: SetValues
-    offset: 32
-  - name: ProcessDeferredReplaceAction
-    offset: 72
   member_functions: []
 - type: Client::Game::Gauge::MachinistGauge
   name: MachinistGauge
@@ -8909,7 +8346,6 @@ structs:
   - type: char
     name: TimerActive
     offset: 15
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::MonkGauge
   name: MonkGauge
@@ -8938,7 +8374,6 @@ structs:
   - type: unsigned __int16
     name: BlitzTimeRemaining
     offset: 14
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::NinjaGauge
   name: NinjaGauge
@@ -8952,7 +8387,6 @@ structs:
   - type: char
     name: Kazematoi
     offset: 10
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::PaladinGauge
   name: PaladinGauge
@@ -8969,7 +8403,6 @@ structs:
   - type: char
     name: ConfiteorComboStep
     offset: 12
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::PictomancerGauge
   name: PictomancerGauge
@@ -8989,7 +8422,6 @@ structs:
   - type: Client::Game::Gauge::CreatureFlags
     name: CreatureFlags
     offset: 12
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::ReaperGauge
   name: ReaperGauge
@@ -9012,7 +8444,6 @@ structs:
   - type: char
     name: VoidShroud
     offset: 13
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::RedMageGauge
   name: RedMageGauge
@@ -9029,7 +8460,6 @@ structs:
   - type: char
     name: ManaStacks
     offset: 10
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::SageGauge
   name: SageGauge
@@ -9049,7 +8479,6 @@ structs:
   - type: char
     name: Eukrasia
     offset: 12
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::SamuraiGauge
   name: SamuraiGauge
@@ -9069,7 +8498,6 @@ structs:
   - type: Client::Game::Gauge::SenFlags
     name: SenFlags
     offset: 13
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::ScholarGauge
   name: ScholarGauge
@@ -9089,7 +8517,6 @@ structs:
   - type: char
     name: DismissedFairy
     offset: 12
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::SummonerGauge
   name: SummonerGauge
@@ -9115,7 +8542,6 @@ structs:
   - type: Client::Game::Gauge::AetherFlags
     name: AetherFlags
     offset: 15
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::ViperGauge
   name: ViperGauge
@@ -9141,7 +8567,6 @@ structs:
   - type: char
     name: SerpentComboState
     offset: 16
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::WarriorGauge
   name: WarriorGauge
@@ -9152,7 +8577,6 @@ structs:
   - type: char
     name: BeastGauge
     offset: 8
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::WhiteMageGauge
   name: WhiteMageGauge
@@ -9169,7 +8593,6 @@ structs:
   - type: char
     name: BloodLily
     offset: 13
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::GcArmyManager
   name: GcArmyManager
@@ -9370,7 +8793,6 @@ structs:
   - type: Client::Game::Event::HwdDevEventHandler*
     name: HwdDevEventHandler
     offset: 64
-  virtual_functions: []
   member_functions: []
   static_members:
   - signature: 48 8B 05 ?? ?? ?? ?? 48 8B 4C 24 ?? 0F B6 50 11
@@ -10643,6 +10065,102 @@ structs:
     name: SourceObjectId
     offset: 8
   member_functions: []
+- type: Client::Game::Network::CrossRealmListingSegmentPacket::CrossRealmListing
+  name: CrossRealmListing
+  namespace: Client.Game.Network
+  union: False
+  size: 400
+  fields:
+  - type: unsigned __int64
+    name: ListingId
+    offset: 0
+  - type: unsigned __int64
+    name: AccountId
+    offset: 8
+  - type: unsigned __int64
+    name: ContentId
+    offset: 16
+  - type: unsigned int
+    name: Category
+    offset: 28
+  - type: unsigned __int16
+    name: Duty
+    offset: 32
+  - type: unsigned __int16
+    name: DutyType
+    offset: 34
+  - type: unsigned __int16
+    name: WorldId
+    offset: 46
+  - type: char
+    name: Objective
+    offset: 56
+  - type: char
+    name: BeginnersWelcome
+    offset: 57
+  - type: char
+    name: CompletionStatus
+    offset: 58
+  - type: char
+    name: DutyFinderSettings
+    offset: 59
+  - type: char
+    name: LootRule
+    offset: 60
+  - type: int
+    name: LastPatchHotfixTimestamp
+    offset: 64
+  - type: unsigned __int16
+    name: TimeLeft
+    offset: 68
+  - type: unsigned __int16
+    name: AvgItemLv
+    offset: 76
+  - type: unsigned __int16
+    name: HomeWorldId
+    offset: 78
+  - type: unsigned __int16
+    name: CurrentWorldId
+    offset: 80
+  - type: char
+    name: ClientLanguage
+    offset: 82
+  - type: char
+    name: TotalSlots
+    offset: 83
+  - type: char
+    name: SlotsFilled
+    offset: 84
+  - type: char
+    name: JoinConditionFlags
+    offset: 86
+  - type: char
+    name: IsAlliance
+    offset: 87
+  - type: char
+    name: NumberOfParties
+    offset: 88
+  - type: unsigned __int64
+    name: SlotFlags
+    offset: 96
+    size: 8
+    is_string: False
+  - type: char
+    name: JobsPresent
+    offset: 160
+    size: 8
+    is_string: False
+  - type: char
+    name: Name
+    offset: 168
+    size: 32
+    is_string: True
+  - type: char
+    name: Description
+    offset: 200
+    size: 192
+    is_string: True
+  member_functions: []
 - type: Client::Game::Network::InventoryItemCurrencyPacket
   name: InventoryItemCurrencyPacket
   namespace: Client.Game.Network
@@ -10742,6 +10260,25 @@ structs:
     name: TargetSlot
     offset: 14
   member_functions: []
+- type: Client::Game::Network::ServerIpcSegmentHeader
+  name: ServerIpcSegmentHeader
+  namespace: Client.Game.Network
+  union: False
+  size: 16
+  fields:
+  - type: unsigned __int16
+    name: Magic
+    offset: 0
+  - type: unsigned __int16
+    name: OpCode
+    offset: 2
+  - type: unsigned __int16
+    name: ServerId
+    offset: 8
+  - type: int
+    name: Timestamp
+    offset: 12
+  member_functions: []
 - type: Client::Game::Network::UpdateInventorySlotPacket
   name: UpdateInventorySlotPacket
   namespace: Client.Game.Network
@@ -10800,7 +10337,6 @@ structs:
   union: False
   size: 448
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Object::ClientObjectManager::BattleCharaEntry
   name: BattleCharaEntry
@@ -10927,7 +10463,6 @@ structs:
   - type: Client::Game::Object::GatheringPointObject*
     name: Object
     offset: 24
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Object::HousingObjectId
   name: HousingObjectId
@@ -10948,7 +10483,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Object::ReactionEventObjectManager
   name: ReactionEventObjectManager
@@ -11383,9 +10917,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions:
   - signature: 48 83 EC 38 B8 ?? ?? ?? ?? 66 3B D0
     return_type: void
@@ -11415,9 +10946,6 @@ structs:
   - type: char
     name: DataRequested
     offset: 121
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions:
   - signature: E8 ?? ?? ?? ?? 89 6E 58
     return_type: void
@@ -11472,7 +11000,6 @@ structs:
   - type: unsigned int
     name: ProgressMax
     offset: 560
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 41 C6 44 24 ?? ?? E9 ?? ?? ?? ?? 48 8D 4F ?? E8 ?? ?? ?? ?? 88 43
     return_type: void
@@ -12371,7 +11898,6 @@ structs:
     offset: 108
     size: 19
     is_string: False
-  virtual_functions: []
   member_functions: []
   static_members:
   - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 F8 02 75 16
@@ -12445,7 +11971,6 @@ structs:
   union: False
   size: 96
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::UI::HateInfo
   name: HateInfo
@@ -12487,7 +12012,6 @@ structs:
   - type: char
     name: IsLimitedTimeBonusActive
     offset: 112
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 8B 0E 3B C8
     return_type: unsigned int
@@ -12530,7 +12054,6 @@ structs:
   union: False
   size: 18280
   fields: []
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 75 35 41 8B CE
     return_type: char
@@ -12574,9 +12097,6 @@ structs:
   - type: char
     name: IsPvP
     offset: 15
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions:
   - signature: E8 ?? ?? ?? ?? 8B F8 85 C0 75 ?? 45 33 C0
     return_type: unsigned int
@@ -12862,7 +12382,6 @@ structs:
   union: False
   size: 1088
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::UI::QuestUI
   name: QuestUI
@@ -12870,7 +12389,6 @@ structs:
   union: False
   size: 4096
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::UI::QueueInfoState
   name: QueueInfoState
@@ -13047,7 +12565,6 @@ structs:
   - type: int
     name: ObjectiveProgress
     offset: 20
-  virtual_functions: []
   member_functions:
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC ?? 48 8B DA 4C 8B F1
     return_type: char
@@ -13082,9 +12599,6 @@ structs:
   - type: unsigned int
     name: AddonId
     offset: 28
-  virtual_functions:
-  - name: Dtor
-    offset: 16
   member_functions:
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 80 79 ?? 00 41 0F B6 F8 8B F2
     return_type: char
@@ -13138,7 +12652,6 @@ structs:
   union: False
   size: 32
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::UI::Wedding
   name: Wedding
@@ -13146,7 +12659,6 @@ structs:
   union: False
   size: 104
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::WKS::WKSMechaEventStageHandlerBase
   name: WKSMechaEventStageHandlerBase
@@ -13164,8 +12676,6 @@ structs:
     parameters:
     - type: Client::Game::WKS::WKSMechaEventStageHandlerBase*
       name: this
-  - name: SetOwnerEvent
-    offset: 0
   member_functions: []
 - type: Client::Game::WKS::WKSModuleBase
   name: WKSModuleBase
@@ -13227,7 +12737,6 @@ structs:
   - type: float
     name: DaytimeFadeLength
     offset: 16
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Animation::AnimationResourceHandle
   name: AnimationResourceHandle
@@ -13260,7 +12769,6 @@ structs:
   union: False
   size: 960
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Environment::EnvSoundState
   name: EnvSoundState
@@ -13271,7 +12779,6 @@ structs:
   - type: Client::Sound::SoundData*
     name: SoundData
     offset: 32
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Environment::EnvState
   name: EnvState
@@ -13282,7 +12789,6 @@ structs:
   - type: float
     name: Rain
     offset: 300
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::JobSystem
   name: JobSystem
@@ -13318,7 +12824,6 @@ structs:
   - type: __int64
     name: UnsafeSourcePointer
     offset: 40
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 45 0F B6 FC 48 85 C0
     return_type: __int64
@@ -13431,7 +12936,6 @@ structs:
   - type: Client::Graphics::Kernel::ImmediateContext*
     name: ImmediateContext
     offset: 920256
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 89 47 ?? B0
     return_type: Client::Graphics::Kernel::ConstantBuffer*
@@ -13485,7 +12989,6 @@ structs:
   - type: unsigned int
     name: Count
     offset: 60
-  virtual_functions: []
   member_functions:
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 48 8B F1 49 8B E8 48 83 C1
     return_type: int
@@ -13549,7 +13052,6 @@ structs:
   - type: Client::Graphics::Kernel::Notifier*
     name: Prev
     offset: 16
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::PVShader::ResourceEntry
   name: ResourceEntry
@@ -13799,7 +13301,6 @@ structs:
   - type: unsigned int
     name: ValueCRC
     offset: 12
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::ShaderSubViewKey
   name: ShaderSubViewKey
@@ -13813,7 +13314,6 @@ structs:
   - type: unsigned int
     name: ValueCRC
     offset: 12
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::SwapChain
   name: SwapChain
@@ -13836,7 +13336,6 @@ structs:
   - type: __int64
     name: DXGISwapChain
     offset: 104
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Physics::BoneKineDriverModule::PartialSkeletonEntry
   name: PartialSkeletonEntry
@@ -13870,15 +13369,6 @@ structs:
   - type: unsigned int
     name: RefCount
     offset: 8
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-  - name: Cleanup
-    offset: 8
-  - name: IncRef
-    offset: 16
-  - name: DecRef
-    offset: 24
   member_functions: []
 - type: Client::Graphics::Render::BaseRenderer
   name: BaseRenderer
@@ -13886,7 +13376,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::GraphicsConfig
   name: GraphicsConfig
@@ -14011,7 +13500,6 @@ structs:
   - type: float
     name: JitterMultiplier
     offset: 120
-  virtual_functions: []
   member_functions: []
   static_members:
   - signature: 48 8B 05 ?? ?? ?? ?? 0F B6 8B ?? ?? ?? ?? 88 48
@@ -14105,7 +13593,6 @@ structs:
   - type: Client::Graphics::Kernel::ShaderPackage*
     name: PrimitivePSPackage
     offset: 352
-  virtual_functions: []
   member_functions: []
   static_members:
   - signature: 48 89 98 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? E8 ?? ?? ?? ??
@@ -14134,7 +13621,6 @@ structs:
   - type: Client::System::Resource::Handle::ShaderCodeResourceHandle*
     name: CopyEnvLocationShaderCodeResourceHandle
     offset: 464
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::Skeleton::BoneIndexMask
   name: BoneIndexMask
@@ -14170,7 +13656,6 @@ structs:
   - type: Client::Graphics::Render::Camera*
     name: Camera
     offset: 16
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Scene::Attach::Owner
   name: Owner
@@ -14199,7 +13684,6 @@ structs:
     offset: 88
     size: 14
     is_string: False
-  virtual_functions: []
   member_functions: []
   static_members:
   - signature: 48 8B 05 ?? ?? ?? ?? 48 83 C1 10 48 C7 40 ?? ?? ?? ?? ??
@@ -14237,7 +13721,6 @@ structs:
   - type: Client::Graphics::Kernel::ConstantBuffer*
     name: FreeCompanyCrestColorCBuffer
     offset: 1016
-  virtual_functions: []
   member_functions: []
   static_members:
   - signature: 48 8B 05 ?? ?? ?? ?? 83 B9
@@ -14269,7 +13752,6 @@ structs:
   - type: Client::System::Resource::Handle::ResourceHandle**
     name: ResourceList
     offset: 24
-  virtual_functions: []
   member_functions: []
   static_members:
   - signature: 0F 44 FE 48 8B 0D ?? ?? ?? ?? 48 85 C9 74 05
@@ -14302,7 +13784,6 @@ structs:
   union: False
   size: 480
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Vfx::VfxResourceInstance
   name: VfxResourceInstance
@@ -14313,7 +13794,6 @@ structs:
   - type: Client::Graphics::Vfx::VfxResourceUnk*
     name: VfxResourceUnk
     offset: 8
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Vfx::VfxResourceUnk
   name: VfxResourceUnk
@@ -14568,12 +14048,6 @@ structs:
       name: this
     - type: float
       name: dt
-  - name: Dtor
-    offset: 0
-  - name: GetSize
-    offset: 8
-  - name: Initialize
-    offset: 80
   member_functions:
   - signature: E8 ?? ?? ?? ?? FF C7 3B BB ?? ?? ?? ?? 72 9A
     return_type: void
@@ -14634,7 +14108,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::LayoutEngine::ILayoutInstance::Identifier
   name: Identifier
@@ -14805,7 +14278,6 @@ structs:
   - type: Client::Network::NetworkModulePacketReceiverCallback*
     name: ReceiverCallback
     offset: 16
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB 0D 49 8B 87 ?? ?? ?? ??
     return_type: char
@@ -15230,8 +14702,6 @@ structs:
     parameters:
     - type: Client::Sound::ISoundData*
       name: this
-  - name: IsPlaying
-    offset: 296
   member_functions: []
 - type: Client::Sound::SoundLayoutOptions
   name: SoundLayoutOptions
@@ -15273,8 +14743,6 @@ structs:
     parameters:
     - type: Client::SupportDesk::HttpConnection*
       name: this
-  - name: MakeRequest
-    offset: 32
   member_functions: []
 - type: Client::SupportDesk::HttpRequest
   name: HttpRequest
@@ -15306,7 +14774,6 @@ structs:
   - type: wchar_t*
     name: LongStringPtr
     offset: 520
-  virtual_functions: []
   member_functions: []
 - type: Client::System::File::FileDescriptor
   name: FileDescriptor
@@ -15350,7 +14817,6 @@ structs:
   - type: Client::System::File::FileThread*
     name: FileThread
     offset: 56
-  virtual_functions: []
   member_functions: []
   static_members:
   - signature: 48 8B 3D ?? ?? ?? ?? 48 85 C0 48 8B CF
@@ -15367,7 +14833,6 @@ structs:
   - type: __int64
     name: SecurityAttributes
     offset: 8
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Framework::EnvironmentManager::ModeUpdateOp
   name: ModeUpdateOp
@@ -15476,10 +14941,6 @@ structs:
       name: this
     - type: __int64
       name: userData
-  - name: Dtor
-    offset: 0
-  - name: Execute_arg2
-    offset: 16
   member_functions: []
 - type: Client::System::Framework::TaskManagerOsData
   name: TaskManagerOsData
@@ -15528,8 +14989,6 @@ structs:
     parameters:
     - type: Client::System::Input::ClipBoardInterface*
       name: this
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Client::System::Input::Cursor
   name: Cursor
@@ -15577,37 +15036,6 @@ structs:
   - type: char
     name: UseOsHardwareCursor
     offset: 880
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-  - name: Update
-    offset: 16
-  - name: SetCursorType
-    offset: 32
-  - name: SetCursorVisibility
-    offset: 40
-  - name: SetUseSoftwareCursor
-    offset: 64
-  - name: GetUseSoftwareCursor
-    offset: 72
-  - name: SetUseOsHardwareCursor
-    offset: 80
-  - name: GetUseOsHardwareCursor
-    offset: 88
-  - name: SetSoftwareCursorScale
-    offset: 96
-  - name: GetSoftwareCursorScale
-    offset: 104
-  - name: GetCursorVisibility
-    offset: 112
-  - name: SetShowSoftwareCursorTrajectory
-    offset: 152
-  - name: IsMouseNotCaptured
-    offset: 168
-  - name: UnloadSoftwareCursor
-    offset: 176
-  - name: LoadCursor
-    offset: 184
   member_functions: []
   static_members:
   - signature: 75 36 48 8B 15 ?? ?? ?? ??
@@ -15795,9 +15223,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Client::System::Input::InputDeviceManager
   name: InputDeviceManager
@@ -15843,7 +15268,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Input::KeyboardInputData
   name: KeyboardInputData
@@ -15872,9 +15296,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Client::System::Input::PadDeviceInterface
   name: PadDeviceInterface
@@ -15899,8 +15320,6 @@ structs:
     parameters:
     - type: Client::System::Input::PadDeviceInterface*
       name: this
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Client::System::Input::RepeatCounter
   name: RepeatCounter
@@ -15908,9 +15327,6 @@ structs:
   union: False
   size: 32
   fields: []
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Client::System::Input::SoftKeyboardDeviceInterface
   name: SoftKeyboardDeviceInterface
@@ -16008,7 +15424,6 @@ structs:
   union: False
   size: 48
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Input::TextServiceInterface
   name: TextServiceInterface
@@ -16016,9 +15431,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Client::System::Input::TextServiceInterface::TextServiceEvent
   name: TextServiceEvent
@@ -16026,7 +15438,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Input::VibrationControl
   name: VibrationControl
@@ -16037,7 +15448,6 @@ structs:
   - type: char
     name: IsVibrating
     offset: 284
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Memory::IMemoryModule
   name: IMemoryModule
@@ -16454,7 +15864,6 @@ structs:
   union: False
   size: 184
   fields: []
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D7 48 8B D8
     return_type: Client::System::Scheduler::TimelineGroup*
@@ -16509,7 +15918,6 @@ structs:
   union: False
   size: 96
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Scheduler::Base::LinkedList<Client::System::Scheduler::Base::CutSceneController>
   name: LinkedList`1
@@ -16566,9 +15974,7 @@ structs:
   size: 24
   fields: []
   vtable_size: 48
-  virtual_functions:
-  - name: Dtor
-    offset: 0
+  virtual_functions: []
   member_functions: []
 - type: Client::System::Scheduler::Object::ObjectManager
   name: ObjectManager
@@ -16586,7 +15992,6 @@ structs:
     offset: 104
     size: 40
     is_string: False
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Scheduler::Resource::SchedulerResource::ResourceName
   name: ResourceName
@@ -16605,7 +16010,6 @@ structs:
     offset: 18
     size: 46
     is_string: True
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Scheduler::ScheduleManagement
   name: ScheduleManagement
@@ -16616,7 +16020,6 @@ structs:
   - type: Client::System::Scheduler::Base::CutSceneController*
     name: CutSceneController
     offset: 56
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D8 48 8B 03 48 8B CB
     return_type: Client::System::Scheduler::Base::CutSceneController*
@@ -16688,7 +16091,7 @@ structs:
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
-  - signature: E8 ?? ?? ?? ?? 4D 39 2E
+  - signature: E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 48 8B 6C 24 ?? 48 8B 5C 24 ?? 4C 8B 74 24
     return_type: void
     name: SetString
     parameters:
@@ -16930,7 +16333,6 @@ structs:
   - type: int
     name: ThreadCount
     offset: 4160
-  virtual_functions: []
   member_functions: []
   static_members:
   - signature: 48 89 B3 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B
@@ -16956,7 +16358,6 @@ structs:
   - type: char
     name: IsEorzeaTimeOverridden
     offset: 56
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::ActionBarSlot
   name: ActionBarSlot
@@ -17372,23 +16773,6 @@ structs:
   - type: Client::UI::AddonJobHud*
     name: JobHud
     offset: 8
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-  - name: Initialize
-    offset: 8
-  - name: Finalizer
-    offset: 16
-  - name: Update
-    offset: 24
-  - name: OnSetup
-    offset: 32
-  - name: OnRequestedUpdate
-    offset: 40
-  - name: OnChangeGaugeType
-    offset: 48
-  - name: Reset
-    offset: 56
   member_functions: []
 - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
   name: AddonJobHudGaugeData
@@ -17396,11 +16780,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions:
-  - name: Initialize
-    offset: 0
-  - name: Copy
-    offset: 8
   member_functions: []
 - type: Client::UI::AddonJobHudACN0::AetherflowACNGauge::AetherflowACNStack
   name: AetherflowACNStack
@@ -17539,7 +16918,6 @@ structs:
   - type: char
     name: Active
     offset: 16
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudMNK1::ChakraGaugeSimple::ChakraSimple
   name: ChakraSimple
@@ -17553,7 +16931,6 @@ structs:
   - type: char
     name: Active
     offset: 16
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDB0::VipersightGauge::RattlingCoilStandard
   name: RattlingCoilStandard
@@ -17585,7 +16962,6 @@ structs:
   - type: int
     name: CoilMax
     offset: 64
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDB0::VipersightGauge::ViperBladesStandard
   name: ViperBladesStandard
@@ -17614,7 +16990,6 @@ structs:
   - type: int
     name: ComboStep
     offset: 36
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDB0::VipersightGaugeSimple::RattlingCoilSimple
   name: RattlingCoilSimple
@@ -17643,7 +17018,6 @@ structs:
   - type: int
     name: CoilMax
     offset: 56
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDB0::VipersightGaugeSimple::ViperBladesSimple
   name: ViperBladesSimple
@@ -17678,7 +17052,6 @@ structs:
   - type: int
     name: ComboStep
     offset: 60
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGauge::OfferingsBar
   name: OfferingsBar
@@ -17747,7 +17120,6 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: GaugeFill
     offset: 48
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGaugeSimple::TributeCounterSimple
   name: TributeCounterSimple
@@ -17766,7 +17138,6 @@ structs:
     offset: 32
     size: 5
     is_string: False
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDM0::BalanceGauge::ManaBar
   name: ManaBar
@@ -17825,7 +17196,6 @@ structs:
     offset: 24
     size: 5
     is_string: False
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRPM1::PaletteGauge::PaletteBarStandard
   name: PaletteBarStandard
@@ -17854,7 +17224,6 @@ structs:
   - type: Component::GUI::AtkImageNode*
     name: DecreaseFillNode
     offset: 64
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRPM1::PaletteGaugeSimple::PaintStacksSimple
   name: PaintStacksSimple
@@ -17870,7 +17239,6 @@ structs:
     offset: 24
     size: 5
     is_string: False
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRPM1::PaletteGaugeSimple::PaletteBarSimple
   name: PaletteBarSimple
@@ -17890,7 +17258,6 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: Container
     offset: 40
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRRP1::DeathGauge::ShroudStack
   name: ShroudStack
@@ -18093,7 +17460,6 @@ structs:
   - type: char
     name: DisableFixedFontResolution
     offset: 560
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonPartyList::PartyListMemberStruct
   name: PartyListMemberStruct
@@ -18856,7 +18222,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::AgentItemComp::ComparedItemData::GearDataDelta
   name: GearDataDelta
@@ -21499,7 +20864,6 @@ structs:
   - type: char
     name: Unk4A
     offset: 74
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::DutySlot
   name: DutySlot
@@ -21815,10 +21179,6 @@ structs:
     parameters:
     - type: Client::UI::Info::InfoProxyInterface*
       name: this
-  - name: Dtor
-    offset: 0
-  - name: ClearData
-    offset: 16
   member_functions: []
 - type: Client::UI::Info::InfoProxyInvitedInterface
   name: InfoProxyInvitedInterface
@@ -21826,7 +21186,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::Info::InfoProxyLetter::Letter::ItemAttachment
   name: ItemAttachment
@@ -22280,9 +21639,6 @@ structs:
   - type: Client::UI::UIModule*
     name: UIModulePtr
     offset: 8
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions:
   - signature: E8 ?? ?? ?? ?? 49 8B 4C 24 ?? 0F B6 E8
     return_type: char
@@ -22374,8 +21730,6 @@ structs:
     parameters:
     - type: Client::UI::Misc::HelperInterface*
       name: this
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Client::UI::Misc::HudLayoutAddon
   name: HudLayoutAddon
@@ -23134,8 +22488,6 @@ structs:
       name: this
     - type: char
       name: force
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Client::UI::Misc::VVDNotebookModule::VVDNotebookSeries
   name: VVDNotebookSeries
@@ -23256,7 +22608,6 @@ structs:
   - type: char
     name: IsLoaded
     offset: 20
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::RaptureAtkColorDataManager::ColorSet
   name: ColorSet
@@ -23460,7 +22811,6 @@ structs:
   - type: char
     name: Unk12
     offset: 18
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::UIGlobals
   name: UIGlobals
@@ -23545,7 +22895,6 @@ structs:
   - type: char
     name: IsPadMouseModeEnabled
     offset: 38
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 4B ?? ?? ?? ?? FF 90 ?? ?? ?? ?? 48 8B C8 33 D2 48 83 C4
     return_type: void
@@ -24537,66 +23886,6 @@ structs:
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
-  - name: Dtor
-    offset: 0
-  - name: GetInfoModule2
-    offset: 272
-  - name: GetExcelSheetPreloader
-    offset: 408
-  - name: EnableCutsceneInputMode
-    offset: 672
-  - name: DisableCutsceneInputMode
-    offset: 680
-  - name: CloseMiniMap
-    offset: 888
-  - name: OpenMiniMap
-    offset: 896
-  - name: IsUIHidden
-    offset: 944
-  - name: ShowContentIntroduction
-    offset: 992
-  - name: IsContentIntroductionInvisible
-    offset: 1000
-  - name: HideContentIntroduction
-    offset: 1008
-  - name: ToggleCursor
-    offset: 1104
-  - name: ShowEventFadeIn
-    offset: 1216
-  - name: ShowEventFadeOut
-    offset: 1224
-  - name: ToggleUi_2
-    offset: 1264
-  - name: LoadScreenHideUi
-    offset: 1280
-  - name: LoadScreenShowUi
-    offset: 1288
-  - name: AnnounceHowTo
-    offset: 1304
-  - name: HideHowTo
-    offset: 1320
-  - name: HideGoldSaucerReward_2
-    offset: 1352
-  - name: OpenMiniGame
-    offset: 1408
-  - name: HideHousingHarvest
-    offset: 1416
-  - name: HideLocationTitle
-    offset: 1496
-  - name: ShowBattleTalkUnknown
-    offset: 1584
-  - name: ShowRaceCountdownEnd
-    offset: 1664
-  - name: IsDutyRaidFinderOpen
-    offset: 1696
-  - name: ShowAdventureNotice
-    offset: 1728
-  - name: ShowRaceCountdownStart
-    offset: 1920
-  - name: ShowRaceCountdownEnd_2
-    offset: 1928
-  - name: ShouldLimitFps
-    offset: 1968
   member_functions: []
 - type: Common::Base::Container::Array::hkArray<Animation::Animation::hkaAnnotationTrack::Annotation>
   name: hkArray`1
@@ -25456,11 +24745,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-  - name: Clone
-    offset: 8
   member_functions: []
 - type: Common::Component::BGCollision::Math::Matrix4x3
   name: Matrix4x3
@@ -25612,9 +24896,6 @@ structs:
   - type: Common::Component::BGCollision::Node*
     name: Next
     offset: 16
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Common::Component::BGCollision::Object
   name: Object
@@ -25795,8 +25076,6 @@ structs:
     parameters:
     - type: Common::Component::Excel::ExcelModuleInterface*
       name: this
-  - name: ChangeLanguage
-    offset: 40
   member_functions: []
 - type: Common::Component::Excel::ExcelSheet::ColumnInfo
   name: ColumnInfo
@@ -25880,44 +25159,6 @@ structs:
     parameters:
     - type: Common::Component::Excel::ExcelSheetInterface*
       name: this
-  - name: PageRowResolver_Set
-    offset: 32
-  - name: RingBufferPageRowResolver_GetLoadedRowCount
-    offset: 40
-  - name: RingBufferPageRowResolver_Clear
-    offset: 48
-  - name: HashTablePageRowResolver_GetRowIdByStringKeyColumn
-    offset: 56
-  - name: HashTablePageRowResolver_GetRowDescriptorByStringKeyColumn
-    offset: 64
-  - name: Unknown1_Get
-    offset: 88
-  - name: Unknown1_Set
-    offset: 96
-  - name: ReturnSecondParameter
-    offset: 104
-  - name: Unknown2_Find
-    offset: 112
-  - name: Unknown3_GetOrLoad_1
-    offset: 144
-  - name: Unknown3_GetOrLoad_2
-    offset: 152
-  - name: Unknown3_Free
-    offset: 160
-  - name: Unknown3_GetLoadedCount
-    offset: 168
-  - name: HashTablePageRowResolver_GetRowWrapperAndIdByIndex
-    offset: 176
-  - name: HashTablePageRowResolver_GetRowWrapperAndDescriptorByIndex
-    offset: 184
-  - name: EnumerateRows
-    offset: 192
-  - name: GetSheetVersion
-    offset: 200
-  - name: GetName
-    offset: 208
-  - name: SetLanguage
-    offset: 216
   member_functions: []
 - type: Common::Component::Excel::ExcelSheetWaiter
   name: ExcelSheetWaiter
@@ -25925,7 +25166,6 @@ structs:
   union: False
   size: 48
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Common::Configuration::ConfigBase::ChangeEventInterface
   name: ChangeEventInterface
@@ -25950,8 +25190,6 @@ structs:
       name: configOption
     - type: Common::Configuration::ConfigEntry*
       name: configEntry
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Common::Configuration::ConfigProperties::FloatProperties
   name: FloatProperties
@@ -26090,9 +25328,6 @@ structs:
     parameters:
     - type: Common::Lua::lua_State*
       name: a1
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Common::Lua::Mbuffer
   name: Mbuffer
@@ -26498,7 +25733,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Component::Excel::ExcelLanguageEvent
   name: ExcelLanguageEvent
@@ -26506,7 +25740,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Component::Excel::ExcelModuleInterface
   name: ExcelModuleInterface
@@ -26658,9 +25891,6 @@ structs:
   - type: Common::Component::Excel::ExcelModule*
     name: ExcelModule
     offset: 32
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions:
   - signature: 40 53 48 83 EC 20 45 8B D0 4C 8B CA
     return_type: Component::Excel::ExcelRow*
@@ -26847,11 +26077,6 @@ structs:
   - type: __int8
     name: RefCount
     offset: 32
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-  - name: FreeManagedData
-    offset: 8
   member_functions: []
 - type: Component::GUI::AtkArrayDataHolder
   name: AtkArrayDataHolder
@@ -27196,7 +26421,6 @@ structs:
   - type: Component::GUI::AtkComponentMap*
     name: ComponentMap
     offset: 16
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkCrestManager
   name: AtkCrestManager
@@ -27216,9 +26440,6 @@ structs:
   - type: char
     name: TextureVersion
     offset: 64
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Component::GUI::AtkCursor
   name: AtkCursor
@@ -27721,8 +26942,6 @@ structs:
       name: result
     - type: int
       name: soundEffectId
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Component::GUI::AtkFontAnalyzerBase
   name: AtkFontAnalyzerBase
@@ -27730,9 +26949,6 @@ structs:
   union: False
   size: 96
   fields: []
-  virtual_functions:
-  - name: Dtor
-    offset: 64
   member_functions: []
 - type: Component::GUI::AtkFontAnalyzerFunctor
   name: AtkFontAnalyzerFunctor
@@ -27740,7 +26956,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkFontAnalyzerFunctorSelect
   name: AtkFontAnalyzerFunctorSelect
@@ -27748,7 +26963,6 @@ structs:
   union: False
   size: 16
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkFontManager
   name: AtkFontManager
@@ -27839,7 +27053,6 @@ structs:
   union: False
   size: 56
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkGroupManager
   name: AtkGroupManager
@@ -27847,9 +27060,6 @@ structs:
   union: False
   size: 40
   fields: []
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Component::GUI::AtkInputManager::FocusEntry
   name: FocusEntry
@@ -27948,7 +27158,6 @@ structs:
   - type: char
     name: Unk8A
     offset: 138
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent
   name: AtkMessageBoxEvent
@@ -27956,7 +27165,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkModule::AddonCallbackEntry::Interface
   name: Interface
@@ -28154,20 +27362,6 @@ structs:
       name: this
     - type: Component::GUI::AtkCursor::CursorType
       name: cursorType
-  - name: IsUIReady
-    offset: 32
-  - name: EnsureNumberArray
-    offset: 48
-  - name: EnsureStringArray
-    offset: 56
-  - name: EnsureExtendArray
-    offset: 64
-  - name: SetHandlerFunction
-    offset: 136
-  - name: SetAtkModuleEvent
-    offset: 144
-  - name: SetAtkHistory
-    offset: 288
   member_functions: []
 - type: Component::GUI::AtkModuleInterface::AtkEventInterface
   name: AtkEventInterface
@@ -28211,7 +27405,6 @@ structs:
   union: False
   size: 280
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkSimpleTweenHolder
   name: AtkSimpleTweenHolder
@@ -28318,8 +27511,6 @@ structs:
     parameters:
     - type: Component::GUI::AtkTextInput::AtkTextInputEventInterface*
       name: this
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Component::GUI::AtkTextInput::KeyModifiers
   name: KeyModifiers
@@ -28835,7 +28026,6 @@ structs:
   - type: unsigned __int16
     name: Count
     offset: 2056
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkUnitManager::HudAnchoringInfo
   name: HudAnchoringInfo
@@ -29052,7 +28242,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Component::Shell::ShellCommandInterface
   name: ShellCommandInterface
@@ -29071,8 +28260,6 @@ structs:
       name: context
     - type: __int64
       name: source
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Component::SteamApi::SteamCallbackBase
   name: SteamCallbackBase
@@ -29243,8 +28430,6 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: value
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Component::Text::TextModuleInterface
   name: TextModuleInterface
@@ -29309,8 +28494,6 @@ structs:
       name: this
     - type: Component::Text::TextModuleInterface::FixedSheetInterface*
       name: fixedSheetInterface
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Component::Text::TextModuleInterface::FixedSheetInterface
   name: FixedSheetInterface
@@ -29318,7 +28501,6 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
   member_functions: []
 - type: Component::Text::TextParameter::Value
   name: Value
@@ -32430,7 +31612,6 @@ structs:
   - type: unsigned __int16
     name: Value
     offset: 10
-  virtual_functions: []
   member_functions: []
 - type: Application::Network::WorkDefinitions::DailyQuestWork
   name: DailyQuestWork
@@ -32453,7 +31634,6 @@ structs:
       offset: 0
       size: 1
       name: IsCompleted
-  virtual_functions: []
   member_functions: []
 - type: Application::Network::WorkDefinitions::LeveWork
   name: LeveWork
@@ -32493,7 +31673,6 @@ structs:
   - type: char
     name: ClearClass
     offset: 16
-  virtual_functions: []
   member_functions: []
 - type: Application::Network::WorkDefinitions::QuestWork
   name: QuestWork
@@ -32535,7 +31714,6 @@ structs:
   - type: char
     name: AcceptClassJob
     offset: 18
-  virtual_functions: []
   member_functions: []
 - type: Application::Network::WorkDefinitions::TrackingWork
   name: TrackingWork
@@ -32553,7 +31731,6 @@ structs:
   - type: char
     name: Index
     offset: 9
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::BGMSystem
   name: BGMSystem
@@ -32965,7 +32142,6 @@ structs:
     name: ContainerInterface
     offset: 0
     base: true
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 8B 87 ?? ?? ?? ?? 85 C0 74 ?? 83 F8
     return_type: unsigned __int64
@@ -33003,7 +32179,6 @@ structs:
   - type: unsigned __int16
     name: CompanionId
     offset: 24
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? B3 ?? 41 0F BA E6
     return_type: void
@@ -33086,7 +32261,6 @@ structs:
   - type: float
     name: TiltParam2Value
     offset: 76
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Character::ModelContainer
   name: ModelContainer
@@ -33154,7 +32328,6 @@ structs:
     offset: 36
     size: 7
     is_string: False
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F B7 56 66
     return_type: void
@@ -33208,7 +32381,6 @@ structs:
   - type: unsigned __int16
     name: OrnamentId
     offset: 24
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8D 7B ?? 48 8B 74 24
     return_type: void
@@ -33251,7 +32423,6 @@ structs:
   - type: Client::Graphics::Vfx::VfxData*
     name: Vfx
     offset: 64
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Character::VfxContainer::Tether
   name: Tether
@@ -33546,8 +32717,6 @@ structs:
       name: this
     - type: Client::Game::InventoryType
       name: inventoryType
-  - name: vf16
-    offset: 128
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 75 ?? 48 8B 43 ?? 80 78 ?? ?? 74 ?? 48 8B 43 ?? 80 78 ?? ?? 75 ?? 0F 1F 40
     return_type: char
@@ -33589,7 +32758,6 @@ structs:
   - type: char
     name: CPoseState
     offset: 33
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 8B F8 83 F8 FF 0F 84 ?? ?? ?? ?? 8B CF
     return_type: int
@@ -33622,9 +32790,7 @@ structs:
   - type: Client::LayoutEngine::ILayoutInstance*
     name: Layout
     offset: 24
-  virtual_functions:
-  - name: Dtor
-    offset: 0
+  virtual_functions: []
   member_functions: []
 - type: Client::Game::Control::EmoteManager
   name: EmoteManager
@@ -33716,7 +32882,6 @@ structs:
     offset: 38
     size: 11
     is_string: False
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::DomanEnclaveManager
   name: DomanEnclaveManager
@@ -33741,9 +32906,6 @@ structs:
   - type: Client::Game::DomanEnclaveManager::DomanEnclaveState
     name: State
     offset: 160
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
   static_members:
   - signature: 48 8B 15 ?? ?? ?? ?? 48 8B C8 48 83 C4 28
@@ -34012,7 +33174,6 @@ structs:
     name: EventSceneModuleImplBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Event::LuaActor
   name: LuaActor
@@ -34029,9 +33190,6 @@ structs:
   - type: Common::Lua::LuaState*
     name: LuaState
     offset: 120
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Client::Game::Event::LuaEventHandlerLuaText
   name: LuaEventHandlerLuaText
@@ -34414,7 +33572,6 @@ structs:
   - type: int
     name: BuddyObjectIndex
     offset: 88
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::HouseId
   name: HouseId
@@ -34734,7 +33891,6 @@ structs:
   - type: char
     name: SlotUpdateIndex
     offset: 325
-  virtual_functions: []
   member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC 30 41 8B D8 8B FA E8 ?? ?? ?? ?? 48 85 C0
     return_type: void
@@ -35218,7 +34374,6 @@ structs:
     name: GatheringPointObjectImplBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Object::StandObjectManager
   name: StandObjectManager
@@ -37101,7 +36256,6 @@ structs:
   - type: int
     name: ObtainedFlags
     offset: 492
-  virtual_functions: []
   member_functions:
   - signature: 80 FA 16 73 19
     return_type: int
@@ -37830,7 +36984,6 @@ structs:
     name: ExcelSheetWaiter
     offset: 0
     base: true
-  virtual_functions: []
   member_functions:
   - signature: 33 C0 4C 8B C9 38 41 32
     return_type: void
@@ -37849,7 +37002,6 @@ structs:
   - type: StdVector<Client::Graphics::Kernel::DomainShader*>
     name: Vector
     offset: 8
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::GeometryShader*>
   name: CVector`1
@@ -37862,7 +37014,6 @@ structs:
   - type: StdVector<Client::Graphics::Kernel::GeometryShader*>
     name: Vector
     offset: 8
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::HullShader*>
   name: CVector`1
@@ -37875,7 +37026,6 @@ structs:
   - type: StdVector<Client::Graphics::Kernel::HullShader*>
     name: Vector
     offset: 8
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::PixelShader*>
   name: CVector`1
@@ -37888,7 +37038,6 @@ structs:
   - type: StdVector<Client::Graphics::Kernel::PixelShader*>
     name: Vector
     offset: 8
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::ShaderNode*>
   name: CVector`1
@@ -37901,7 +37050,6 @@ structs:
   - type: StdVector<Client::Graphics::Kernel::ShaderNode*>
     name: Vector
     offset: 8
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::VertexShader*>
   name: CVector`1
@@ -37914,7 +37062,6 @@ structs:
   - type: StdVector<Client::Graphics::Kernel::VertexShader*>
     name: Vector
     offset: 8
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::RenderCommandBufferGroup
   name: RenderCommandBufferGroup
@@ -37942,7 +37089,6 @@ structs:
     name: ReferencedClassBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::Texture
   name: Texture
@@ -38038,9 +37184,6 @@ structs:
     offset: 32
     size: 5
     is_string: False
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Client::Graphics::Physics::BonePhysicsUpdater
   name: BonePhysicsUpdater
@@ -38057,7 +37200,6 @@ structs:
   - type: Client::Graphics::JobSystem
     name: TransformUpdaterJob
     offset: 416
-  virtual_functions: []
   member_functions:
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? ?? ?? ?? 33 ED 4C 8B F2
     return_type: void
@@ -38112,7 +37254,6 @@ structs:
   - type: char
     name: IsCollidable
     offset: 1094
-  virtual_functions: []
   member_functions:
   - signature: 40 55 53 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 44 0F 29 94 24
     return_type: void
@@ -38178,7 +37319,6 @@ structs:
   - type: char
     name: Wireframe
     offset: 132489
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::Material
   name: Material
@@ -38208,7 +37348,6 @@ structs:
   - type: unsigned __int16
     name: TextureCount
     offset: 80
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::Model
   name: Model
@@ -38259,7 +37398,6 @@ structs:
   - type: unsigned int
     name: SlotIndex
     offset: 232
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 75 29 48 8B 13
     return_type: char
@@ -38729,7 +37867,6 @@ structs:
   - type: float
     name: GraphicsRezoScale
     offset: 1772
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 4F ?? 48 8B D0 FF D3
     return_type: Client::Graphics::Kernel::Texture*
@@ -38758,7 +37895,6 @@ structs:
   - type: char
     name: Wireframe
     offset: 17345
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::VerticalFogRenderer
   name: VerticalFogRenderer
@@ -38770,7 +37906,6 @@ structs:
     name: BaseRenderer
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::View
   name: View
@@ -38789,7 +37924,6 @@ structs:
     offset: 16
     size: 16
     is_string: False
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::WaterRenderer
   name: WaterRenderer
@@ -38804,7 +37938,6 @@ structs:
   - type: char
     name: Wireframe
     offset: 728
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Scene::Attach
   name: Attach
@@ -38830,7 +37963,6 @@ structs:
   - type: Client::Graphics::Scene::Attach::Attachment*
     name: SkeletonBoneAttachments
     offset: 112
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Scene::CharacterBase::SkeletonAnimationContainer
   name: SkeletonAnimationContainer
@@ -38961,7 +38093,6 @@ structs:
   - type: StdVector<Client::LayoutEngine::Group::TimeLineLayoutInstance*>
     name: Instances
     offset: 8
-  virtual_functions: []
   member_functions:
   - signature: 48 8B 41 08 44 8B CA
     return_type: Client::LayoutEngine::Group::TimeLineLayoutInstance*
@@ -39534,9 +38665,6 @@ structs:
   - type: __int64
     name: UserData
     offset: 104
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions:
   - signature: 8B C2 48 6B D0 78 48 03 51 58
     return_type: void
@@ -39747,7 +38875,6 @@ structs:
   - type: Client::System::File::FileAccessPath
     name: ScreenShotStorageDirectory
     offset: 120
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Resource::ResourceGraph
   name: ResourceGraph
@@ -39817,12 +38944,6 @@ structs:
       name: eventType
     - type: char*
       name: data
-  - name: GetActionTimelineKey
-    offset: 160
-  - name: GetOwningGameObjectIndex
-    offset: 232
-  - name: GetAnimationLength
-    offset: 328
   member_functions: []
 - type: Client::System::Scheduler::Resource::SchedulerResource
   name: SchedulerResource
@@ -39848,7 +38969,6 @@ structs:
   - type: unsigned int
     name: Consumers
     offset: 124
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 8B E8 48 63 8F
     return_type: char*
@@ -39870,7 +38990,6 @@ structs:
   - type: StdMap<int, Client::System::Scheduler::Resource::SchedulerResource>
     name: Resources
     offset: 16
-  virtual_functions: []
   member_functions: []
   static_members:
   - signature: 48 8B 0D ?? ?? ?? ?? 0F 28 CE E8 ?? ?? ?? ?? 48 83 7E ?? ??
@@ -39888,7 +39007,6 @@ structs:
     name: BaseInstanceObject
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Scheduler::TimelineGroup
   name: TimelineGroup
@@ -39899,7 +39017,6 @@ structs:
   - type: Client::System::Scheduler::Base::LinkedList<Client::System::Scheduler::TimelineGroup>
     name: List
     offset: 8
-  virtual_functions: []
   member_functions: []
 - type: Client::System::String::Utf8StringPart
   name: Utf8StringPart
@@ -40105,7 +39222,6 @@ structs:
   - type: char
     name: Enabled
     offset: 9
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudAST0::ArcanaGaugeData
   name: ArcanaGaugeData
@@ -40138,7 +39254,6 @@ structs:
   - type: int
     name: FrameColor
     offset: 28
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudBLM0::ElementalGaugeData
   name: ElementalGaugeData
@@ -40195,7 +39310,6 @@ structs:
   - type: char
     name: ParadoxReady
     offset: 52
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudBLM0::ElementalGaugeSimple
   name: ElementalGaugeSimple
@@ -40258,7 +39372,6 @@ structs:
   - type: int
     name: TimelineFrameId
     offset: 160
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudBLM1::AstralGaugeData
   name: AstralGaugeData
@@ -40279,7 +39392,6 @@ structs:
   - type: int
     name: StackCount
     offset: 12
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudBRD0::SongGauge
   name: SongGauge
@@ -40357,7 +39469,6 @@ structs:
     offset: 208
     size: 3
     is_string: False
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudBRD0::SongGaugeData
   name: SongGaugeData
@@ -40420,7 +39531,6 @@ structs:
   - type: char*
     name: SongTitle
     offset: 56
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudBRD0::SongGaugeSimple
   name: SongGaugeSimple
@@ -40489,7 +39599,6 @@ structs:
   - type: char
     name: RadiantFinaleStatus
     offset: 200
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDNC0::StepGauge
   name: StepGauge
@@ -40527,7 +39636,6 @@ structs:
   - type: int
     name: StandardFinishActive
     offset: 96
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDNC0::StepGaugeData
   name: StepGaugeData
@@ -40565,7 +39673,6 @@ structs:
   - type: char
     name: FinishEffect
     offset: 44
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDNC0::StepGaugeSimple
   name: StepGaugeSimple
@@ -40603,7 +39710,6 @@ structs:
   - type: int
     name: StandardFinishActive
     offset: 96
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDNC1::FeatherGauge
   name: FeatherGauge
@@ -40656,7 +39762,6 @@ structs:
   - type: int
     name: EspritBarValue
     offset: 136
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDNC1::FeatherGaugeData
   name: FeatherGaugeData
@@ -40686,7 +39791,6 @@ structs:
   - type: int
     name: EspritMid
     offset: 24
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDNC1::FeatherGaugeSimple
   name: FeatherGaugeSimple
@@ -40724,7 +39828,6 @@ structs:
   - type: Component::GUI::AtkComponentTextNineGrid*
     name: EspritValueDisplay
     offset: 96
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDRG0::DragonGauge
   name: DragonGauge
@@ -40757,7 +39860,6 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: FirstMindsFocusContainer2
     offset: 64
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDRG0::DragonGaugeData
   name: DragonGaugeData
@@ -40787,7 +39889,6 @@ structs:
   - type: int
     name: FirstMindsFocusCount
     offset: 24
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDRG0::DragonGaugeSimple
   name: DragonGaugeSimple
@@ -40829,7 +39930,6 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: FirstMindsFocusGlow2
     offset: 88
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDRK0::BloodGauge
   name: BloodGauge
@@ -40859,7 +39959,6 @@ structs:
   - type: Component::GUI::AtkComponentGaugeBar*
     name: BloodGaugeBar
     offset: 56
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDRK0::BloodGaugeData
   name: BloodGaugeData
@@ -40889,7 +39988,6 @@ structs:
   - type: int
     name: BloodMid
     offset: 20
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDRK0::BloodGaugeSimple
   name: BloodGaugeSimple
@@ -40916,7 +40014,6 @@ structs:
   - type: Component::GUI::AtkComponentGaugeBar*
     name: BloodGaugeBar
     offset: 56
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDRK1::DarksideGauge
   name: DarksideGauge
@@ -40949,7 +40046,6 @@ structs:
   - type: Component::GUI::AtkTextNode*
     name: LivingShadowTimerText
     offset: 80
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDRK1::DarksideGaugeData
   name: DarksideGaugeData
@@ -40979,7 +40075,6 @@ structs:
   - type: int
     name: LivingShadowTimeLeft
     offset: 20
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDRK1::DarksideGaugeSimple
   name: DarksideGaugeSimple
@@ -41006,7 +40101,6 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: LivingShadowTimerDisplay
     offset: 56
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudGFF0::EukrasiaGauge
   name: EukrasiaGauge
@@ -41024,7 +40118,6 @@ structs:
   - type: char
     name: EukrasiaActive
     offset: 24
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudGFF0::EukrasiaGaugeData
   name: EukrasiaGaugeData
@@ -41042,7 +40135,6 @@ structs:
   - type: char
     name: EukrasiaActive
     offset: 9
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudGFF0::EukrasiaGaugeSimple
   name: EukrasiaGaugeSimple
@@ -41060,7 +40152,6 @@ structs:
   - type: char
     name: EukrasiaActive
     offset: 24
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudGFF1::AddersgallGauge
   name: AddersgallGauge
@@ -41103,7 +40194,6 @@ structs:
   - type: int
     name: TimelineFrameId
     offset: 104
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudGFF1::AddersgallGaugeData
   name: AddersgallGaugeData
@@ -41136,7 +40226,6 @@ structs:
   - type: char
     name: InCombat
     offset: 28
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudGFF1::AddersgallGaugeSimple
   name: AddersgallGaugeSimple
@@ -41176,7 +40265,6 @@ structs:
   - type: int
     name: AdderstingTimelineFrameId
     offset: 92
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudGNB0::PowderGaugeData
   name: PowderGaugeData
@@ -41206,7 +40294,6 @@ structs:
   - type: int
     name: Ammo
     offset: 16
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudMCH0::HeatGauge
   name: HeatGauge
@@ -41257,7 +40344,6 @@ structs:
   - type: int
     name: SummonState
     offset: 112
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudMCH0::HeatGaugeData
   name: HeatGaugeData
@@ -41305,7 +40391,6 @@ structs:
   - type: int
     name: SummonTimeLeft
     offset: 52
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudMCH0::HeatGaugeSimple
   name: HeatGaugeSimple
@@ -41350,7 +40435,6 @@ structs:
   - type: Component::GUI::AtkComponentTextNineGrid*
     name: SummonTimerDisplay
     offset: 96
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudMNK0::BeastChakraGauge
   name: BeastChakraGauge
@@ -41434,7 +40518,6 @@ structs:
   - type: Component::GUI::AtkComponentBase*
     name: CoeurlStack2
     offset: 208
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudMNK0::BeastChakraGaugeData
   name: BeastChakraGaugeData
@@ -41494,7 +40577,6 @@ structs:
   - type: int
     name: CoeurlCount
     offset: 48
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudMNK0::BeastChakraGaugeSimple
   name: BeastChakraGaugeSimple
@@ -41578,7 +40660,6 @@ structs:
   - type: Component::GUI::AtkComponentBase*
     name: CoeurlStack2
     offset: 224
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudMNK1::ChakraGaugeData
   name: ChakraGaugeData
@@ -41599,7 +40680,6 @@ structs:
   - type: char
     name: CounterGlowActive
     offset: 16
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudNIN0::NinkiGauge
   name: NinkiGauge
@@ -41629,7 +40709,6 @@ structs:
   - type: char
     name: CanSpend
     offset: 56
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudNIN0::NinkiGaugeData
   name: NinkiGaugeData
@@ -41653,7 +40732,6 @@ structs:
   - type: int
     name: Mid
     offset: 20
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudNIN0::NinkiGaugeSimple
   name: NinkiGaugeSimple
@@ -41677,7 +40755,6 @@ structs:
   - type: Component::GUI::AtkComponentGaugeBar*
     name: GaugeBar
     offset: 40
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudNIN1::KazematoiGauge
   name: KazematoiGauge
@@ -41774,7 +40851,6 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: StanceGemLowLevel
     offset: 72
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudPLD0::OathGaugeData
   name: OathGaugeData
@@ -41801,7 +40877,6 @@ structs:
   - type: int
     name: OathMax
     offset: 16
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudPLD0::OathGaugeSimple
   name: OathGaugeSimple
@@ -41828,7 +40903,6 @@ structs:
   - type: Component::GUI::AtkComponentBase*
     name: StanceIcon
     offset: 56
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDB0::VipersightGauge
   name: VipersightGauge
@@ -41846,7 +40920,6 @@ structs:
   - type: Client::UI::AddonJobHudRDB0::VipersightGauge::RattlingCoilStandard*
     name: RattlingCoil
     offset: 24
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDB0::VipersightGaugeData
   name: VipersightGaugeData
@@ -41879,7 +40952,6 @@ structs:
   - type: int
     name: CoilMax
     offset: 20
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDB0::VipersightGaugeSimple
   name: VipersightGaugeSimple
@@ -41897,7 +40969,6 @@ structs:
   - type: Client::UI::AddonJobHudRDB0::VipersightGaugeSimple::RattlingCoilSimple*
     name: RattlingCoil
     offset: 24
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGauge
   name: SerpentOfferingsGauge
@@ -41915,7 +40986,6 @@ structs:
   - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGauge::TributeCounter*
     name: _tributeCounter
     offset: 24
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGaugeData
   name: SerpentOfferingsGaugeData
@@ -41954,7 +41024,6 @@ structs:
   - type: int
     name: TributeMaxTime
     offset: 40
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGaugeSimple
   name: SerpentOfferingsGaugeSimple
@@ -41972,7 +41041,6 @@ structs:
   - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGaugeSimple::TributeCounterSimple*
     name: _tributeCounter
     offset: 24
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDM0::BalanceGaugeData
   name: BalanceGaugeData
@@ -42008,7 +41076,6 @@ structs:
   - type: int
     name: ManaStacks
     offset: 32
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDM0::BalanceGaugeSimple
   name: BalanceGaugeSimple
@@ -42070,7 +41137,6 @@ structs:
   - type: int
     name: ManaStackCount
     offset: 140
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRPM0::CanvasGauge
   name: CanvasGauge
@@ -42124,7 +41190,6 @@ structs:
   - type: Component::GUI::AtkComponentBase*
     name: LandscapePaintingStarrySky
     offset: 128
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRPM0::CanvasGaugeData
   name: CanvasGaugeData
@@ -42163,7 +41228,6 @@ structs:
   - type: char
     name: LandscapeMotif
     offset: 25
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRPM0::CanvasGaugeSimple
   name: CanvasGaugeSimple
@@ -42211,7 +41275,6 @@ structs:
   - type: int
     name: WeaponMotif
     offset: 104
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRPM1::PaletteGauge
   name: PaletteGauge
@@ -42229,7 +41292,6 @@ structs:
   - type: Client::UI::AddonJobHudRPM1::PaletteGauge::PaintStacksStandard*
     name: PaintStacks
     offset: 24
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRPM1::PaletteGaugeData
   name: PaletteGaugeData
@@ -42268,7 +41330,6 @@ structs:
   - type: int
     name: BlackPaint
     offset: 28
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRPM1::PaletteGaugeSimple
   name: PaletteGaugeSimple
@@ -42286,7 +41347,6 @@ structs:
   - type: Client::UI::AddonJobHudRPM1::PaletteGaugeSimple::PaintStacksSimple*
     name: PaintStacks
     offset: 24
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRRP0::SoulGauge
   name: SoulGauge
@@ -42346,7 +41406,6 @@ structs:
   - type: Component::GUI::AtkComponentBase*
     name: ShroudTextContainer
     offset: 232
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRRP0::SoulGaugeData
   name: SoulGaugeData
@@ -42385,7 +41444,6 @@ structs:
   - type: char
     name: Enshrouded
     offset: 36
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRRP0::SoulGaugeSimple
   name: SoulGaugeSimple
@@ -42418,7 +41476,6 @@ structs:
   - type: int
     name: GlowTimelineFrameId
     offset: 76
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRRP1::DeathGaugeData
   name: DeathGaugeData
@@ -42445,7 +41502,6 @@ structs:
   - type: int
     name: EnshroudTimer
     offset: 20
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSAM0::KenkiGauge
   name: KenkiGauge
@@ -42521,7 +41577,6 @@ structs:
   - type: char
     name: KenkiCapped
     offset: 136
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSAM0::KenkiGaugeData
   name: KenkiGaugeData
@@ -42548,7 +41603,6 @@ structs:
   - type: int
     name: KenkiMax
     offset: 20
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSAM0::KenkiGaugeSimple
   name: KenkiGaugeSimple
@@ -42600,7 +41654,6 @@ structs:
   - type: char
     name: Visible
     offset: 93
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSAM1::SenGauge
   name: SenGauge
@@ -42645,7 +41698,6 @@ structs:
   - type: int
     name: GlowTimelineFrameId
     offset: 76
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSAM1::SenGaugeData
   name: SenGaugeData
@@ -42669,7 +41721,6 @@ structs:
   - type: char
     name: HasKa
     offset: 11
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSAM1::SenGaugeSimple
   name: SenGaugeSimple
@@ -42717,7 +41768,6 @@ structs:
   - type: char
     name: HasAll
     offset: 83
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSCH0::FaerieGauge
   name: FaerieGauge
@@ -42780,7 +41830,6 @@ structs:
   - type: char
     name: HasFaerie
     offset: 135
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSCH0::FaerieGaugeData
   name: FaerieGaugeData
@@ -42816,7 +41865,6 @@ structs:
   - type: int
     name: SeraphMaxTime
     offset: 28
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSCH0::FaerieGaugeSimple
   name: FaerieGaugeSimple
@@ -42852,7 +41900,6 @@ structs:
   - type: Component::GUI::AtkComponentTextNineGrid*
     name: SeraphTimerDisplay
     offset: 72
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSMN0::AetherflowSMNGauge
   name: AetherflowSMNGauge
@@ -42885,7 +41932,6 @@ structs:
   - type: int
     name: TimelineFrameId
     offset: 52
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeData
   name: AetherflowSMNGaugeData
@@ -42905,7 +41951,6 @@ structs:
     offset: 12
     size: 1
     is_string: False
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSMN0::AetherflowSMNGaugeSimple
   name: AetherflowSMNGaugeSimple
@@ -42938,7 +41983,6 @@ structs:
   - type: int
     name: TimelineFrameId
     offset: 52
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSMN1::TranceGaugeData
   name: TranceGaugeData
@@ -42998,7 +42042,6 @@ structs:
   - type: int
     name: EgiTimeLeft
     offset: 52
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudWAR0::BeastGauge
   name: BeastGauge
@@ -43034,7 +42077,6 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: StanceGemLowLevel
     offset: 72
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudWAR0::BeastGaugeData
   name: BeastGaugeData
@@ -43061,7 +42103,6 @@ structs:
   - type: int
     name: BeastMax
     offset: 16
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudWAR0::BeastGaugeSimple
   name: BeastGaugeSimple
@@ -43088,7 +42129,6 @@ structs:
   - type: Component::GUI::AtkComponentBase*
     name: StanceIcon
     offset: 48
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudWHM0::HealingGauge
   name: HealingGauge
@@ -43129,7 +42169,6 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: BranchContainer
     offset: 96
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudWHM0::HealingGaugeData
   name: HealingGaugeData
@@ -43159,7 +42198,6 @@ structs:
   - type: int
     name: LilyTimerMax
     offset: 24
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudWHM0::HealingGaugeSimple
   name: HealingGaugeSimple
@@ -43216,7 +42254,6 @@ structs:
   - type: Component::GUI::AtkComponentGaugeBar*
     name: LilyTimerGaugeBar
     offset: 144
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonLotteryDaily::GameBoardNumbers
   name: GameBoardNumbers
@@ -44686,7 +43723,6 @@ structs:
   - type: Client::UI::Agent::AgentHelpers
     name: AgentHelpers
     offset: 3952
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 85 ?? ?? ?? ?? 48 8B CE
     return_type: void
@@ -46079,7 +45115,6 @@ structs:
     offset: 158
     size: 5
     is_string: False
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 49 8D 4F ?? E8 ?? ?? ?? ?? 8B C8
     return_type: void
@@ -46260,9 +45295,6 @@ structs:
   - type: unsigned __int64
     name: OnlineStatusFlags
     offset: 7224
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions:
   - signature: E8 ?? ?? ?? ?? 45 85 E4 7E 5C
     return_type: Client::UI::Info::InfoProxyInterface*
@@ -47640,9 +46672,6 @@ structs:
   - type: StdVector<Client::UI::Misc::DataCenterHelper::DataCenter>
     name: DataCenters
     offset: 8
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Client::UI::Misc::DescriptionModule
   name: DescriptionModule
@@ -48345,7 +47374,6 @@ structs:
     offset: 988
     size: 5
     is_string: False
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::Misc::ItemContextCustomizeModule
   name: ItemContextCustomizeModule
@@ -50867,9 +49895,6 @@ structs:
   - type: char
     name: IsLoaded
     offset: 56
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 85 F6 75 17
     return_type: Client::UI::Misc::WorldHelper::World
@@ -50960,8 +49985,6 @@ structs:
       name: atkEvent
     - type: Component::GUI::AtkEventData*
       name: atkEventData
-  - name: OnItemSelected
-    offset: 24
   member_functions: []
 - type: Client::UI::RaidFinderDutyEntry
   name: RaidFinderDutyEntry
@@ -51133,7 +50156,6 @@ structs:
   - type: char
     name: Unk20
     offset: 32
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::UI3DModule::UnkInfo
   name: UnkInfo
@@ -51512,7 +50534,6 @@ structs:
   - type: Client::System::String::Utf8String
     name: UnkString
     offset: 80
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 8B C3 39 58
     return_type: Common::Configuration::ConfigEntry*
@@ -51560,7 +50581,6 @@ structs:
     name: LuaState
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Common::Lua::Proto
   name: Proto
@@ -51959,7 +50979,6 @@ structs:
     name: AtkFontAnalyzerBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkFontAnalyzerCRLFCount
   name: AtkFontAnalyzerCRLFCount
@@ -51971,7 +50990,6 @@ structs:
     name: AtkFontAnalyzerBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkFontAnalyzerCRLFSearch
   name: AtkFontAnalyzerCRLFSearch
@@ -51983,7 +51001,6 @@ structs:
     name: AtkFontAnalyzerBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkFontAnalyzerCheckStringOnlyNumSymbol
   name: AtkFontAnalyzerCheckStringOnlyNumSymbol
@@ -51995,7 +51012,6 @@ structs:
     name: AtkFontAnalyzerBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkFontAnalyzerCount
   name: AtkFontAnalyzerCount
@@ -52007,7 +51023,6 @@ structs:
     name: AtkFontAnalyzerBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkFontAnalyzerCreateCache
   name: AtkFontAnalyzerCreateCache
@@ -52019,7 +51034,6 @@ structs:
     name: AtkFontAnalyzerBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkFontAnalyzerDrawSize
   name: AtkFontAnalyzerDrawSize
@@ -52031,7 +51045,6 @@ structs:
     name: AtkFontAnalyzerBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkFontAnalyzerRenderCount
   name: AtkFontAnalyzerRenderCount
@@ -52043,7 +51056,6 @@ structs:
     name: AtkFontAnalyzerBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkFontAnalyzerSearchPosition
   name: AtkFontAnalyzerSearchPosition
@@ -52055,7 +51067,6 @@ structs:
     name: AtkFontAnalyzerBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkModule::AddonCallbackEntry
   name: AddonCallbackEntry
@@ -53160,7 +52171,6 @@ structs:
   - type: __int64*
     name: DataArray
     offset: 40
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::NumberArrayData
   name: NumberArrayData
@@ -53175,7 +52185,6 @@ structs:
   - type: int*
     name: IntArray
     offset: 40
-  virtual_functions: []
   member_functions:
   - signature: 3B 51 08 7D 20
     return_type: void
@@ -53207,7 +52216,6 @@ structs:
   - type: char**
     name: ManagedStringArray
     offset: 48
-  virtual_functions: []
   member_functions:
   - signature: 48 89 6C 24 ?? 56 48 83 EC ?? 49 8B F0 48 8B E9 3B 51
     return_type: void
@@ -54768,7 +53776,6 @@ structs:
   - type: char
     name: IsOutTerritory
     offset: 280
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::CSBonusManager
   name: CSBonusManager
@@ -54782,7 +53789,6 @@ structs:
   - type: Client::Game::CSBonusMissionInfo
     name: MissionInfo
     offset: 24
-  virtual_functions: []
   member_functions: []
   static_members:
   - signature: 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 63 D0
@@ -54956,9 +53962,6 @@ structs:
   - type: char
     name: Flags
     offset: 44
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Client::Game::GcArmyData
   name: GcArmyData
@@ -55031,7 +54034,6 @@ structs:
   - type: Client::Game::InventoryItem*
     name: InventoryItem
     offset: 40
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 75 ?? 8B 4B
     return_type: char
@@ -55299,6 +54301,28 @@ structs:
     - 3
     is_pointer: False
     return_type: Client::Game::NameCache
+- type: Client::Game::Network::CrossRealmListingSegmentPacket
+  name: CrossRealmListingSegmentPacket
+  namespace: Client.Game.Network
+  union: False
+  size: 1632
+  fields:
+  - type: Client::Game::Network::ServerIpcSegmentHeader
+    name: ServerIpcSegmentHeader
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: Unk10
+    offset: 16
+  - type: unsigned __int16
+    name: SegmentIndex
+    offset: 28
+  - type: Client::Game::Network::CrossRealmListingSegmentPacket::CrossRealmListing
+    name: Entries
+    offset: 32
+    size: 4
+    is_string: False
+  member_functions: []
 - type: Client::Game::Network::PacketPlayerGearsetData
   name: PacketPlayerGearsetData
   namespace: Client.Game.Network
@@ -59181,7 +58205,6 @@ structs:
     name: PacketDispatcher
     offset: 8
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Client::Sound::SoundDataSoundController
   name: SoundDataSoundController
@@ -59665,9 +58688,6 @@ structs:
     name: RepeatCounter
     offset: 8
     base: true
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions: []
 - type: Client::System::Memory::Regular::DefaultSpace
   name: DefaultSpace
@@ -59904,7 +58924,6 @@ structs:
   - type: Client::Graphics::Scene::Object*
     name: Graphics
     offset: 128
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Scheduler::Instance::CharacterObject
   name: CharacterObject
@@ -59928,7 +58947,6 @@ structs:
   - type: int
     name: Tribe
     offset: 176
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Scheduler::Instance::LayoutReferenceObject
   name: LayoutReferenceObject
@@ -59979,7 +58997,6 @@ structs:
   - type: Client::Graphics::Scene::Object*
     name: Graphics
     offset: 168
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Scheduler::Instance::VfxObject
   name: VfxObject
@@ -59994,7 +59011,6 @@ structs:
   - type: Client::Graphics::Scene::Object*
     name: Graphics
     offset: 128
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Scheduler::Instance::WeaponObject
   name: WeaponObject
@@ -60009,7 +59025,6 @@ structs:
   - type: Client::Graphics::Scene::Object*
     name: Graphics
     offset: 128
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonItemDetailCompare::AtkValuesArray::ComparedItem
   name: ComparedItem
@@ -60203,7 +59218,6 @@ structs:
   - type: int
     name: TimelineFrameId
     offset: 88
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudACN0::AetherflowACNGaugeSimple
   name: AetherflowACNGaugeSimple
@@ -60223,7 +59237,6 @@ structs:
   - type: int
     name: TimelineFrameId
     offset: 88
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudAST0::ArcanaGauge
   name: ArcanaGauge
@@ -60253,7 +59266,6 @@ structs:
   - type: Client::UI::AddonJobHudAST0::ArcanaCard
     name: MinorArcanaCard
     offset: 136
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudAST0::ArcanaGaugeSimple
   name: ArcanaGaugeSimple
@@ -60280,7 +59292,6 @@ structs:
   - type: Client::UI::AddonJobHudAST0::ArcanaCard
     name: MinorArcanaCard
     offset: 128
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudBLM1::AstralGauge
   name: AstralGauge
@@ -60300,7 +59311,6 @@ structs:
     offset: 32
     size: 6
     is_string: False
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudBLM1::AstralGaugeSimple
   name: AstralGaugeSimple
@@ -60317,7 +59327,6 @@ structs:
     offset: 32
     size: 6
     is_string: False
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudGNB0::PowderGauge
   name: PowderGauge
@@ -60361,7 +59370,6 @@ structs:
   - type: char
     name: Bloodfest
     offset: 152
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudGNB0::PowderGaugeSimple
   name: PowderGaugeSimple
@@ -60387,7 +59395,6 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: Container
     offset: 120
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudMNK1::ChakraGauge
   name: ChakraGauge
@@ -60413,7 +59420,6 @@ structs:
   - type: char
     name: CounterGlowActive
     offset: 152
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudMNK1::ChakraGaugeSimple
   name: ChakraGaugeSimple
@@ -60439,7 +59445,6 @@ structs:
   - type: char
     name: CounterGlowActive
     offset: 200
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDM0::BalanceGauge
   name: BalanceGauge
@@ -60498,7 +59503,6 @@ structs:
   - type: int
     name: ManaStackCount
     offset: 248
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRRP1::DeathGauge
   name: DeathGauge
@@ -60521,7 +59525,6 @@ structs:
   - type: Component::GUI::AtkComponentTextNineGrid*
     name: EnshroudTimerDisplay
     offset: 272
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRRP1::DeathGaugeSimple
   name: DeathGaugeSimple
@@ -60547,7 +59550,6 @@ structs:
   - type: Component::GUI::AtkComponentTextNineGrid*
     name: EnshroudTimerDisplay
     offset: 208
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSMN1::TranceGauge
   name: TranceGauge
@@ -60628,7 +59630,6 @@ structs:
   - type: Client::UI::AddonJobHudSMN1::TranceGauge::EgiGauge
     name: GarudaGauge
     offset: 288
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSMN1::TranceGaugeSimple
   name: TranceGaugeSimple
@@ -60685,7 +59686,6 @@ structs:
   - type: int
     name: TimelineFrameId
     offset: 208
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonSelectIconString::PopupMenuDerive
   name: PopupMenuDerive
@@ -71165,7 +70165,6 @@ structs:
   - type: char
     name: NorthLockedUp
     offset: 4940
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::Info::InfoProxy25
   name: InfoProxy25
@@ -71733,7 +70732,6 @@ structs:
     offset: 23608
     size: 715
     is_string: False
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::Misc::CraftModule
   name: CraftModule
@@ -73763,7 +72761,6 @@ structs:
   - type: char
     name: SortPriority
     offset: 81
-  virtual_functions: []
   member_functions: []
 - type: Common::Base::Math::QsTransform::hkQsTransformf
   name: hkQsTransformf
@@ -74149,8 +73146,6 @@ structs:
       name: this
     - type: char
       name: freeFlags
-  - name: Visit
-    offset: 80
   member_functions: []
 - type: Common::Component::BGCollision::MeshPCB::FileNode
   name: FileNode
@@ -74214,7 +73209,6 @@ structs:
     name: ConfigBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Common::Configuration::SystemConfig
   name: SystemConfig
@@ -74235,7 +73229,6 @@ structs:
   - type: Common::Configuration::ConfigBase
     name: UiControlGamepadConfig
     offset: 824
-  virtual_functions: []
   member_functions: []
 - type: Common::Lua::TKey
   name: TKey
@@ -74455,7 +73448,6 @@ structs:
   - type: Component::GUI::AtkFontAnalyzerRenderCount
     name: AtkFontAnalyzerRenderCount
     offset: 304
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkInputManager
   name: AtkInputManager
@@ -74737,11 +73729,6 @@ structs:
   - type: char
     name: IsActive
     offset: 40
-  virtual_functions:
-  - name: Dtor
-    offset: 8
-  - name: OnTick
-    offset: 16
   member_functions:
   - signature: E8 ?? ?? ?? ?? 49 8D 46 78
     return_type: void
@@ -74824,7 +73811,6 @@ structs:
   - type: StdVector<char>
     name: LogMessageData
     offset: 96
-  virtual_functions: []
   member_functions: []
 - type: Component::Shell::ShellCommands
   name: ShellCommands
@@ -74838,7 +73824,6 @@ structs:
   - type: StdMap<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>
     name: DebugCommands
     offset: 24
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 83 F8 ?? 74 ?? 83 F8 ?? 0F 85 ?? ?? ?? ?? 48 8B 06
     return_type: int
@@ -74882,103 +73867,6 @@ structs:
   - type: StdDeque<Component::Text::TextParameter>
     name: GlobalParameters
     offset: 56
-  virtual_functions:
-  - name: DecodeSetResetTime
-    offset: 8
-  - name: DecodeSetTime
-    offset: 16
-  - name: DecodeIf
-    offset: 24
-  - name: DecodeSwitch
-    offset: 32
-  - name: DecodeSwitchPlatform
-    offset: 40
-  - name: DecodeBr
-    offset: 48
-  - name: DecodeWait
-    offset: 56
-  - name: DecodeIcon
-    offset: 64
-  - name: DecodeIcon2
-    offset: 72
-  - name: DecodeColor
-    offset: 80
-  - name: DecodeColorType
-    offset: 88
-  - name: DecodeEdgeColor
-    offset: 96
-  - name: DecodeEdgeColorType
-    offset: 104
-  - name: DecodeShadowColor
-    offset: 112
-  - name: DecodeScale
-    offset: 136
-  - name: DecodeNum
-    offset: 192
-  - name: DecodeHex
-    offset: 200
-  - name: DecodeKilo
-    offset: 208
-  - name: DecodeByte
-    offset: 216
-  - name: DecodeSec
-    offset: 224
-  - name: DecodeTime
-    offset: 232
-  - name: DecodeFloat
-    offset: 240
-  - name: DecodeDigit
-    offset: 248
-  - name: DecodeOrdinal
-    offset: 256
-  - name: DecodeSheet
-    offset: 264
-  - name: DecodeString
-    offset: 272
-  - name: DecodeCaps
-    offset: 280
-  - name: DecodeHead
-    offset: 288
-  - name: DecodeSplit
-    offset: 296
-  - name: DecodeHeadAll
-    offset: 304
-  - name: DecodeFixed
-    offset: 312
-  - name: DecodeLower
-    offset: 320
-  - name: DecodeLowerHead
-    offset: 328
-  - name: DecodeSheetSub
-    offset: 336
-  - name: DecodeJaNoun
-    offset: 344
-  - name: DecodeEnNoun
-    offset: 352
-  - name: DecodeDeNoun
-    offset: 360
-  - name: DecodeFrNoun
-    offset: 368
-  - name: DecodeChNoun
-    offset: 376
-  - name: DecodeKoNoun
-    offset: 384
-  - name: DecodeJosa
-    offset: 392
-  - name: DecodeJosaro
-    offset: 400
-  - name: DecodePcName
-    offset: 408
-  - name: DecodeIfPcGender
-    offset: 416
-  - name: DecodeIfPcName
-    offset: 424
-  - name: DecodeIfSelf
-    offset: 432
-  - name: DecodeSound
-    offset: 440
-  - name: DecodeLevelPos
-    offset: 448
   member_functions: []
   static_members:
   - signature: 48 8D 0D ?? ?? ?? ?? 48 89 44 24 ?? E8 ?? ?? ?? ?? 48 83 C4
@@ -75772,7 +74660,6 @@ structs:
       offset: 6
       size: 1
       name: IsWeaponDrawn
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 0F B7 E8 45 85 ED
     return_type: unsigned int
@@ -75833,7 +74720,6 @@ structs:
   - type: unsigned __int16
     name: VoiceId
     offset: 208
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB 6A 0F BE 83 ?? ?? ?? ??
     return_type: __int64
@@ -76081,7 +74967,6 @@ structs:
   - type: StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>
     name: Handles
     offset: 24
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>
   name: LuaScriptLoader`1
@@ -76101,7 +74986,6 @@ structs:
   - type: StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>
     name: Handles
     offset: 24
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Fate::FateContext::FateMapMarker
   name: FateMapMarker
@@ -76522,10 +75406,6 @@ structs:
       name: this
     - type: unsigned __int16
       name: value
-  - name: IsHighQuality2
-    offset: 160
-  - name: SetIsHighQuality2
-    offset: 168
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 C0 48 8D 4B 58
     return_type: void
@@ -77021,12 +75901,6 @@ structs:
       name: outHitPosition
     - type: char*
       name: outModelChecked
-  - name: GetObjectType
-    offset: 24
-  - name: UpdateRadius
-    offset: 200
-  - name: Update
-    offset: 280
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 8B F8 B8
     return_type: Client::Game::Character::Character*
@@ -77352,9 +76226,6 @@ structs:
     offset: 480
     size: 8
     is_string: False
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 EB 5C
     return_type: char
@@ -77577,8 +76448,6 @@ structs:
       name: valueCount
     - type: unsigned __int64
       name: eventKind
-  - name: Dtor
-    offset: 16
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 4B 10 84 C0 48 8B 01 74 2C
     return_type: char
@@ -77758,7 +76627,6 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::DomainShader
   name: DomainShader
@@ -77773,7 +76641,6 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::GeometryShader
   name: GeometryShader
@@ -77788,7 +76655,6 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::HullShader
   name: HullShader
@@ -77803,7 +76669,6 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::PixelShader
   name: PixelShader
@@ -77818,7 +76683,6 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 96
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Kernel::VertexShader
   name: VertexShader
@@ -77842,7 +76706,6 @@ structs:
   - type: __int64
     name: DirectXObject
     offset: 112
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Physics::BonePhysicsModule
   name: BonePhysicsModule
@@ -77876,9 +76739,6 @@ structs:
   - type: float
     name: FrameDeltaTime
     offset: 440
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F 2F C6 76 ?? 48 8B CE
     return_type: float
@@ -77941,9 +76801,6 @@ structs:
   - type: char
     name: FiniteFarPlane
     offset: 516
-  virtual_functions:
-  - name: UpdateConstantBuffer
-    offset: 40
   member_functions: []
 - type: Client::Graphics::Scene::DrawObject
   name: DrawObject
@@ -78118,8 +76975,6 @@ structs:
     parameters:
     - type: Client::Graphics::Scene::DrawObject*
       name: this
-  - name: UpdateTint
-    offset: 192
   member_functions: []
 - type: Client::Graphics::Scene::World
   name: World
@@ -78645,7 +77500,6 @@ structs:
     name: DevConfigBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Configuration::SystemConfig
   name: SystemConfig
@@ -78657,7 +77511,6 @@ structs:
     name: SystemConfigBase
     offset: 0
     base: true
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 0F B7 E8 48 8D 4B
     return_type: unsigned int
@@ -78792,7 +77645,6 @@ structs:
     name: RepeatCounter
     offset: 16
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Client::System::Resource::Handle::ResourceHandle
   name: ResourceHandle
@@ -78865,8 +77717,6 @@ structs:
       name: contents
     - type: char
       name: flag
-  - name: GetClassName
-    offset: 128
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 C7 03 ?? ?? ?? ?? C6 83
     return_type: char
@@ -79165,7 +78015,6 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: ParadoxGemBase
     offset: 360
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::AgentAchievement
   name: AgentAchievement
@@ -79490,7 +78339,7 @@ structs:
     name: AdvancedRequirementsPtr
     offset: 392
   - type: char
-    name: _UnkFlags
+    name: UnkFlags
     offset: 400
   virtual_functions:
   - name: ReceiveEvent
@@ -84501,7 +83350,7 @@ structs:
   size: 896
   fields:
   - type: int
-    name: _UnkLoadState
+    name: UnkLoadState
     offset: 4
   - type: int
     name: SelectedContentIndex
@@ -84513,7 +83362,7 @@ structs:
     name: CurrentContentIndex
     offset: 64
   - type: unsigned int
-    name: _UnkState
+    name: UnkState
     offset: 68
   - type: char
     name: CurrentActIndex
@@ -84541,7 +83390,7 @@ structs:
     size: 3
     is_string: False
   - type: float
-    name: _UnkFloat
+    name: UnkFloat
     offset: 892
   member_functions: []
 - type: Client::UI::Agent::HousingPortalPacket
@@ -84792,7 +83641,6 @@ structs:
     offset: 264
     size: 8
     is_string: False
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 45 33 C0 8D 4E 70
     return_type: Client::System::String::Utf8String*
@@ -85116,7 +83964,6 @@ structs:
   - type: char
     name: IsSelectingText
     offset: 289
-  virtual_functions: []
   member_functions:
   - signature: 48 85 D2 0F 84 ?? ?? ?? ?? 4C 8B DC 55 41 54
     return_type: void
@@ -86402,9 +85249,6 @@ structs:
   - type: __int64
     name: NextHwnd
     offset: 248
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 80 3D ?? ?? ?? ?? ?? 74 29
     return_type: void
@@ -86941,12 +85785,6 @@ structs:
       name: this
     - type: char
       name: freeFlags
-  - name: Visit1
-    offset: 144
-  - name: Visit2
-    offset: 160
-  - name: Visit3
-    offset: 168
   member_functions: []
 - type: Common::Configuration::ConfigProperties
   name: ConfigProperties
@@ -87374,9 +86212,6 @@ structs:
   - type: __int16
     name: UnkBA
     offset: 186
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions:
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8D 05 ?? ?? ?? ?? 48 8B F1 48 89 01 41 0F B6 F8
     return_type: void
@@ -87606,7 +86441,6 @@ structs:
   - type: Common::Component::Excel::ExcelModule*
     name: ExcelModule
     offset: 96
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkTextInput
   name: AtkTextInput
@@ -87667,7 +86501,6 @@ structs:
   - type: Client::System::String::AllowedEntities
     name: InputSanitizationFlags
     offset: 3096
-  virtual_functions: []
   member_functions:
   - signature: 40 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 66 83 B9
     return_type: void
@@ -87887,7 +86720,6 @@ structs:
   - type: Client::System::String::Utf8String
     name: Str7
     offset: 680
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? FF CE 89 74 24
     return_type: int
@@ -88553,7 +87385,6 @@ structs:
   - type: float
     name: DistanceToTargetHitbox
     offset: 2024
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? B0 01 EB B6
     return_type: char
@@ -89254,26 +88085,6 @@ structs:
     parameters:
     - type: Client::Game::Event::EventHandler*
       name: this
-  - name: Dtor
-    offset: 0
-  - name: Terminate
-    offset: 48
-  - name: IsUnlocked
-    offset: 56
-  - name: GetIconId
-    offset: 1808
-  - name: IsOccupied33
-    offset: 1840
-  - name: GetOccupiedConditionId
-    offset: 1848
-  - name: GetOccupiedPermissionId
-    offset: 1856
-  - name: GetScriptVersion
-    offset: 2000
-  - name: IsTodoTitleFocusable
-    offset: 2136
-  - name: Initialize
-    offset: 2184
   member_functions: []
 - type: Client::Game::Event::ModuleBase
   name: ModuleBase
@@ -89287,11 +88098,6 @@ structs:
   - type: Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>
     name: LuaScriptLoader
     offset: 16
-  virtual_functions:
-  - name: SetupClasses
-    offset: 8
-  - name: SetupClasses_2
-    offset: 32
   member_functions: []
 - type: Client::Game::InstanceContent::DynamicEvent
   name: DynamicEvent
@@ -89357,7 +88163,6 @@ structs:
   - type: Client::Game::InstanceContent::DynamicEventContainer*
     name: EventContainer
     offset: 448
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 44 0F B7 03
     return_type: char
@@ -90046,7 +88851,6 @@ structs:
   - type: Client::Game::UI::ContentsFinderQueueInfo
     name: QueueInfo
     offset: 32
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 FF 0F B6 48
     return_type: Client::Game::UI::ContentsFinderQueueInfo*
@@ -90153,7 +88957,6 @@ structs:
   - type: char
     name: Unk284A
     offset: 10314
-  virtual_functions: []
   member_functions: []
   static_members:
   - signature: 48 8D 0D ?? ?? ?? ?? 0F 11 44 24 ?? C6 44 24
@@ -90588,10 +89391,10 @@ structs:
     size: 4
     is_string: False
   - type: unsigned __int16
-    name: _weeklyBingoStickers
+    name: WeeklyBingoStickers
     offset: 1856
   - type: unsigned int
-    name: _weeklyBingoFlags
+    name: WeeklyBingoFlags
     offset: 1860
   - type: char
     name: _weeklyBingoTaskStatus
@@ -90975,7 +89778,6 @@ structs:
   - type: Client::Graphics::JobSystem
     name: JobSystem
     offset: 912
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 0F B7 28
     return_type: unsigned __int16*
@@ -91001,7 +89803,6 @@ structs:
     name: Camera
     offset: 0
     base: true
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::Skeleton
   name: Skeleton
@@ -91046,7 +89847,6 @@ structs:
   - type: Client::Graphics::Scene::CharacterBase*
     name: Owner
     offset: 184
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Scene::Attach::Attachment
   name: Attachment
@@ -91283,8 +90083,6 @@ structs:
     parameters:
     - type: Client::Graphics::Scene::Camera*
       name: this
-  - name: PrepareRenderCamera
-    offset: 80
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 8B E0 4C 8B FB
     return_type: Client::Graphics::Ray*
@@ -94942,12 +93740,6 @@ structs:
       name: this
     - type: __int64
       name: packetPtr
-  - name: GetCurrentLocationName
-    offset: 120
-  - name: Compare
-    offset: 208
-  - name: CompareHomeworld
-    offset: 232
   member_functions:
   - signature: 3B 51 10 73 12 8B C2 48 6B D0 70
     return_type: unsigned __int64
@@ -95624,7 +94416,6 @@ structs:
   - type: char
     name: IsChildSetupComplete
     offset: 93
-  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkComponentBase
   name: AtkComponentBase
@@ -95757,8 +94548,6 @@ structs:
       name: atkEvent
     - type: Component::GUI::AtkEventData*
       name: atkEventData
-  - name: Load
-    offset: 48
   member_functions:
   - signature: 48 8D 05 ?? ?? ?? ?? C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 01 33 C0 48 89 41 08
     return_type: void
@@ -96748,7 +95537,6 @@ structs:
   - type: Client::System::String::Utf8String
     name: Unk90
     offset: 144
-  virtual_functions: []
   member_functions: []
 - type: Animation::Playback::Control::hkaAnimationControl
   name: hkaAnimationControl
@@ -96956,7 +95744,6 @@ structs:
   - type: unsigned int
     name: TargetModeIndex
     offset: 28288
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 8B F8 33 F6 EB
     return_type: Client::Game::Object::GameObjectId
@@ -97563,9 +96350,6 @@ structs:
     offset: 2992
     size: 37
     is_string: False
-  virtual_functions:
-  - name: Dtor
-    offset: 0
   member_functions:
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B FA 49 8B F0 8B 91
     return_type: char
@@ -97674,7 +96458,6 @@ structs:
   - type: char
     name: ContentMemberLimit
     offset: 7551
-  virtual_functions: []
   member_functions:
   - signature: 48 0F BE 81 ?? ?? ?? ?? 48 8B D1 84 C0 79
     return_type: Client::Game::InstanceContent::DynamicEvent*
@@ -98260,7 +97043,6 @@ structs:
   - type: Common::Math::AxisAlignedBounds
     name: RangeBounds
     offset: 192
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::PartialSkeleton
   name: PartialSkeleton
@@ -98315,7 +97097,6 @@ structs:
     offset: 176
     size: 8
     is_string: False
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Scene::VfxObject
   name: VfxObject
@@ -99524,7 +98305,7 @@ structs:
     offset: 0
     base: true
   - type: Common::Component::Excel::ExcelSheetWaiter
-    name: _sheetWaiter
+    name: SheetWaiter
     offset: 40
   - type: StdVector<__int64>
     name: TutorialRows
@@ -101402,8 +100183,6 @@ structs:
       name: this
     - type: __int64
       name: packetPtr
-  - name: RemoveData
-    offset: 104
   member_functions: []
 - type: Client::UI::Info::InfoProxyLinkshellMember
   name: InfoProxyLinkshellMember
@@ -102032,7 +100811,6 @@ structs:
   - type: int
     name: UnkCount
     offset: 91664
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::UIInputData
   name: UIInputData
@@ -103618,8 +102396,6 @@ structs:
       name: this
     - type: __int64
       name: data
-  - name: GetSelectedItemAtkResNode
-    offset: 360
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 07 0F 57 C0
     return_type: void
@@ -104797,16 +103573,6 @@ structs:
       name: this
     - type: __int64
       name: data
-  - name: GetWindowCollisionNode
-    offset: 160
-  - name: GetTitleBarCollisionNode
-    offset: 168
-  - name: GetCloseButtonNode
-    offset: 176
-  - name: SetOwnerUnitBase
-    offset: 184
-  - name: ToggleTitleBarVisibility
-    offset: 200
   member_functions:
   - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 0F 57 C0
     return_type: void
@@ -105585,7 +104351,6 @@ structs:
   - type: char
     name: FreeCompanyCrestBitfield
     offset: 608
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? B1 ?? 41 FF C6
     return_type: void
@@ -106130,7 +104895,6 @@ structs:
   - type: StdMap<unsigned __int64, Client::Game::Event::LuaActor*>
     name: ActorMap
     offset: 64
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Group::GroupManager::Group
   name: Group
@@ -110177,7 +108941,6 @@ structs:
   - type: Client::Game::InstanceContent::ContentDirector*
     name: ActiveContentDirector
     offset: 152
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Event::EventHandlerModule
   name: EventHandlerModule
@@ -110216,7 +108979,6 @@ structs:
   - type: Client::Game::Event::IdleCameraEventHandler*
     name: IdleCameraEventHandler
     offset: 144
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::Event::EventSceneModule
   name: EventSceneModule
@@ -111571,7 +110333,7 @@ structs:
     name: CurrentTabIndex
     offset: 216
   - type: Common::Component::Excel::ExcelSheetWaiter
-    name: _sheetWaiter
+    name: SheetWaiter
     offset: 232
   - type: StdVector<Client::UI::Agent::AgentCabinetWithdraw::CabinetWithdrawData::CurrentCategoryItemDetail>
     name: CurrentCategoryItems
@@ -112967,7 +111729,6 @@ structs:
   - type: Client::UI::Misc::RaptureLogModule::AddonMessageSub
     name: AddonMessageSub3488
     offset: 13448
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 41 83 EC ?? 89 43
     return_type: unsigned int
@@ -113471,20 +112232,6 @@ structs:
       name: this
     - type: System::Numerics::Vector3*
       name: pos
-  - name: SweepSphereNonHorizCheckLayer
-    offset: 192
-  - name: SweepSphereSimpleCheckLayerAndMaterial
-    offset: 200
-  - name: SweepSphereSimpleCheckLayer
-    offset: 208
-  - name: SweepSphereSimple
-    offset: 216
-  - name: RaycastNonHorizCheckLayer
-    offset: 224
-  - name: RaycastSimpleCheckLayer
-    offset: 232
-  - name: RaycastSimple
-    offset: 240
   member_functions: []
 - type: Common::Component::BGCollision::ColliderCylinder
   name: ColliderCylinder
@@ -113933,20 +112680,6 @@ structs:
       name: this
     - type: System::Numerics::Vector3*
       name: pos
-  - name: SweepSphereNonHorizCheckLayer
-    offset: 192
-  - name: SweepSphereSimpleCheckLayerAndMaterial
-    offset: 200
-  - name: SweepSphereSimpleCheckLayer
-    offset: 208
-  - name: SweepSphereSimple
-    offset: 216
-  - name: RaycastNonHorizCheckLayer
-    offset: 224
-  - name: RaycastSimpleCheckLayer
-    offset: 232
-  - name: RaycastSimple
-    offset: 240
   member_functions: []
 - type: Common::Component::BGCollision::ColliderSphere
   name: ColliderSphere
@@ -114171,20 +112904,6 @@ structs:
       name: this
     - type: System::Numerics::Vector3*
       name: pos
-  - name: SweepSphereNonHorizCheckLayer
-    offset: 192
-  - name: SweepSphereSimpleCheckLayerAndMaterial
-    offset: 200
-  - name: SweepSphereSimpleCheckLayer
-    offset: 208
-  - name: SweepSphereSimple
-    offset: 216
-  - name: RaycastNonHorizCheckLayer
-    offset: 224
-  - name: RaycastSimpleCheckLayer
-    offset: 232
-  - name: RaycastSimple
-    offset: 240
   member_functions: []
 - type: Component::GUI::AtkComponentHoldButton
   name: AtkComponentHoldButton
@@ -115304,7 +114023,6 @@ structs:
   - type: Client::Game::Character::LookAtContainer::BannerCameraFollowFlags
     name: BannerCameraFollowFlag
     offset: 3012
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::ContentInventoryManager
   name: ContentInventoryManager
@@ -115318,11 +114036,6 @@ structs:
   - type: Client::Game::WKS::WKSContentInventoryProvider
     name: WKSInventoryProvider
     offset: 24
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-  - name: vf6
-    offset: 48
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? E8 ?? ?? ?? ?? 44 0F B7 C6
     return_type: char
@@ -115868,7 +114581,6 @@ structs:
   - type: Client::Graphics::Render::ShadowCamera
     name: ShadowCamera
     offset: 2272
-  virtual_functions: []
   member_functions: []
   static_members:
   - signature: 0F 28 F2 48 8B 05
@@ -117046,7 +115758,6 @@ structs:
   - type: char
     name: AliasColumn
     offset: 585
-  virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 89 6E
     return_type: void
@@ -118798,10 +117509,6 @@ structs:
       name: this
     - type: System::Numerics::Vector3*
       name: pos
-  - name: CreateMesh
-    offset: 192
-  - name: ClearMesh
-    offset: 200
   member_functions: []
 - type: Component::GUI::AtkComponentGaugeBar
   name: AtkComponentGaugeBar
@@ -120030,8 +118737,6 @@ structs:
       name: atkEvent
     - type: Component::GUI::AtkEventData*
       name: atkEventData
-  - name: OnOpenTransitionStarted
-    offset: 464
   member_functions:
   - signature: E8 ?? ?? ?? ?? 33 D2 48 8D 9F
     return_type: void
@@ -120524,14 +119229,6 @@ structs:
       name: atkEvent
     - type: Component::GUI::AtkEventData*
       name: atkEventData
-  - name: Update
-    offset: 40
-  - name: IsScdResourceLoaded
-    offset: 152
-  - name: LoadScdResource
-    offset: 160
-  - name: UnloadScdResource
-    offset: 168
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B F8 41 B0 01
     return_type: Component::GUI::AtkUnitBase*
@@ -121319,22 +120016,6 @@ structs:
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
-  - name: ForceWetness
-    offset: 416
-  - name: ResetWetness
-    offset: 424
-  - name: SetupScaling
-    offset: 464
-  - name: GetRaceSexId
-    offset: 704
-  - name: GetDyeFlorSlot
-    offset: 760
-  - name: GetSkeletonCount
-    offset: 768
-  - name: CreateDeformer
-    offset: 808
-  - name: CreateRenderModelForMDL
-    offset: 816
   member_functions:
   - signature: E8 ?? ?? ?? ?? 40 F6 C7 01 74 3A 40 F6 C7 04 75 27 48 85 DB 74 2F 48 8B 05 ?? ?? ?? ?? 48 8B D3 48 8B 48 30
     return_type: void
@@ -139575,18 +138256,6 @@ structs:
       name: inputId
     - type: char
       name: a3
-  - name: InitializePointers
-    offset: 576
-  - name: UpdateVisibility
-    offset: 592
-  - name: SetTimeLineLabelDefaults
-    offset: 600
-  - name: UpdateVisibility2
-    offset: 608
-  - name: ChangeGaugeType
-    offset: 616
-  - name: UpdateGaugeData
-    offset: 624
   member_functions: []
 - type: Client::UI::AddonJournalDetail
   name: AddonJournalDetail
@@ -154910,36 +153579,6 @@ structs:
       name: inputId
     - type: char
       name: a3
-  - name: UpdateCycledBar
-    offset: 608
-  - name: UpdateLockState
-    offset: 616
-  - name: UpdateSlotVisibility
-    offset: 624
-  - name: UpdateBarNumberText
-    offset: 632
-  - name: UpdateControlHints
-    offset: 640
-  - name: OnDragDropClick
-    offset: 656
-  - name: OnDragDropInsert
-    offset: 664
-  - name: OnDragDropBegin
-    offset: 672
-  - name: OnDragDropDiscard
-    offset: 680
-  - name: OnDragDropRollover
-    offset: 688
-  - name: ExecuteActionBarSlot
-    offset: 696
-  - name: OpenContextMenu
-    offset: 704
-  - name: IsExpandedHold
-    offset: 712
-  - name: IsNotExpandedHold
-    offset: 720
-  - name: IsCross
-    offset: 728
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 81 C6 ?? ?? ?? ?? 83 C7 11
     return_type: void
@@ -168998,7 +167637,6 @@ structs:
   - type: unsigned int
     name: ErrorData
     offset: 4684
-  virtual_functions: []
   member_functions:
   - signature: 48 89 5C 24 ?? 41 56 48 83 EC ?? 80 B9 ?? ?? ?? ?? ?? 4C 8B F2
     return_type: void
@@ -169302,7 +167940,6 @@ structs:
   - type: Component::GUI::AtkFontAnalyzerFunctorSelect
     name: AtkFontAnalyzerFunctorSelect
     offset: 2400
-  virtual_functions: []
   member_functions: []
 - type: Component::Text::TextModule
   name: TextModule
@@ -169425,8 +168062,6 @@ structs:
       name: this
     - type: Component::Text::TextModuleInterface::FixedSheetInterface*
       name: fixedSheetInterface
-  - name: ProcessNoun
-    offset: 136
   member_functions: []
 - type: Animation::Mapper::hkaSkeletonMapper
   name: hkaSkeletonMapper
@@ -169594,14 +168229,6 @@ structs:
     parameters:
     - type: Client::Game::Event::Director*
       name: this
-  - name: Update
-    offset: 2352
-  - name: Update2
-    offset: 2360
-  - name: SetSequence
-    offset: 2368
-  - name: Synchronize
-    offset: 2376
   member_functions: []
 - type: Client::Game::Event::GroupPoseEventHandler
   name: GroupPoseEventHandler
@@ -178239,7 +176866,6 @@ structs:
   - type: unsigned int
     name: SubviewValue2
     offset: 348
-  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::Manager
   name: Manager
@@ -178276,7 +176902,6 @@ structs:
   - type: Client::Graphics::Render::VerticalFogRenderer
     name: VerticalFogRenderer
     offset: 223584
-  virtual_functions: []
   member_functions: []
   static_members:
   - signature: 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 33 C9
@@ -179929,8 +178554,6 @@ structs:
       name: this
     - type: int
       name: slotIndex
-  - name: LoadUldResourceHandleImpl
-    offset: 736
   member_functions: []
 - type: Client::UI::AddonBannerEditor
   name: AddonBannerEditor
@@ -186272,7 +184895,6 @@ structs:
   - type: __int64
     name: SomePointer
     offset: 1984
-  virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::AgentLobby
   name: AgentLobby
@@ -186590,9 +185212,11 @@ structs:
     name: LeveDirector
     offset: 0
     base: true
-  - type: Component::Exd::Sheets::BattleLeve
-    name: BattleLeveSheet
+  - type: unsigned __int16
+    name: Time
     offset: 1216
+    size: 8
+    is_string: False
   - type: unsigned __int16
     name: RecommendedLevel
     offset: 1648
@@ -186847,8 +185471,6 @@ structs:
       name: territoryTypeId
     - type: StdVector<Client::Game::UI::MapMarkerData>*
       name: markerVector
-  - name: IsAcceptingGate
-    offset: 2392
   member_functions: []
 - type: Client::Game::MassivePcContent::MassivePcContentDirector
   name: MassivePcContentDirector
@@ -186960,34 +185582,6 @@ structs:
       name: territoryTypeId
     - type: StdVector<Client::Game::UI::MapMarkerData>*
       name: markerVector
-  - name: GetAdditionalTodoText
-    offset: 2400
-  - name: SetAdditionalTodo
-    offset: 2416
-  - name: SetAdditionalTodoNumber
-    offset: 2424
-  - name: SetAdditionalTodoFraction
-    offset: 2432
-  - name: SetAdditionalTodoFractionBar
-    offset: 2440
-  - name: SetAdditionalTodoLargeBar
-    offset: 2448
-  - name: SetAdditionalTodoColorableBar
-    offset: 2456
-  - name: SetAdditionalTodoTimeRemaining
-    offset: 2464
-  - name: SetAdditionalTodoQuestTitle
-    offset: 2472
-  - name: SetAdditionalTodoLargeTimeRemaining
-    offset: 2480
-  - name: SetAdditionalTodoLargeBlueText
-    offset: 2488
-  - name: SetAdditionalTodoLargeGrayText
-    offset: 2496
-  - name: SetAdditionalTodoJoinButton
-    offset: 2504
-  - name: ClearAdditionalTodo
-    offset: 2664
   member_functions: []
 - type: Client::UI::AddonActionBar
   name: AddonActionBar
@@ -190763,10 +189357,6 @@ structs:
       name: territoryTypeId
     - type: StdVector<Client::Game::UI::MapMarkerData>*
       name: markerVector
-  - name: GetContentTypeIconId
-    offset: 2632
-  - name: SetExperience
-    offset: 2672
   member_functions: []
 - type: Client::UI::AddonCharacter
   name: AddonCharacter
@@ -194275,8 +192865,6 @@ structs:
     parameters:
     - type: Client::System::Framework::Framework*
       name: this
-  - name: Dtor
-    offset: 0
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4B 8B 8C F4
     return_type: Client::System::Framework::ClientPlatform
@@ -207386,8 +205974,6 @@ structs:
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDirector*
       name: this
-  - name: HandleGMCommand
-    offset: 3176
   member_functions: []
 - type: Client::Game::InstanceContent::PublicContentDirector
   name: PublicContentDirector
@@ -211917,9 +210503,6 @@ structs:
   - type: int
     name: TimerCount
     offset: 482808
-  virtual_functions:
-  - name: Dtor
-    offset: 8
   member_functions:
   - signature: 48 8B 51 ?? 48 0F BF 82
     return_type: Component::GUI::AtkResNode*
@@ -213003,14 +211586,6 @@ structs:
       name: this
     - type: Component::GUI::AtkCursor::CursorType
       name: cursorType
-  - name: InitializeHud
-    offset: 464
-  - name: IsUISceneGameMain
-    offset: 496
-  - name: GetColorThemeTypeForUIScene
-    offset: 504
-  - name: SetScreenSizeScale
-    offset: 592
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 0F B6 44 24 ?? 8B D3
     return_type: char
@@ -213594,16 +212169,6 @@ structs:
       name: outHitPosition
     - type: char*
       name: outModelChecked
-  - name: GetModelChara
-    offset: 608
-  - name: GetStatusManager_2
-    offset: 624
-  - name: GetCastInfo_2
-    offset: 640
-  - name: GetScreenLogManager
-    offset: 656
-  - name: GetForayInfo_2
-    offset: 672
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 8B E0 48 8B 4F
     return_type: Client::Game::Object::GameObjectId
