@@ -5,227 +5,228 @@
 version: 2026.03.07.0000.0000
 
 globals:
-  0x142537390: g_EmptyUtf8String
-#   0x14253B250: g_FloatOne # 1f
-#   0x142994928: g_MacroTime
+  # 0x142537390: g_EmptyUtf8String
+  # 0x14253B250: g_FloatOne # 1f
+  # 0x142994928: g_MacroTime
 
 functions:
-  0x140058430: WinMain
-  0x14005EDE0: Utf8DecodeChar
-  0x14005F270: IsValidUtf8Markup
-  0x14005F4B0: Utf8LeadLen  # Get byte length of UTF-8 character based on first byte
-  0x14005F500: Utf8EncodeChar
-  0x14005F6B0: Utf8EncodeString
+  0x14005DB70: WinMain
+  # 0x14005EDE0: Utf8DecodeChar
+  # 0x14005F270: IsValidUtf8Markup
+  # 0x14005F4B0: Utf8LeadLen  # Get byte length of UTF-8 character based on first byte
+  # 0x14005F500: Utf8EncodeChar
+  # 0x14005F6B0: Utf8EncodeString
 
 
 classes:
   Client::System::String::Utf8String:
     funcs:
-      0x140059C00: Ctor  # empty string ctor
-      0x140059C40: Ctor_Copy # copy constructor
-      0x140059CC0: Ctor_FromCStr # from null-terminated string
-      0x140059D10: Ctor_FromSequence # (FFXIVString, char * str, size_t size)
-      0x140059DB0: Ctor_WithSize
-      0x140059E00: Ctor_FromUtf8String
-      0x14005A1A0: Copy
-      0x14005A200: Concat
-      0x14005A370: ConcatCStr
-      0x14005A3E0: AddChar_RetUtf8String # AppendChar, return Utf8String
-      0x14005A430: EqualTo
-      0x14005A480: EqualToString
-      0x14005A4C0: NotEqualTo
-      0x14005A510: NotEqualToString
-      0x14005A550: LessThanOrEqualTo
-      0x14005A5B0: GreaterThanOrEqualTo
-      0x14005A610: LessThan
-      0x14005A670: GreaterThan
-      0x14005A6F0: Dtor
-      0x14005A720: SetString
-      0x14005AA20: FormatString_RetCharPtr
-      0x14005B1A0: SetStringSized
-      0x14005B1F0: GetString
-      0x14005B200: CalcLength
-      0x14005B320: GetSize
-      0x14005B330: GetCharAt
-      0x14005B340: AddChar_RetCharPtr  # AppendChar, return char*
-      0x14005B390: PrependChar
-      0x14005B3F0: PopBack
-      0x14005B440: PopFront
-      0x14005B520: ToUpper
-      0x14005B710: ToLower
-      0x14005B9F0: SubStr
-      0x14005BA30: CopySubStrTo
-      0x14005BD40: SetSize  # cannot shrink
-      0x14005BD70: Append
-      0x14005BE00: AppendCStr
-      0x14005BE70: AppendCStrSized
-      0x14005C240: IndexOfChar
-      0x14005C460: InsertString
-      0x14005CD30: ReplaceChar
-      0x14005CD60: PadEnd
-      0x14005CE50: Swap
-      0x14005D540: ICompareCStr
-      0x14005D560: Clear
-      0x14005D5A0: AddChar_RetLength
-      0x14005D6D0: InternalSetSize  # cannot shrink, internal use
-      0x14005DB10: IndexOf
-      0x14005E0F0: FindFirstOf
-      0x14005E3D0: FindLastOf
-      0x14005EE60: FormatString_RetUtf8String
-      # 0x14005F170: FormatString_RetUtf8String
-      # 0x1400891D0: GetLength #count of character
-      # 0x14008A6D0: ReplaceSubString
-      # 0x14008A8D0: Replace
-      # 0x14008B1E0: Compare
-      # 0x14045BF00: ToPosixPath
-      # 0x14045BF10: ReplaceDirectorySeparatorChar
-      # 0x14078B520: ToInteger # strtoi for utf8string (str, base)
-      # 0x1418D9630: SanitizeString
-      # 0x1418D9CD0: SanitizeStringCh
-      # 0x1418DA1A0: SanitizeStringKo
-      # 0x1418DA650: SanitizeStringTc
-      # 0x1418DAB90: GetParts
-  Client::Game::Control::ActionTimelineSequencer:
-    funcs:
-      0x1405E5910: Ctor
-      0x1405E5BE0: PlayTimeline
-      0x1405E61B0: GetSlotTimeline
-      0x1405E6620: SetSlotSpeed
-      0x1405E6930: GetSlotSpeed
-      # 0x1405E84C0: GetCurrentActionTimelineTimestamp
-      # 0x1405E8ED0: SetSlotTimeline
-  Client::Game::Control::TargetSystem:
-    instances:
-      - ea: 0x142728CB0
-    funcs:
-      0x1406055E0: GetTargetObject
-  Client::Game::Event::EventGPoseController:
-    funcs:
-      # 0x140AB57E0: ctor
-      # 0x140AB93B0: IsActive
-      # 0x140AB94B0: IsFaceCameraEnabled
-      # 0x140AB94D0: ToggleFaceCamera
-      # 0x140AB9550: IsGazeCameraEnabled
-      # 0x140AB9570: ToggleGazeCamera
-      # 0x140AB95D0: ToggleMotionFreeze
-      # 0x140AB99D0: EnableCameraLight
-      0x14097F6B0: DisableCameraLight
-#oldfail       0x1409866D0: SetupDefaultTarget # inlined at 0x140942529
-      # 0x140AC1F90: AddCharacterToGPose
-      0x140988690: RemoveCharacterFromGPose
+      0x14078AE80: ToInteger # strtoi for utf8string (str, base)
+#       0x140059C00: Ctor  # empty string ctor
+#       0x140059C40: Ctor_Copy # copy constructor
+#       0x140059CC0: Ctor_FromCStr # from null-terminated string
+#       0x140059D10: Ctor_FromSequence # (FFXIVString, char * str, size_t size)
+#       0x140059DB0: Ctor_WithSize
+#       0x140059E00: Ctor_FromUtf8String
+#       0x14005A1A0: Copy
+#       0x14005A200: Concat
+#       0x14005A370: ConcatCStr
+#       0x14005A3E0: AddChar_RetUtf8String # AppendChar, return Utf8String
+#       0x14005A430: EqualTo
+#       0x14005A480: EqualToString
+#       0x14005A4C0: NotEqualTo
+#       0x14005A510: NotEqualToString
+#       0x14005A550: LessThanOrEqualTo
+#       0x14005A5B0: GreaterThanOrEqualTo
+#       0x14005A610: LessThan
+#       0x14005A670: GreaterThan
+#       0x14005A6F0: Dtor
+#       0x14005A720: SetString
+#       0x14005AA20: FormatString_RetCharPtr
+#       0x14005B1A0: SetStringSized
+#       0x14005B1F0: GetString
+#       0x14005B200: CalcLength
+#       0x14005B320: GetSize
+#       0x14005B330: GetCharAt
+#       0x14005B340: AddChar_RetCharPtr  # AppendChar, return char*
+#       0x14005B390: PrependChar
+#       0x14005B3F0: PopBack
+#       0x14005B440: PopFront
+#       0x14005B520: ToUpper
+#       0x14005B710: ToLower
+#       0x14005B9F0: SubStr
+#       0x14005BA30: CopySubStrTo
+#       0x14005BD40: SetSize  # cannot shrink
+#       0x14005BD70: Append
+#       0x14005BE00: AppendCStr
+#       0x14005BE70: AppendCStrSized
+#       0x14005C240: IndexOfChar
+#       0x14005C460: InsertString
+#       0x14005CD30: ReplaceChar
+#       0x14005CD60: PadEnd
+#       0x14005CE50: Swap
+#       0x14005D540: ICompareCStr
+#       0x14005D560: Clear
+#       0x14005D5A0: AddChar_RetLength
+#       0x14005D6D0: InternalSetSize  # cannot shrink, internal use
+#       0x14005DB10: IndexOf
+#       0x14005E0F0: FindFirstOf
+#       0x14005E3D0: FindLastOf
+#       0x14005EE60: FormatString_RetUtf8String
+#       # 0x14005F170: FormatString_RetUtf8String
+#       # 0x1400891D0: GetLength #count of character
+#       # 0x14008A6D0: ReplaceSubString
+#       # 0x14008A8D0: Replace
+#       # 0x14008B1E0: Compare
+#       # 0x14045BF00: ToPosixPath
+#       # 0x14045BF10: ReplaceDirectorySeparatorChar
+#       # 0x14078B520: ToInteger # strtoi for utf8string (str, base)
+#       # 0x1418D9630: SanitizeString
+#       # 0x1418D9CD0: SanitizeStringCh
+#       # 0x1418DA1A0: SanitizeStringKo
+#       # 0x1418DA650: SanitizeStringTc
+#       # 0x1418DAB90: GetParts
+#   Client::Game::Control::ActionTimelineSequencer:
+#     funcs:
+#       0x1405E5910: Ctor
+#       0x1405E5BE0: PlayTimeline
+#       0x1405E61B0: GetSlotTimeline
+#       0x1405E6620: SetSlotSpeed
+#       0x1405E6930: GetSlotSpeed
+#       # 0x1405E84C0: GetCurrentActionTimelineTimestamp
+#       # 0x1405E8ED0: SetSlotTimeline
+#   Client::Game::Control::TargetSystem:
+#     # instances:
+#     #   - ea: 0x142728CB0
+#     funcs:
+#       0x1406055E0: GetTargetObject
+#   Client::Game::Event::EventGPoseController:
+#     funcs:
+#       # 0x140AB57E0: ctor
+#       # 0x140AB93B0: IsActive
+#       # 0x140AB94B0: IsFaceCameraEnabled
+#       # 0x140AB94D0: ToggleFaceCamera
+#       # 0x140AB9550: IsGazeCameraEnabled
+#       # 0x140AB9570: ToggleGazeCamera
+#       # 0x140AB95D0: ToggleMotionFreeze
+#       # 0x140AB99D0: EnableCameraLight
+#       0x14097F6B0: DisableCameraLight
+# #oldfail       0x1409866D0: SetupDefaultTarget # inlined at 0x140942529
+#       # 0x140AC1F90: AddCharacterToGPose
+#       0x140988690: RemoveCharacterFromGPose
 
-  Client::Game::UI::ContentsFinderQueueInfo:
-    funcs:
-      0x140B28E20: QueueDuties
-      0x140B29050: QueueRoulette
-      0x140B29940: CancelQueue
-      0x140B29BA0: SetQueuedLanguages
-      0x140B29DE0: UpdateQueueState
-      0x140B2A1B0: ProcessInfoState
-      0x140B2A680: SetQueuedJobAndRoulette
-      0x140B2A6B0: SetQueuedContentFinderConditions
-      # 0x140B51360: QueueDuties
-      # 0x140B51740: QueueRoulette
-      # 0x140B52620: CancelQueue
-      # 0x140B52880: SetQueuedLanguages
-      # 0x140B52F80: UpdateQueueState
-      # 0x140B53350: ProcessInfoState
-      # 0x140B53820: SetQueuedJobAndRoulette
-      # 0x140B53850: SetQueuedContentFinderConditions
-  Client::Network::NetworkModuleProxy:
-    funcs:
-      0x1402834A0: SetCurrentInstance
-      0x1402834C0: GetCurrentInstance
-  Application::Network::LogoutCallbackInterface:
-    vtbls:
-      - ea: 0x141EC1860
-    vfuncs:
-      1: OnLogout
-  Component::SteamApi::SteamApi:
-    funcs:
-      0x140766D00: ctor
-      0x140766E00: Dtor
-      0x140767170: GetSteamServerTime  # static
-      0x1407671A0: IsRunningOnSteamDeck
-      0x1407671E0: ShowGamepadTextInput
-      0x140767260: ShowFloatingGamepadTextInput
-  Component::GUI::AtkResNode:
-    vtbls:
-      - ea: 0x141EF0C10
-        base: Component::GUI::AtkEventTarget
-    vfuncs:
-      1: Destroy
-      2: UpdateFromTimeline
-    funcs:
-      0x14063E4E0: IsVisible
-      0x14063E510: ToggleVisibility
-  Client::UI::RaptureAtkModule:
-    vtbls:
-      - ea: 0x141EA1578
-        base: Component::GUI::AtkModule
-      - ea: 0x141EA17C0
-        base: Component::GUI::AtkExternalInterface
-      - ea: 0x141EA17D8
-        base: Client::System::Input::TextServiceInterface::TextServiceEvent
-      - ea: 0x141EA1820
-        base: Common::Configuration::ConfigBase::ChangeEventInterface
-    funcs:
-      # 0x1400C4C50: ctor
-#       0x1400EA1D0: Finalizer
-#       0x1400EA550: ChangeUIScene
-#       0x1400EA700: ChangeUIMode
-#       0x1400EB120: CancelDragDrop
-      0x1400C6F80: OpenAddon
-      0x1400C7400: OpenAddonByAgent
-#       0x1400EBEB0: OpenYesNo
-#       0x1400EC530: OpenYesNo2
-#       0x1400EC250: OpenSelectOk
-#       0x1400EC0F0: OpenSelectOk2
-#       0x1400EF990: ShowScreenImage
-#       0x1400F2A20: ShowTextGimmickHint
-#       0x1400F6580: SetCursorVisibility
-      0x1400D6730: OpenDawnStory
-      0x1400D6760: OpenDawn
-      0x1400D6820: IsDawnSupported
-      0x1400D7150: OpenLuaUI
-      0x1400D7980: HandleSaveAddonConfig # 17
-      0x1400D7C30: HandlePlaySoundEffect # 21
-      0x1400D7D30: HandleExecuteHotbarSlot # 22
-      0x1400D7E10: HandleSetHotbarSlot # 23
-      0x1400D7F00: HandleItemMove # 24
-      0x1400D8360: HandleLootRoll # 25
-      0x1400D84F0: HandleSellStack # 26
-      0x1400D8410: HandleSetBattleMode # 27
-      0x1400D8570: HandleOpenInventory # 28
-      0x1400D85D0: HandleOpenItemContextMenu # 29
-      0x1400D86F0: HandleNameplateHover # 31
-      0x1400D87B0: HandleShowDetailAddon # 32
-      0x1400D8930: HandleFormatText # 33
-      0x1400D9100: HandleExecuteMainCommand # 41
-      0x1400D9160: HandleIsMainCommandUnlocked # 42
-      0x1400D9470: HandleNowLoading # 44
-      0x1400D9610: HandleItemDiscard # 45
-      0x1400D99B0: HandleWorldToScreenPoint # 49
-      0x1400D9AD0: HandleScdResource # 50
-      0x1400D9CF0: HandleCloseTryOn # 52
-      0x1400D9D70: HandleOpenContextMenuForAddon # 53
-      0x1400D9EC0: HandleGlassesDrop # 56
-#       0x1401014B0: OnUpdate_Nameplates
-#       0x140102160: OnUpdate_NameplateCastbars
-      0x1400DDBA0: IncRefNumberArrayData
-      0x1400DDBF0: IncRefStringArrayData
-#       0x140106EA0: GetStaticAddonName
-#       0x140107F00: RegisterAddonAllocators
-#       0x1401143A0: UpdateBattleCharaNameplates
-#       0x1401157A0: UpdateNpcNameplates
-#       0x140117EB0: IsUIVisible
-#       0x140118180: IsEditingHudLayout
-      0x140685230: DecRefNumberArrayData
-      0x140685290: DecRefStringArrayData
-#       0x140688C80: SetupAtkMessageBoxManager
-#       0x140688DC0: SetAtkMessageBoxManagerTexts
-#       0x14068B900: UpdateUI
-#       0x14068C600: GetAtkFontCodeModule
-#       0x14068D150: UpdateSubscribedAddons
-#       0x14068D8E0: UpdateAtkUIColorHolder
-#       0x1400FAF80: OpenSatisfactionSupply
+#   Client::Game::UI::ContentsFinderQueueInfo:
+#     funcs:
+#       0x140B28E20: QueueDuties
+#       0x140B29050: QueueRoulette
+#       0x140B29940: CancelQueue
+#       0x140B29BA0: SetQueuedLanguages
+#       0x140B29DE0: UpdateQueueState
+#       0x140B2A1B0: ProcessInfoState
+#       0x140B2A680: SetQueuedJobAndRoulette
+#       0x140B2A6B0: SetQueuedContentFinderConditions
+#       # 0x140B51360: QueueDuties
+#       # 0x140B51740: QueueRoulette
+#       # 0x140B52620: CancelQueue
+#       # 0x140B52880: SetQueuedLanguages
+#       # 0x140B52F80: UpdateQueueState
+#       # 0x140B53350: ProcessInfoState
+#       # 0x140B53820: SetQueuedJobAndRoulette
+#       # 0x140B53850: SetQueuedContentFinderConditions
+#   Client::Network::NetworkModuleProxy:
+#     funcs:
+#       0x1402834A0: SetCurrentInstance
+#       0x1402834C0: GetCurrentInstance
+#   Application::Network::LogoutCallbackInterface:
+#     vtbls:
+#       - ea: 0x141EC1860
+#     vfuncs:
+#       1: OnLogout
+#   Component::SteamApi::SteamApi:
+#     funcs:
+#       0x140766D00: ctor
+#       0x140766E00: Dtor
+#       0x140767170: GetSteamServerTime  # static
+#       0x1407671A0: IsRunningOnSteamDeck
+#       0x1407671E0: ShowGamepadTextInput
+#       0x140767260: ShowFloatingGamepadTextInput
+#   Component::GUI::AtkResNode:
+#     vtbls:
+#       - ea: 0x141EF0C10
+#         base: Component::GUI::AtkEventTarget
+#     vfuncs:
+#       1: Destroy
+#       2: UpdateFromTimeline
+#     funcs:
+#       0x14063E4E0: IsVisible
+#       0x14063E510: ToggleVisibility
+#   Client::UI::RaptureAtkModule:
+#     vtbls:
+#       - ea: 0x141EA1578
+#         base: Component::GUI::AtkModule
+#       - ea: 0x141EA17C0
+#         base: Component::GUI::AtkExternalInterface
+#       - ea: 0x141EA17D8
+#         base: Client::System::Input::TextServiceInterface::TextServiceEvent
+#       - ea: 0x141EA1820
+#         base: Common::Configuration::ConfigBase::ChangeEventInterface
+#     funcs:
+#       # 0x1400C4C50: ctor
+# #       0x1400EA1D0: Finalizer
+# #       0x1400EA550: ChangeUIScene
+# #       0x1400EA700: ChangeUIMode
+# #       0x1400EB120: CancelDragDrop
+#       0x1400C6F80: OpenAddon
+#       0x1400C7400: OpenAddonByAgent
+# #       0x1400EBEB0: OpenYesNo
+# #       0x1400EC530: OpenYesNo2
+# #       0x1400EC250: OpenSelectOk
+# #       0x1400EC0F0: OpenSelectOk2
+# #       0x1400EF990: ShowScreenImage
+# #       0x1400F2A20: ShowTextGimmickHint
+# #       0x1400F6580: SetCursorVisibility
+#       0x1400D6730: OpenDawnStory
+#       0x1400D6760: OpenDawn
+#       0x1400D6820: IsDawnSupported
+#       0x1400D7150: OpenLuaUI
+#       0x1400D7980: HandleSaveAddonConfig # 17
+#       0x1400D7C30: HandlePlaySoundEffect # 21
+#       0x1400D7D30: HandleExecuteHotbarSlot # 22
+#       0x1400D7E10: HandleSetHotbarSlot # 23
+#       0x1400D7F00: HandleItemMove # 24
+#       0x1400D8360: HandleLootRoll # 25
+#       0x1400D84F0: HandleSellStack # 26
+#       0x1400D8410: HandleSetBattleMode # 27
+#       0x1400D8570: HandleOpenInventory # 28
+#       0x1400D85D0: HandleOpenItemContextMenu # 29
+#       0x1400D86F0: HandleNameplateHover # 31
+#       0x1400D87B0: HandleShowDetailAddon # 32
+#       0x1400D8930: HandleFormatText # 33
+#       0x1400D9100: HandleExecuteMainCommand # 41
+#       0x1400D9160: HandleIsMainCommandUnlocked # 42
+#       0x1400D9470: HandleNowLoading # 44
+#       0x1400D9610: HandleItemDiscard # 45
+#       0x1400D99B0: HandleWorldToScreenPoint # 49
+#       0x1400D9AD0: HandleScdResource # 50
+#       0x1400D9CF0: HandleCloseTryOn # 52
+#       0x1400D9D70: HandleOpenContextMenuForAddon # 53
+#       0x1400D9EC0: HandleGlassesDrop # 56
+# #       0x1401014B0: OnUpdate_Nameplates
+# #       0x140102160: OnUpdate_NameplateCastbars
+#       0x1400DDBA0: IncRefNumberArrayData
+#       0x1400DDBF0: IncRefStringArrayData
+# #       0x140106EA0: GetStaticAddonName
+# #       0x140107F00: RegisterAddonAllocators
+# #       0x1401143A0: UpdateBattleCharaNameplates
+# #       0x1401157A0: UpdateNpcNameplates
+# #       0x140117EB0: IsUIVisible
+# #       0x140118180: IsEditingHudLayout
+#       0x140685230: DecRefNumberArrayData
+#       0x140685290: DecRefStringArrayData
+# #       0x140688C80: SetupAtkMessageBoxManager
+# #       0x140688DC0: SetAtkMessageBoxManagerTexts
+# #       0x14068B900: UpdateUI
+# #       0x14068C600: GetAtkFontCodeModule
+# #       0x14068D150: UpdateSubscribedAddons
+# #       0x14068D8E0: UpdateAtkUIColorHolder
+# #       0x1400FAF80: OpenSatisfactionSupply

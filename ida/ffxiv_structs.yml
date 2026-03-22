@@ -16091,7 +16091,7 @@ structs:
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
-  - signature: E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 48 8B 6C 24 ?? 48 8B 5C 24 ?? 4C 8B 74 24
+  - signature: E8 ?? ?? ?? ?? 4D 39 2E
     return_type: void
     name: SetString
     parameters:
@@ -76112,7 +76112,7 @@ structs:
       name: newState
     - type: char
       name: beganQueue
-  - signature: 4C 8B DC 55 41 54 41 56 49 8D 6B ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 80 79 ?? 00
+  - signature: 4C 8B DC 55 56 41 57 49 8D 6B ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 80 79 ?? ?? 44 0F B6 FA
     return_type: void
     name: QueueRoulette
     parameters:
@@ -95424,7 +95424,7 @@ structs:
       name: this
     - type: unsigned __int16
       name: priority
-  - signature: E8 ?? ?? ?? ?? 3C 01 75 7F
+  - signature: E8 ?? ?? ?? ?? 3C 01 0F 85 AD
     return_type: char
     name: IsVisible
     parameters:
@@ -116574,7 +116574,7 @@ structs:
     - type: char
       name: classJobId
   member_functions:
-  - signature: E8 ?? ?? ?? ?? 4C 89 6B ?? E9
+  - signature: E8 ?? ?? ?? ?? 32 C0 EB 84
     return_type: void
     name: OpenContextMenu
     parameters:
@@ -211356,47 +211356,47 @@ structs:
     offset: 29392
   - type: Component::GUI::AtkTextInput
     name: TextInput
-    offset: 29440
+    offset: 29424
   - type: Client::System::String::Utf8String
     name: Unk7FA8
-    offset: 32712
+    offset: 32696
   - type: Client::System::String::Utf8String
     name: Unk8010
-    offset: 32816
+    offset: 32800
   - type: Client::System::String::Utf8String
     name: Unk8078
-    offset: 32920
+    offset: 32904
   - type: Client::System::String::Utf8String
     name: Unk80E0
-    offset: 33024
+    offset: 33008
   - type: Client::System::Input::SoftKeyboards::SteamGamepadSoftKeyboard
     name: SoftKeyboardDevice
-    offset: 33136
+    offset: 33120
   - type: char
     name: CurrentUIScene
-    offset: 33416
+    offset: 33400
     size: 16
     is_string: True
   - type: char
     name: LoadingUIScene
-    offset: 33432
+    offset: 33416
     size: 16
     is_string: True
   - type: unsigned __int16
     name: ScreenWidth
-    offset: 33456
+    offset: 33440
   - type: unsigned __int16
     name: ScreenHeight
-    offset: 33458
+    offset: 33442
   - type: char
     name: EnableUiDraw
-    offset: 33460
+    offset: 33444
   - type: char
     name: EnableUiInput
-    offset: 33464
+    offset: 33448
   - type: char
     name: IsHudInitialized
-    offset: 33465
+    offset: 33449
   virtual_functions:
   - name: GetAddonStatus
     offset: 352
@@ -213170,131 +213170,131 @@ structs:
     base: true
   - type: Client::UI::GameUIScene
     name: UIScene
-    offset: 33504
+    offset: 33488
   - type: Client::UI::GameUIMode
     name: UIMode
-    offset: 33506
+    offset: 33490
   - type: Client::System::String::Utf8String
     name: Unk8358
-    offset: 33656
+    offset: 33640
   - type: Client::System::String::Utf8String
     name: UnkArray
-    offset: 33760
+    offset: 33744
     size: 6
     is_string: False
   - type: Client::System::String::Utf8String
     name: ItalicOn
-    offset: 34384
+    offset: 34368
   - type: Client::System::String::Utf8String
     name: ItalicOff
-    offset: 34488
+    offset: 34472
   - type: Client::System::String::Utf8String
     name: BoldOn
-    offset: 34592
+    offset: 34576
   - type: Client::System::String::Utf8String
     name: BoldOff
-    offset: 34696
+    offset: 34680
   - type: Client::UI::RaptureAtkModule::AgentUpdateFlags
     name: AgentUpdateFlag
-    offset: 34871
+    offset: 34855
   - type: Client::UI::RaptureAtkModule::AddonFactoryInfo
     name: AddonFactories
-    offset: 34872
+    offset: 34856
     size: 942
     is_string: False
   - type: StdVector<Client::System::String::Utf8String>
     name: AddonNames
-    offset: 72552
+    offset: 72536
   - type: Client::UI::Misc::AddonConfig*
     name: AddonConfigPtr
-    offset: 72576
+    offset: 72560
   - type: Component::GUI::AtkCursor::CursorType
     name: CursorType
-    offset: 72586
+    offset: 72570
   - type: int
     name: AudioClientRpcTagSize
-    offset: 72744
+    offset: 72728
   - type: wchar_t*
     name: AudioClientRpcTag
-    offset: 72752
+    offset: 72736
   - type: Client::UI::UIModule*
     name: UIModulePtr
-    offset: 72760
+    offset: 72744
   - type: Client::UI::Misc::RaptureLogModule*
     name: RaptureLogModulePtr
-    offset: 72768
+    offset: 72752
   - type: Client::UI::Agent::AgentModule
     name: AgentModule
-    offset: 72776
+    offset: 72760
   - type: Client::UI::Misc::RaptureHotbarModule*
     name: RaptureHotbarModulePtr
-    offset: 76744
+    offset: 76728
   - type: Client::UI::RaptureAtkUnitManager
     name: RaptureAtkUnitManager
-    offset: 76752
+    offset: 76736
   - type: Client::UI::RaptureAtkColorDataManager
     name: RaptureAtkColorDataManager
-    offset: 116992
+    offset: 116976
   - type: int
     name: NameplateInfoCount
-    offset: 117632
+    offset: 117616
   - type: Client::UI::RaptureAtkModule::NamePlateInfo
     name: NamePlateInfoEntries
-    offset: 117640
+    offset: 117624
     size: 50
     is_string: False
   - type: Client::UI::RaptureAtkModule::CrystalCache
     name: CrystalItemCache
-    offset: 147456
+    offset: 147440
     size: 18
     is_string: False
   - type: Client::UI::RaptureAtkModule::ItemCache*
     name: KeyItemCache
-    offset: 150192
+    offset: 150176
   - type: Client::UI::RaptureAtkModule::ItemCache*
     name: EquippedItemCache
-    offset: 150200
+    offset: 150184
   - type: Client::UI::RaptureAtkModule::ItemCache
     name: InventoryItemCache
-    offset: 150208
+    offset: 150192
     size: 160
     is_string: False
   - type: unsigned int
     name: InventoryItemCacheSlotCount
-    offset: 171968
+    offset: 171952
   - type: unsigned int
     name: GilCap
-    offset: 171972
+    offset: 171956
   - type: unsigned int
     name: LocalPlayerClassJobId
-    offset: 172040
+    offset: 172024
   - type: unsigned int
     name: LocalPlayerLevel
-    offset: 172044
+    offset: 172028
   - type: char
     name: QuickGatheringEnabled
-    offset: 172053
+    offset: 172037
   - type: Common::Component::Excel::ExcelSheet*
     name: AddonParamSheet
-    offset: 172160
+    offset: 172144
   - type: Component::GUI::AtkTexture
     name: CharaViewDefaultBackgroundTexture
-    offset: 172168
+    offset: 172152
   - type: unsigned int
     name: LoginSummonCompanionId
-    offset: 172196
+    offset: 172180
   - type: float
     name: LoginSummonCompanionCountdown
-    offset: 172200
+    offset: 172184
   - type: float
     name: HourTimer
-    offset: 172204
+    offset: 172188
   - type: int
     name: HoursPlayed
-    offset: 172208
+    offset: 172192
   - type: __int64
     name: ShellCommands
-    offset: 172232
+    offset: 172216
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -214297,40 +214297,40 @@ structs:
     offset: 860768
   - type: Client::UI::Info::InfoModule
     name: InfoModule
-    offset: 1033008
+    offset: 1032992
   - type: Client::UI::Misc::UIModuleHelpers
     name: UIModuleHelpers
-    offset: 1040296
+    offset: 1040280
   - type: Client::System::String::Utf8String
     name: AddonSheetName
-    offset: 1040360
+    offset: 1040344
   - type: Client::System::String::Utf8String
     name: UIColorSheetName
-    offset: 1040472
+    offset: 1040456
   - type: Client::System::String::Utf8String
     name: CompletionSheetName
-    offset: 1040592
+    offset: 1040576
   - type: Client::System::String::Utf8String
     name: CompletionOpenIconMacro
-    offset: 1040696
+    offset: 1040680
   - type: Client::System::String::Utf8String
     name: CompletionCloseIconMacro
-    offset: 1040800
+    offset: 1040784
   - type: Client::System::String::Utf8String
     name: NewLineMacro
-    offset: 1040904
+    offset: 1040888
   - type: Client::System::String::Utf8String
     name: LastTalkName
-    offset: 1041008
+    offset: 1040992
   - type: Client::System::String::Utf8String
     name: LastTalkText
-    offset: 1041112
+    offset: 1041096
   - type: Client::UI::UIInputData
     name: UIInputData
-    offset: 1041216
+    offset: 1041200
   - type: Client::UI::UIInputModule
     name: UIInputModule
-    offset: 1043824
+    offset: 1043808
   virtual_functions:
   - name: ExitGame
     offset: 32

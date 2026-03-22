@@ -110,8 +110,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [MemberFunction("E8 ?? ?? ?? ?? C7 44 F5")]
     public partial void Dtor();
 
-    //[MemberFunction("E8 ?? ?? ?? ?? 4D 39 2E"), GenerateStringOverloads]
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 8E ?? ?? ?? ?? E8 ?? ?? ?? ?? 49 8B 16"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 39 2E"), GenerateStringOverloads]
     public partial void SetString(CStringPointer cStr);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 87 ?? ?? ?? ?? 48 83 EE 80")]
@@ -165,7 +164,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     /// An optional list of ASCII characters that are explicitly allowed in the sanitized string when the <see cref="AllowedEntities.CharacterList"/> flag is set in the <paramref name="flags"/> argument.
     /// </param>
     
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 0F B6 F8 E8 ?? ?? ?? ?? 48 8D 4D ?? 44 0F B6 F7")]   // TODO: Fix
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 0F B6 F8 E8 ?? ?? ?? ?? 48 8D 4D ?? 44 0F B6 F7")]
     public partial void SanitizeString(AllowedEntities flags, Utf8String* characterList = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 74 24 ?? 48 8B 74 24 ?? 48 89 5C 24 ?? 48 89 5D 80 49 8B DE 48 C7 45 ?? ?? ?? ?? ?? 4C 3B F6 0F 84 ?? ?? ?? ?? 48 8B 03 80 38 00 74 1F 41 8B C4")]
