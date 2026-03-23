@@ -288,17 +288,17 @@ if api is None:
                 # type: (str, int, set) -> str
                 if not hasattr(self, "data_yaml") or not self.data_yaml or "classes" not in self.data_yaml:
                     return None
-                
+
                 if visited is None:
                     visited = set()
-                
+
                 if class_name in visited:
                     return None
                 visited.add(class_name)
 
                 if class_name not in self.data_yaml["classes"]:
                     return None
-                
+
                 class_data = self.data_yaml["classes"][class_name]
                 if not class_data:
                     return None
@@ -324,14 +324,14 @@ if api is None:
                 return os.path.join(
                     os.path.dirname(os.path.realpath(__file__)), "ffxiv_structs.yml"
                 )
-            
+
             def can_run(self):
                 return self.enum_exists("Component::Exd::SheetsEnum")
 
             def create_enum_struct(self, enum):
                 # type: (DefinedStructEnum) -> None
                 fullname = enum.type
-                
+
                 e = self.get_enum_id(fullname)
                 if e == idaapi.BADADDR:
                     e = self.create_enum(fullname)
@@ -487,13 +487,13 @@ if api is None:
                         )
 
                     meminfo = self.get_struct_member_by_name(s, field_name)
-                    if meminfo is not None:    
+                    if meminfo is not None:
                         if field_is_base:
                             if idaapi.IDA_SDK_VERSION >= 900:
                                 meminfo.set_baseclass()
                             else:
                                 meminfo.props |= self.get_base_class_flag()
-                                
+
                         array_size = field.size if hasattr(field, "size") else 0
                         self.set_struct_member_info(
                             s,
@@ -551,11 +551,11 @@ if api is None:
                 for i in range(size):
                     if self.get_struct_member_id(s, i * 8) == idc.BADADDR:
                         name = "vf{0}".format(i)
-                        
+
                         fallback_name = self.get_fallback_vfunc_name(struct.type, i)
                         if fallback_name:
                             name = fallback_name
-                        
+
                         self.create_struct_member(
                             s,
                             name,
@@ -679,7 +679,7 @@ if api is None:
                     )
                     == ida_kernwin.ASKBTN_YES
                 )
-            
+
         full_padding = (
             ida_kernwin.ask_buttons(
                 "Full Padding",
@@ -716,7 +716,7 @@ if api is None:
         class GhidraApi(BaseApi):
             def can_run(self):
                 return True
-            
+
             def get_size_from_type(self, name):
                 # type: (str) -> int
                 dt = self.get_datatype(name)
@@ -978,7 +978,7 @@ if api is None:
                                 func.name,
                                 "vf{0}".format(func.offset / 8),
                             )
-                
+
                 if struct.vtable_size:
                     vt_size = struct.vtable_size
                     vt_type.setLength(vt_size)
@@ -1115,7 +1115,7 @@ if api is None:
         class BinjaApi(BaseApi):
             def can_run(self):
                 return True
-            
+
             def get_binja_type(self, name):
                 # type: (str) -> str
                 lookup = {
@@ -1340,13 +1340,13 @@ def get_time():
 def run():
     if not api.can_run():
         raise RuntimeError("This script depends on exdgetters. Run that script before retrying")
-    
+
     update_virt_func = api.should_update_virt_func()
     update_member_func = api.should_update_member_func()
 
     print("{0} Loading yaml".format(get_time()))
     yaml = api.get_yaml()
-    
+
     print("{0} Loading data yaml".format(get_time()))
     api.data_yaml = api.load_data_yaml()
 
@@ -1357,7 +1357,7 @@ def run():
     print("{0} Deleting old enums and creating new ones".format(get_time()))
     for enum in yaml.enums:
         api.delete_enum(enum)
-    
+
     for enum in yaml.enums:
         api.create_enum_struct(enum)
 
