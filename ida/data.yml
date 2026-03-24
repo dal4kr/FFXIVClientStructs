@@ -887,7 +887,7 @@ classes:
   Client::Game::SheetWaiterBase:
     vtbls:
 #FAIL        - ea: 0x1420BE2C8
-        base: Common::Component::Excel::ExcelSheetWaiter
+#FAIL          base: Common::Component::Excel::ExcelSheetWaiter
   Client::Game::InstanceContent::ContentSheetWaiter:
     vtbls:
       - ea: 0x1420BC718
@@ -1231,7 +1231,7 @@ classes:
   Client::Network::Socket::SocketWinsock:
     vtbls:
 #FAIL        - ea: 0x1421E7E38
-        base: Client::Network::Socket::SocketBase
+#FAIL          base: Client::Network::Socket::SocketBase
   Client::Network::Socket::SocketImpl:
     vtbls:
       - ea: 0x1421E7FA0
@@ -1649,7 +1649,7 @@ classes:
       - ea: 0x1427B4470
     vtbls:
 #FAIL        - ea: 0x1420F8550 # it has some abstract base even!
-        base: Client::Game::Character::CharacterManagerInterface
+#FAIL          base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140E45390: Create
       0x140E452C0: GetGroupWithCheck
@@ -2228,11 +2228,11 @@ classes:
   Client::Game::WeatherManager::ServerWeather:
     vtbls:
 #FAIL        - ea: 0x1420E68A8
-        base: Client::Game::WeatherManager::WeatherInterface
+#FAIL          base: Client::Game::WeatherManager::WeatherInterface
   Client::Game::WeatherManager::Weather:
     vtbls:
 #FAIL        - ea: 0x1420E68F0
-        base: Client::Game::WeatherManager::ServerWeather
+#FAIL          base: Client::Game::WeatherManager::ServerWeather
   Client::Game::WeatherManager:
     instances:
       - ea: 0x1427B41F0
@@ -3173,7 +3173,7 @@ classes:
       - ea: 0x1429D0860
     vtbls:
       - ea: 0x1420D0D38
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+#FAIL          base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::RidePillon:
     instances:
       - ea: 0x1429D0C48
@@ -3464,7 +3464,7 @@ classes:
 #FAIL        - ea: 0x1427AA670
     vtbls:
 #FAIL        - ea: 0x1420C0630
-        base: Client::Graphics::Vfx::VfxDataListenner
+#FAIL          base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
 #fail       0x140048E10: StaticInitializer # seems to be removed now?
       0x1400E3500: GetCurrentComboActionId
@@ -3855,7 +3855,7 @@ classes:
   Client::Sound::ISoundData:
     vtbls:
 #FAIL        - ea: 0x14208EDA8
-        base: Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>
+#FAIL          base: Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>
     vfuncs:
       3: GetSoundController
       5: SetIsLoadingSoundResource
@@ -4041,7 +4041,7 @@ classes:
     vtbls:
       - ea: 0x142496C70
 #FAIL        - ea: 0x1424935A0
-        base: Common::Component::Excel::ExcelResourceListener
+#FAIL          base: Common::Component::Excel::ExcelResourceListener
     vfuncs:
       1: GetSheetByIndex
       2: GetSheetByName
@@ -4122,7 +4122,7 @@ classes:
       - ea: 0x142495E30
         base: Common::Component::BGCollision::Object
 #FAIL        - ea: 0x1424926D8
-        base: Common::Component::BGCollision::NodeLink
+#FAIL          base: Common::Component::BGCollision::NodeLink
   Common::Component::BGCollision::IMesh:
     vtbls:
       - ea: 0x1424960A0
@@ -4132,9 +4132,9 @@ classes:
   Common::Component::BGCollision::Mesh:
     vtbls:
 #FAIL        - ea: 0x142492950
-        base: Common::Component::BGCollision::Object
+#FAIL          base: Common::Component::BGCollision::Object
 #FAIL        - ea: 0x1424929A8
-        base: Common::Component::BGCollision::IMesh
+#FAIL          base: Common::Component::BGCollision::IMesh
     vfuncs:
       2: GetBoundsMin
       3: GetBoundsMax
@@ -4181,7 +4181,7 @@ classes:
       - ea: 0x142495C88
         base: Common::Component::BGCollision::SceneWrapperNode
 #FAIL        - ea: 0x1424925B8
-        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+#FAIL          base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
     vfuncs:
       1: Clear
       2: SetStreamingSphere
@@ -5022,7 +5022,7 @@ classes:
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
 #FAIL        - ea: 0x1420C66F8
-        base: Client::UI::Info::InfoProxyInterface
+#FAIL          base: Client::UI::Info::InfoProxyInterface
     vfuncs:
       11: AddPage
   Client::UI::Info::InfoProxyInvitedInterface:
@@ -11208,7 +11208,7 @@ classes:
   Client::UI::Shell::RaptureShellCommandInterface:
      vtbls:
 #FAIL        - ea: 0x1420C2EF0
-        base: Component::Shell::ShellCommandInterface
+#FAIL          base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
       - ea: 0x1420C1610
@@ -11546,7 +11546,7 @@ classes:
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
 #FAIL        - ea: 0x1420C60E0
-        base: Client::UI::Shell::RaptureShellCommandInterface
+#FAIL          base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
       - ea: 0x1420C4838
@@ -15608,19 +15608,19 @@ classes:
   Client::Game::Event::TalkCallback::TalkAsyncEventImpl:
     vtbls:
 #FAIL        - ea: 0x1421DDA20
-        base: Client::Game::Event::TalkCallback::TalkEventImpl
+#FAIL          base: Client::Game::Event::TalkCallback::TalkEventImpl
   Client::Game::Event::FormatStringCallback<Client::Game::Event::TalkCallback>:
     vtbls:
 #FAIL        - ea: 0x1421DDA30
-        base: Client::Game::Event::FormatStringCallbackInterface
+#FAIL          base: Client::Game::Event::FormatStringCallbackInterface
   Client::Game::Event::TalkCallback:
     vtbls:
 #FAIL        - ea: 0x1421DDA48
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
+#FAIL          base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
   Client::Game::Event::NpcRepairCallback:
     vtbls:
 #FAIL        - ea: 0x1421DDF70
-        base: Client::Game::Event::TalkCallback # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler>
+#FAIL          base: Client::Game::Event::TalkCallback # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler>
   Client::Game::Event::EventSceneModule:
     funcs:
       0x141706950: ctor
@@ -18283,7 +18283,7 @@ classes:
   Client::UI::AddonScreenLog::AddonChild:
     vtbls:
 #FAIL        - ea: 0x142176380
-        base: Component::GUI::AtkUnitBase
+#FAIL          base: Component::GUI::AtkUnitBase
   Client::UI::AddonScreenLog: # 93
     vtbls:
       - ea: 0x1421763D0
@@ -24540,7 +24540,7 @@ classes:
   Client::Game::Object::HousingObject:
     vtbls:
       - ea: 0x142314648
-        base: Client::Game::Object::GameObject
+#FAIL          base: Client::Game::Object::GameObject
       - ea: 0x1423148E0
         base: Client::LayoutEngine::Housing::HousingEventListener
     funcs:

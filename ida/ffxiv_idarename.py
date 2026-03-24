@@ -552,7 +552,10 @@ def load_data():
                 class_data = {}
 
             vtbls_raw = class_data.pop("vtbls", [])
-            vtbls = [(vtbl["ea"], vtbl["base"] if "base" in vtbl else None) for vtbl in vtbls_raw]
+            if vtbls_raw is None:
+                vtbls = []
+            else:
+                vtbls = [(vtbl["ea"], vtbl["base"] if "base" in vtbl else None) for vtbl in vtbls_raw]
             vfuncs = class_data.pop("vfuncs", {})
             funcs = class_data.pop("funcs", {})
             instances_raw = class_data.pop("instances", [])
