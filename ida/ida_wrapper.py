@@ -724,54 +724,6 @@ class IdaInterface(BaseIdaInterface):
 
     elif idaapi.IDA_SDK_VERSION >= 900:
 
-        def _get_struct_tinfo(self, sid: ida_typeinf.tinfo_t | int) -> ida_typeinf.tinfo_t | None:
-            """Normalize a struct reference to a loaded tinfo_t."""
-            if isinstance(sid, ida_typeinf.tinfo_t):
-                return sid if sid.get_tid() != idaapi.BADADDR else None
-
-            tinfo = ida_typeinf.tinfo_t()
-            if not tinfo.get_type_by_tid(sid):
-                return None
-
-            return tinfo
-
-        def _get_udm_by_offset(
-            self, sid: ida_typeinf.tinfo_t | int, offset: int
-        ) -> tuple[int, ida_typeinf.udm_t | None]:
-            """Look up a UDT member by byte offset using only IDA 9.0-compatible APIs."""
-            tinfo = self._get_struct_tinfo(sid)
-            if tinfo is None:
-                return (-1, None)
-
-            udt = ida_typeinf.udt_type_data_t()
-            if not tinfo.get_udt_details(udt):
-                return (-1, None)
-
-            bit_offset = offset * 8
-            for member_idx, udm in enumerate(udt):
-                if udm.offset == bit_offset:
-                    return (member_idx, udm)
-
-            return (-1, None)
-
-        def _get_udm_by_name(
-            self, sid: ida_typeinf.tinfo_t | int, name: str
-        ) -> tuple[int, ida_typeinf.udm_t | None]:
-            """Look up a UDT member by name without relying on version-specific find_udm signatures."""
-            tinfo = self._get_struct_tinfo(sid)
-            if tinfo is None:
-                return (-1, None)
-
-            udt = ida_typeinf.udt_type_data_t()
-            if not tinfo.get_udt_details(udt):
-                return (-1, None)
-
-            for member_idx, udm in enumerate(udt):
-                if udm.name == name:
-                    return (member_idx, udm)
-
-            return (-1, None)
-
         def get_tinfo_from_func_data(self, data: DefinedStructFuncField):
             """Retrieve a tinfo_t from a raw function data.
 
@@ -961,11 +913,7 @@ class IdaInterface(BaseIdaInterface):
             Returns:
                 ida_typeinf.tinfo_t: The struct's parent tinfo_t
             """
-            tinfo = self._get_struct_tinfo(sid)
-            if tinfo is None:
-                return ida_typeinf.tinfo_t()
-
-            return tinfo
+            return ida_typeinf.tinfo_t(tid=sid)
 
         def get_struct_size(self, sid: ida_typeinf.tinfo_t | int) -> int:
             """Get the struct size
@@ -1032,11 +980,8 @@ class IdaInterface(BaseIdaInterface):
                 tinfo_code_t: See ida_typeinfo.TERR_ constants
             """
             try:
-                tinfo = self._get_struct_tinfo(sid)
-                if tinfo is None:
-                    return ida_typeinf.TERR_BAD_ARG
-
-                idx, _ = self._get_udm_by_name(tinfo, name)
+                tinfo = ida_typeinf.tinfo_t(tid=sid)
+                idx = tinfo.find_udm(name=name)
                 if idx == -1:
                     return True
 
@@ -1076,7 +1021,7 @@ class IdaInterface(BaseIdaInterface):
             Returns:
                 ida_typeinf.udm_t: The member data
             """
-            _, udm = self._get_udm_by_offset(sid, offset)
+            _, udm = sid.get_udm_by_offset(offset)
             return udm
 
         def get_struct_member_by_name(
@@ -1091,14 +1036,7 @@ class IdaInterface(BaseIdaInterface):
             Returns:
                 ida_typeinf.udm_t: The member data
             """
-            tinfo = self._get_struct_tinfo(sid)
-            if tinfo is None:
-                return None
-
-            member_idx, udm = self._get_udm_by_name(tinfo, name)
-            if member_idx < 0:
-                return None
-
+            _, udm = sid.get_udm(name)
             return udm
 
         def set_struct_member_info(
@@ -1125,10 +1063,7 @@ class IdaInterface(BaseIdaInterface):
             if offset != 0:
                 raise ValueError("IDA 9+ does not support offset != 0 in set_struct_member_info")
 
-            memberIdx, _ = self._get_udm_by_offset(sid, int(member.offset / 8))
-            if memberIdx < 0:
-                return ida_typeinf.TERR_BAD_ARG
-
+            memberIdx, _ = sid.get_udm_by_offset(member.offset)
             return sid.set_udm_type(index=memberIdx, tif=tif)
 
         def get_struct_member_id(self, sid: ida_typeinf.tinfo_t, offset: int) -> int:
@@ -1141,10 +1076,7 @@ class IdaInterface(BaseIdaInterface):
             Returns:
                 int: The member id inside of the struct or -1 if not found
             """
-            idx, _ = self._get_udm_by_offset(sid, offset)
-            if idx < 0:
-                return idc.BADADDR
-
+            idx, _ = sid.get_udm_by_offset(offset)
             return idx
 
         def get_enum_id(self, name: str):
@@ -1193,11 +1125,19 @@ class IdaInterface(BaseIdaInterface):
 
             # must clear values before groups
 
-            for (idx, _, _) in reversed(list(eti.all_constants())):
-                tif.del_edm(idx)
+            values = []
+            for (idx, _, _) in eti.all_constants():
+                values.append(eti[idx].name)
 
-            for (idx, _) in reversed(list(eti.all_groups())):
-                tif.del_edm(idx)
+            for name in values:
+                tif.del_edm(name)
+
+            groups = []
+            for (idx, _) in eti.all_groups():
+                groups.append(eti[idx].name)
+
+            for name in groups:
+                tif.del_edm(name)
 
         def create_enum(self, name: str) -> int:
             """Create an enum by its name
@@ -1271,13 +1211,13 @@ class IdaInterface(BaseIdaInterface):
 
             idc.set_enum_bf(eid, True)
 
-            (mask_name, bmask) = self.get_enum_bitmask_field(eid)
+            (name, bmask) = self.get_enum_bitmask_field(eid)
 
             # this shouldn't happen under normal circumstances
-            if idc.get_enum_member_by_name(mask_name) != idaapi.BADADDR:
+            if idc.get_enum_member_by_name(f"{name}_Mask") != idaapi.BADADDR:
                 return
 
-            idc.add_enum_member(eid, mask_name, bmask, bmask)
+            idc.add_enum_member(eid, f"{name}_Mask", bmask, bmask)
 
         def add_enum_member(self, eid: int, name: str, value: int, mask: int = -1):
             """Add an enum member to an enum by its id
