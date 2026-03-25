@@ -4856,6 +4856,8 @@ classes:
       19: IsScdResourceLoaded
       20: LoadScdResource
       21: UnloadScdResource # it really just DecRefs it
+      24: ToggleUi
+      25: IsUiFlagsSet
     funcs:
       0x1401D1C30: Finalizer
       0x14065BDC0: ctor
@@ -4905,6 +4907,7 @@ classes:
       0x1400EABA0: OpenAddonByAgent
       0x1400EAF40: OpenYesNo
       0x1400EB5C0: OpenYesNo2
+      0x1400ECCC0: ToggleUi
       0x1400EB2E0: OpenSelectOk
       0x1400EB180: OpenSelectOk2
       0x1400EEA20: ShowScreenImage
@@ -6810,7 +6813,7 @@ classes:
   Client::Graphics::Render::Light:
     vtbls:
       - ea: 0x1420746B8
-        base: Client::Graphics::Render::RenderObject      
+        base: Client::Graphics::Render::RenderObject
   Client::Graphics::Render::Material:
     vtbls:
       - ea: 0x142074590
@@ -10304,7 +10307,7 @@ classes:
       0x1409865E0: ShowLogMessageSourceObjectTargetObjectTextParameters
       0x1409868A0: ShowLogMessageSourceObjectTargetObject
       0x140986C70: ShowLogMessageSourceTarget
-      0x140987160: ShowLogMessageSourceTargetTextParameters 
+      0x140987160: ShowLogMessageSourceTargetTextParameters
       0x140987D70: GetChatTab
       0x140987D90: SetTabName
       0x140987F40: GetTabName
