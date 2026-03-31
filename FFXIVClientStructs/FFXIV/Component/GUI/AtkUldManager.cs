@@ -73,8 +73,17 @@ public unsafe partial struct AtkUldManager {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 47 0E")]
     public partial void BindTimeline(byte* uldResourceOffset, AtkUldObjectInfo* objects, byte* nodeData, AtkTimelineManager* atkTimeLineManager);
 
+    /// <summary>
+    /// Sets any child <see cref="AtkTextNode"/>'s Text via TextId and SheetType.
+    /// </summary>
     [MemberFunction("40 56 48 83 EC 20 48 8B 41 10")]
     public partial void SetupText();
+
+    /// <summary>
+    /// Sets any child <see cref="AtkTextNode"/>'s Text via TextId and SheetType, then recurses into child components.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 45 84 F6 74 59")]
+    public partial void SetupTextRecursive();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 8E ?? ?? ?? ?? 48 8B 86")]
     public partial void SetupTexture(IMemorySpace* memSpace, AtkResNode* node, AtkUldPartsList** parts, uint id);
