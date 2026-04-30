@@ -106,24 +106,21 @@ public unsafe partial struct UIModule {
 
     [FieldOffset(0xBAD20)] internal UI3DModule UI3DModule;
     [FieldOffset(0xD2260)] internal RaptureAtkModule RaptureAtkModule;
+    [FieldOffset(0xFCFB0)] internal InfoModule InfoModule;
+    [FieldOffset(0xFEC28)] internal UIModuleHelpers UIModuleHelpers;
+    [FieldOffset(0xFEC78)] public Utf8String AddonSheetName;
 
-    // TODO: Review this CN patch
+    [FieldOffset(0xFECE8)] public Utf8String UIColorSheetName;
 
-    [FieldOffset(0xFC330 - 0x10)] internal InfoModule InfoModule;
-    [FieldOffset(0xFDFA8 - 0x10)] internal UIModuleHelpers UIModuleHelpers;
-    [FieldOffset(0xFDFE8 - 0x10)] public Utf8String AddonSheetName;
-
-    [FieldOffset(0xFE058 - 0x10)] public Utf8String UIColorSheetName;
-
-    [FieldOffset(0xFE0D0 - 0x10)] public Utf8String CompletionSheetName;
-    [FieldOffset(0xFE138 - 0x10)] public Utf8String CompletionOpenIconMacro;
-    [FieldOffset(0xFE1A0 - 0x10)] public Utf8String CompletionCloseIconMacro;
-    [FieldOffset(0xFE208 - 0x10)] public Utf8String NewLineMacro;
-    [FieldOffset(0xFE270 - 0x10)] public Utf8String LastTalkName;
-    [FieldOffset(0xFE2D8 - 0x10)] public Utf8String LastTalkText;
-    [FieldOffset(0xFE340 - 0x10)] internal UIInputData UIInputData;
-    [FieldOffset(0xFED70 - 0x10)] internal UIInputModule UIInputModule;
-    // [FieldOffset(0xF6E68)] public Vf79Struct;
+    [FieldOffset(0xFED60)] public Utf8String CompletionSheetName;
+    [FieldOffset(0xFEDC8)] public Utf8String CompletionOpenIconMacro;
+    [FieldOffset(0xFEE30)] public Utf8String CompletionCloseIconMacro;
+    [FieldOffset(0xFEE98)] public Utf8String NewLineMacro;
+    [FieldOffset(0xFEF00)] public Utf8String LastTalkName;
+    [FieldOffset(0xFEF68)] public Utf8String LastTalkText;
+    [FieldOffset(0xFEFD0)] internal UIInputData UIInputData;
+    [FieldOffset(0xFFA00)] internal UIInputModule UIInputModule;
+    // [FieldOffset(0xF7AF8)] public Vf79Struct;
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F2 48 8B F9 45 84 C9")]
     public partial void ProcessChatBoxEntry(Utf8String* message, nint a4 = 0, bool saveToHistory = false);
