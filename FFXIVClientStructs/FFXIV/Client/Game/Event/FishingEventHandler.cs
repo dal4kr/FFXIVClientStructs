@@ -92,8 +92,10 @@ public unsafe partial struct FishingEventHandler {
     public AtkValue* ChangeBait(int baitId) {
         var returnValue = new AtkValue();
         var baitValue = stackalloc AtkValue[2];
-        baitValue[0].SetInt(baitId);
-        baitValue[1].SetBool(false);
+        baitValue[0].Type = AtkValueType.Int;
+        baitValue[0].Int = baitId;
+        baitValue[1].Type = AtkValueType.Bool;
+        baitValue[1].Bool = false;
         return ReceiveEvent(&returnValue, baitValue, 2, 2);
     }
 }
@@ -145,7 +147,4 @@ public enum FishingState : int {
     /// Or air, sand, etc.; just when you are actually fishing.
     /// </remarks>
     LineInWater = 12,
-
-    [Obsolete("Why are you using this without documenting it in CS?", true)]
-    Unk_11 = 11,
 }

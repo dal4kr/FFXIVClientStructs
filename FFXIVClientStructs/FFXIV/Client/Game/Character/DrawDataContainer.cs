@@ -33,7 +33,7 @@ public unsafe partial struct DrawDataContainer {
     public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId* modelId, bool force);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 45 7F")]
-    public partial void LoadWeapon(WeaponSlot slot, WeaponModelId weaponData, byte redrawOnEquality, byte unk2, byte skipGameObject, byte unk4);
+    public partial void LoadWeapon(WeaponSlot slot, WeaponModelId weaponData, byte redrawOnEquality, byte a5, byte skipGameObject, byte a7, bool a8);
 
     /// <summary>
     /// Called when Hide/Display Weapons when sheathed is toggled or /displayarms is used.
@@ -76,7 +76,7 @@ public unsafe partial struct DrawDataContainer {
     public partial void HideVieraEars(bool hide);
 
     [MemberFunction("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 44 0F B6 B9")]
-    public partial void LoadGearsetData(PacketPlayerGearsetData* gearsetData);
+    public partial void HandleGearsetDrawDataPacket(GearsetDrawDataPacket* packet);
 
     public enum EquipmentSlot : uint {
         Head = 0,

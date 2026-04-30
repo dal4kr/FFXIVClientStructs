@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
+using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
@@ -11,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x238)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 33 ED 48 8B 89 ?? ?? ?? ?? 8B F2", 3, 74)]
-public unsafe partial struct AtkUnitBase : ICreatable {
+public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [FieldOffset(0x8), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     [FieldOffset(0x28)] public AtkUldManager UldManager;
     [FieldOffset(0xB8)] public AtkWidgetAlignment WidgetAlignment; // copied from (AtkUldWidgetInfo*)UldManager.Objects
@@ -39,7 +40,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [BitField<bool>(nameof(DisableFocusability), 7)]
     [FieldOffset(0x1A0)] public byte Flags1A0;
     [BitField<bool>(nameof(IsReady), 0)]
-    [BitField<bool>(nameof(DisableUserClose), 2)]
+    [BitField<bool>(nameof(ShouldFireCallbackAndHideOrClose), 2)]
     [BitField<bool>(nameof(DisableFocusOnShow), 6)]
     [FieldOffset(0x1A1)] public byte Flags1A1;
     [BitField<bool>(nameof(WasLoadUldByNameCalled), 2)]
@@ -51,6 +52,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     // Bit 5: Disable clamping of position to the game window (Note: this will make the unitbase open at (0,0) if no position is set)
     // Bit 6: Disable WindowCollisionNode interactivity (no focus on click, not moving the addon when dragged)
     [FieldOffset(0x1A3)] public byte Flags1A3;
+    // Bit 4: Use UiBaseScale or ScreenTextBaseScale (depending on other flags, checked in AtkUnitManager vfuncs)
     // Bit 6: Unknown, enables whatever HudAnchoringInfoIndex does
     [FieldOffset(0x1A4)] public byte Flags1A4;
     [BitField<bool>(nameof(EnableTextNodePopulation), 5)]
@@ -60,17 +62,20 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1A8)] public int Param; // appears to be a generic field that some addons use for storage
     [FieldOffset(0x1AC)] public uint ShowTransitionDuration;
     [FieldOffset(0x1B0)] public uint HideTransitionDuration;
-    [FieldOffset(0x1B4)] public uint Flags1B4; // used by SetFlag, AddonConfig related?
+    [BitField<UiFlags>(nameof(UiFlags), 0, 7)]
+    [FieldOffset(0x1B4)] public uint Flags1B4; // set by SetFlag, bits 24-30 setting flags?!
     [FieldOffset(0x1B8)] private byte AddonParamUnknown1; // used in RaptureAtkUnitManager.vf18
     /// <remarks> Used for dialogs, context menus and other windows that cause inputs to be blocked. Checked in <see cref="ShouldIgnoreInputs"/>. </remarks>
     [FieldOffset(0x1B9)] public byte NumBlockingAddons;
-    [FieldOffset(0x1BA)] private byte Unk1BA;
+    [FieldOffset(0x1BA)] public byte UiFlagsHideCount; // incremented for each Hide call caused due to set UiFlags
     [FieldOffset(0x1BB)] private byte Unk1BB;
     [FieldOffset(0x1BC)] public float ShowTransitionScale;
     [FieldOffset(0x1C0)] public float HideTransitionScale;
     [FieldOffset(0x1C4)] public float Scale;
     [BitField<bool>(nameof(EnableFilter), 2)]
-    [BitField<bool>(nameof(DisableUserScaling), 11)]
+    [BitField<bool>(nameof(DisableUserScaling), 11)] // sets Scale to 1.0
+    [BitField<bool>(nameof(DisableUnfocusedCloseOnEsc), 20)] // if true, won't close on esc when unfocused
+    [BitField<bool>(nameof(IsScalingWithGlobalUIScale), 21)] // multiplies scale by g_GlobalUIScale
     [FieldOffset(0x1C8)] public uint Flags1C8;
     /// <summary>
     /// An optional scd resource that is loaded along with the uld resource in <see cref="LoadUldResourceHandle"/>.<br/>
@@ -84,9 +89,12 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </code>
     /// </summary>
     [FieldOffset(0x1CC)] public byte ScdResourceIndex;
+    /// <remarks>
+    /// If bit flag &amp; 0x80 is set, it uses either UiBaseScale or ScreenTextBaseScale.<br/>
+    /// Otherwise, if values is up to 10, it uses g_HUDScaleTable.
+    /// </remarks>
     [FieldOffset(0x1CD)] public byte HUDScaleTableIndex;
-    [FieldOffset(0x1CE)] public byte VisibilityFlags;
-    // 1 byte padding
+    [FieldOffset(0x1CE)] public ushort VisibilityFlags;
     [FieldOffset(0x1D0)] public ushort DrawOrderIndex;
     /// <remarks> Index in <see cref="AtkUnitManager.HudAnchoringTable"/>. </remarks>
     [FieldOffset(0x1D2)] public sbyte HudAnchoringInfoIndex; // -1 = undefined
@@ -112,23 +120,27 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1F8)] public uint CollisionNodeListCount;
     [FieldOffset(0x1FC), FixedSizeArray] internal FixedSizeArray5<OperationGuide> _operationGuides; // the little button hints in controller mode
 
-    [FieldOffset(0x1B9), Obsolete("Renamed to NumBlockingAddons")] public byte NumOpenPopups;
-    [FieldOffset(0x1EA), Obsolete("Renamed to BlockedParentId")] public ushort ContextMenuParentId;
-    [FieldOffset(0x1AC), Obsolete("Renamed to ShowTransitionDuration")] public uint OpenTransitionDuration;
-    [FieldOffset(0x1B0), Obsolete("Renamed to HideTransitionDuration")] public uint CloseTransitionDuration;
-    [FieldOffset(0x1BC), Obsolete("Renamed to ShowTransitionScale")] public float OpenTransitionScale;
-    [FieldOffset(0x1C0), Obsolete("Renamed to HideTransitionScale")] public float CloseTransitionScale;
-    [FieldOffset(0x1D8), Obsolete("Renamed to ShowTransitionOffsetX")] public short OpenTransitionOffsetX;
-    [FieldOffset(0x1DA), Obsolete("Renamed to ShowTransitionOffsetY")] public short OpenTransitionOffsetY;
-    [FieldOffset(0x1DC), Obsolete("Renamed to HideTransitionOffsetX")] public short CloseTransitionOffsetX;
-    [FieldOffset(0x1DE), Obsolete("Renamed to HideTransitionOffsetY")] public short CloseTransitionOffsetY;
-    [FieldOffset(0x1E0), Obsolete("Renamed to ShowSoundEffectId")] public short OpenSoundEffectId;
+    [FieldOffset(0x1B9), Obsolete("Renamed to NumBlockingAddons", true)] public byte NumOpenPopups;
+    [FieldOffset(0x1EA), Obsolete("Renamed to BlockedParentId", true)] public ushort ContextMenuParentId;
+    [FieldOffset(0x1AC), Obsolete("Renamed to ShowTransitionDuration", true)] public uint OpenTransitionDuration;
+    [FieldOffset(0x1B0), Obsolete("Renamed to HideTransitionDuration", true)] public uint CloseTransitionDuration;
+    [FieldOffset(0x1BC), Obsolete("Renamed to ShowTransitionScale", true)] public float OpenTransitionScale;
+    [FieldOffset(0x1C0), Obsolete("Renamed to HideTransitionScale", true)] public float CloseTransitionScale;
+    [FieldOffset(0x1D8), Obsolete("Renamed to ShowTransitionOffsetX", true)] public short OpenTransitionOffsetX;
+    [FieldOffset(0x1DA), Obsolete("Renamed to ShowTransitionOffsetY", true)] public short OpenTransitionOffsetY;
+    [FieldOffset(0x1DC), Obsolete("Renamed to HideTransitionOffsetX", true)] public short CloseTransitionOffsetX;
+    [FieldOffset(0x1DE), Obsolete("Renamed to HideTransitionOffsetY", true)] public short CloseTransitionOffsetY;
+    [FieldOffset(0x1E0), Obsolete("Renamed to ShowSoundEffectId", true)] public short OpenSoundEffectId;
 
     /// <summary> Gets a value indicating whether OnSetup was called </summary>
     public partial bool IsReady { get; }
 
     /// <summary> Disables the "Close" option in the title bar context menu and prevents the window from being closed via input (ESC or similar). </summary>
-    public partial bool DisableUserClose { get; set; }
+    [Obsolete("Use ShouldFireCallbackAndHideOrClose.", true)]
+    public bool DisableUserClose { get => ShouldFireCallbackAndHideOrClose; set => ShouldFireCallbackAndHideOrClose = value; }
+
+    /// <summary> If addon should have <seealso cref="FireCallback"/> triggered and if <seealso cref="Hide"/> or <seealso cref="Close"/> should be called </summary>
+    public partial bool ShouldFireCallbackAndHideOrClose { get; set; }
 
     /// <summary> Disables loading from/saving to AddonConfig </summary>
     public partial bool DisableAddonConfig { get; set; }
@@ -160,7 +172,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public static partial float GetGlobalUIScale();
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8D 9F")]
-    public partial void Ctor();
+    public partial AtkUnitBase* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 40 F6 C5 01")]
     public partial void Destructor();
@@ -265,6 +277,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 4D 8B CF C6 44 24 ?? ?? 4C 8B C7"), GenerateStringOverloads]
     public partial void SaveAddonConfig(CStringPointer name, bool a2, bool a3);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 0C 48 8B CF")]
+    public partial AtkEvent* RegisterEvent(AtkEventType eventType, uint param, AtkEventListener* listener, AtkResNode* node);
+
     [VirtualFunction(3)]
     public partial bool Open(uint depthLayer);
 
@@ -302,7 +317,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial void SetScale(float scale, bool a3);
 
     [VirtualFunction(15)]
-    public partial void GetSize(short* outWidth, short* outHeight, bool scaled);
+    public partial void GetSize(ushort* outWidth, ushort* outHeight, bool scaled);
 
     [VirtualFunction(16)]
     public partial void Hide2();

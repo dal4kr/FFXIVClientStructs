@@ -241,7 +241,11 @@ public sealed partial class InteropGenerator {
 
         if (methodSymbol.TypeParameters.Any()) {
             ImmutableArray<SymbolDisplayPart> symbolDisplayParts = methodSymbol.ToDisplayParts(new SymbolDisplayFormat(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeConstraints));
-            constraints = string.Join("", symbolDisplayParts[1..]);
+            constraints = string.Join("", symbolDisplayParts[1..].Select(t => {
+                if (t.Kind != SymbolDisplayPartKind.InterfaceName) return t.ToString();
+                var typeArguments = ((INamedTypeSymbol)t.Symbol!).TypeArguments;
+                return typeArguments.Length <= 0 ? t.ToString() : $"{t.ToString()}<{string.Join(", ", typeArguments.Select(t => t.Name))}>";
+            }));
         }
 
         EquatableArray<string> inheritableAttributes = ParseInheritedAttributes(methodSymbol, token);
@@ -326,6 +330,7 @@ public sealed partial class InteropGenerator {
                     continue;
 
                 // defaults
+                Accessibility accessibility = Accessibility.Public;
                 bool isPartial = false;
                 bool hasGetter = true;
                 bool hasSetter = true;
@@ -335,6 +340,7 @@ public sealed partial class InteropGenerator {
                     if (propertySymbol.Name != name)
                         continue;
 
+                    accessibility = propertySymbol.DeclaredAccessibility;
                     isPartial = propertySymbol.IsPartialDefinition;
                     hasGetter = propertySymbol.GetMethod != null;
                     hasSetter = !propertySymbol.IsReadOnly && propertySymbol.SetMethod != null;
@@ -353,6 +359,7 @@ public sealed partial class InteropGenerator {
                     fieldSymbol.Type.GetFullyQualifiedName(),
                     index,
                     length,
+                    accessibility,
                     isPartial,
                     hasGetter,
                     hasSetter,

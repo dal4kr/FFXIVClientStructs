@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.MassivePcContent;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Common.Lua;
+using static FFXIVClientStructs.FFXIV.Client.Game.GameMain;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
@@ -36,10 +37,11 @@ public unsafe partial struct EventFramework {
     [FieldOffset(0x3D10)] public GameObjectId SceneGameObjectId;
     [FieldOffset(0x3D18)] public short Scene;
     [FieldOffset(0x3D20)] public ushort SceneFlags;
-    [FieldOffset(0x3D28), FixedSizeArray] internal FixedSizeArray255<uint> _sceneData; // TODO: use SceneData struct instead
-    [FieldOffset(0x4124)] public byte SceneDataCount;
+    [FieldOffset(0x3D28)] public SceneData SceneData;
 
     [FieldOffset(0x42D8)] public DailyQuestMap DailyQuests;
+
+    [FieldOffset(0x446A), FixedSizeArray] internal FixedSizeArray8<Festival> _festivals; // copied from PlayerState, used by GPose (maybe more) to check if Fan Festival frames/stamps should be displayed
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B D8 48 85 C0 0F 84")]
     public partial ContentDirector* GetContentDirector();
@@ -76,9 +78,8 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? 83 7E 20 00 48 8B 7C 24")]
     public partial void MaterializeItem(EventId eventID, InventoryType inventoryType, short inventorySlot, int extraParam = 0);
 
-    public void MaterializeItem(InventoryItem* itemSlot, MaterializeEntryId entryId) {
-        MaterializeItem(new EventId { ContentId = EventHandlerContent.Materialize, EntryId = (ushort)entryId }, itemSlot->Container, itemSlot->Slot, 0);
-    }
+    public void MaterializeItem(InventoryItem* itemSlot, MaterializeEntryId entryId)
+        => MaterializeItem(new EventId { ContentId = EventHandlerContent.Materialize, EntryId = (ushort)entryId }, itemSlot->Container, itemSlot->Slot, 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 46 ?? 49 BF")]
     public partial void GetEventMapMarkers(ushort territoryId, StdVector<MapMarkerData>* markerVector);
@@ -104,6 +105,9 @@ public unsafe partial struct EventFramework {
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B 81 ?? ?? ?? ?? 41 0F B7 F1")]
     public partial void ProcessEventPlay(GameObject* gameObject, EventId eventId, short scene, ulong sceneFlags, uint* sceneData, byte sceneDataCount);
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 41 0F B6 F9 41 0F B7 D8 E8 ?? ?? ?? ?? 48 8B C8 48 85 C0 74 ?? 66 39 58 ?? 75 ?? 0F B6 80 ?? ?? ?? ?? A8 ?? 74 ?? ?? ?? ?? 24 ?? 4C 8B 4C 24 ?? 44 0F B6 C7 88 81 ?? ?? ?? ?? 0F B7 D3 0F B6 44 24 ?? 88 44 24 ?? 41 FF 92")]
+    public partial void ProcessEventYield(EventId eventId, short scene, byte yieldId, int* intParams, byte intParamCount);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 07 48 8D 9F ?? ?? ?? ??")]
     public partial void ProcessInitializeScene(GameObject* gameObject, EventId eventId, short scene, ulong sceneFlags, uint* sceneData, byte sceneDataCount);

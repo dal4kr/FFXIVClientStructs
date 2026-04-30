@@ -9,17 +9,20 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [StructLayout(LayoutKind.Explicit, Size = 0x1B8)]
 public unsafe partial struct EventHandler {
     [FieldOffset(0x08)] public StdSet<Pointer<GameObject>> EventObjects;
-    [FieldOffset(0x18)] public EventSceneModuleUsualImpl* EventSceneModule;
+    [FieldOffset(0x18)] public EventSceneModule* EventSceneModule;
     [FieldOffset(0x20)] public EventHandlerInfo Info;
     [FieldOffset(0x5C)] public uint IconId;
 
     [FieldOffset(0x78)] public short Scene; // OnScene%05u
     [FieldOffset(0x80)] public GameObject* SceneGameObject;
-    [FieldOffset(0x88)] public ulong SceneFlags; // TODO: use SceneFlag enum
+    [FieldOffset(0x88)] public SceneFlag SceneFlags;
 
     [FieldOffset(0x94)] public LuaStatus LuaStatus;
 
     [FieldOffset(0xC8)] private Utf8String UnkString0;
+
+    [VirtualFunction(40)]
+    public partial void ProcessYield(short scene, byte yieldId, int* intParams, byte intParamCount);
 
     [VirtualFunction(158)]
     public partial void CancelInteraction();
@@ -64,20 +67,6 @@ public struct EventHandlerInfo {
     [FieldOffset(0x04)] public byte Flags;
 }
 
-// TODO: remove (was renamed/replaced with DirectorTodo)
-[StructLayout(LayoutKind.Explicit, Size = 0x160)]
-public struct EventHandlerObjective {
-    [FieldOffset(0x00)] public bool Enabled;
-
-    [FieldOffset(0x04)] public int DisplayType;
-    [FieldOffset(0x08)] public Utf8String Label;
-
-    [FieldOffset(0x78)] public int CountCurrent;
-    [FieldOffset(0x7C)] public int CountNeeded;
-    [FieldOffset(0x80)] public ulong TimeLeft;
-    [FieldOffset(0x88)] public uint MapRowId;
-}
-
 [StructLayout(LayoutKind.Explicit, Size = 0x160)]
 public struct DirectorTodo {
     [FieldOffset(0x00)] public bool Enabled;
@@ -100,7 +89,7 @@ public struct DirectorTodo {
     [FieldOffset(0x80)] public long EndTimestamp;
     /// <remarks> In seconds. </remarks>
     [FieldOffset(0x88)] public long Duration;
-    [FieldOffset(0x88), CExporterIgnore] public uint MapRowId; // unsure where this is used that way. copied from old EventHandlerObjective struct
+    [FieldOffset(0x88), CExporterIgnore] public uint MapRowId; // unsure where this is used that way
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x168)]

@@ -69,9 +69,15 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x1A4)] public int BasePiety;
     [FieldOffset(0x1A8), FixedSizeArray] internal FixedSizeArray74<int> _attributes;
     [FieldOffset(0x2D0)] public byte GrandCompany;
-    [FieldOffset(0x2D1)] public byte GCRankMaelstrom; // TODO: convert to array of 3 with name `_gCRanks`
-    [FieldOffset(0x2D2)] public byte GCRankTwinAdders;
-    [FieldOffset(0x2D3)] public byte GCRankImmortalFlames;
+    /// <remarks>
+    /// 0 = Maelstrom <br/>
+    /// 1 = Order of the Twin Adder <br/>
+    /// 2 = Immortal Flames
+    /// </remarks>
+    [FieldOffset(0x2D1), FixedSizeArray] internal FixedSizeArray3<byte> _GCRanks;
+    [FieldOffset(0x2D1), Obsolete("Use GCRanks[0]", true)] public byte GCRankMaelstrom;
+    [FieldOffset(0x2D2), Obsolete("Use GCRanks[1]", true)] public byte GCRankTwinAdders;
+    [FieldOffset(0x2D3), Obsolete("Use GCRanks[2]", true)] public byte GCRankImmortalFlames;
     [FieldOffset(0x2D4)] public ushort HomeAetheryteId;
     [FieldOffset(0x2D6)] public byte FavouriteAetheryteCount;
     [FieldOffset(0x2D8), FixedSizeArray] internal FixedSizeArray4<ushort> _favouriteAetherytes;
@@ -354,6 +360,9 @@ public unsafe partial struct PlayerState {
     [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 41 0F B6 CE")]
     public partial bool IsOrnamentUnlocked(uint ornamentId);
 
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 8B DA 41 0F B6 F8 C1 EA")]
+    public partial void SetOrnamentUnlocked(uint ornamentId, bool isUnlocked);
+
     /// <summary>
     /// Check if a specific orchestrion roll has been unlocked by the player.
     /// </summary>
@@ -431,12 +440,18 @@ public unsafe partial struct PlayerState {
     /// <summary>
     /// Check if a specific set of Glasses are unlocked. Internally, this will look up the associated GlassesStyle
     /// for the specified pair and check that it's valid and marked as unlocked in
-    /// <see cref="UnlockedGlassesStylesBitArray"/>.
+    /// <see cref="UnlockedGlassesStyles"/>.
     /// </summary>
     /// <param name="glassesId">The RowID of a set of glasses to check.</param>
     /// <returns>Returns true if the specified glasses are unlocked, false otherwise.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 0B 66 FF C3")]
     public partial bool IsGlassesUnlocked(ushort glassesId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 3A FE 75 ?? 84 C0")]
+    public partial bool IsGlassesStyleUnlocked(ushort glassesStyleId);
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 0F BF DA 41 0F B6 F8")]
+    public partial void SetGlassesStyleUnlocked(ushort glassesStyleId, bool isUnlocked);
 
     #endregion
 

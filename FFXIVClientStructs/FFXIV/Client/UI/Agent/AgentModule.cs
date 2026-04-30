@@ -18,7 +18,7 @@ public unsafe partial struct AgentModule {
     [FieldOffset(0xF70)] public AgentHelpers AgentHelpers;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 85 ?? ?? ?? ?? 48 8B CE")]
-    public partial void Ctor(UIModule* uiModule);
+    public partial AgentModule* Ctor(UIModule* uiModule);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 7B 48 00")]
     public partial AgentInterface* GetAgentByInternalId(AgentId agentId);
@@ -100,7 +100,7 @@ public enum AgentId : uint {
     PartyInvite = 62,
     Search = 63,
     Detail = 64,
-    LetterList = 65,
+    Letter = 65,
     LetterView = 66,
     LetterEdit = 67,
     ItemDetail = 68,
@@ -210,7 +210,7 @@ public enum AgentId : uint {
     ChocoboBreed = 172,
     GoldSaucerMiniGame = 173,
     TripleTriad = 174,
-    [Obsolete("Renamed to TripleTriad")]
+    [Obsolete("Renamed to TripleTriad", true)]
     TrippleTriad = 174,
     TripleTriadRuleAnnounce = 175,
     TripleTriadRuleSetting = 176,
@@ -359,14 +359,14 @@ public enum AgentId : uint {
     MiragePrismENpcSatisfaction = 319,
     Description = 320, // Frontline/Bozja Description
     Alarm = 321,
-    Unk322 = 322,
+    Unk322 = 322, // JobHudManual?
     MerchantSetting = 323, // Mannequins
     FreeShop = 324,
     AozNotebook = 325, // Bluemage Spells
     RhythmAction = 326,
     WeddingNotification = 327,
     Emj = 328, // Mahjong
-    Unk329 = 329,
+    Unk329 = 329, // EmjTotalResult?
     Unk330 = 330,
     EmjIntro = 331,
     EmjVoiceCharacter = 332,
@@ -433,7 +433,7 @@ public enum AgentId : uint {
     GatheringMasterpiece = 393,
     StarlightGiftBox = 394,
     HalloweenNpcSelect = 395,
-    Unk396 = 396, // new in 7.4
+    Unk396 = 396, // new in 7.4 - EasterMowingResult? (Hatching-tide 2026)
     SpearFishing = 397,
     Omikuji = 398,
     FittingShop = 399,
@@ -445,7 +445,7 @@ public enum AgentId : uint {
     Unk405 = 405,
     BannerPreview = 406,
     PvPMap = 407,
-    CharaCard = 408, // AdventurerPlate
+    CharaCard = 408, // Adventurer Plate
     CharaCardDesignSetting = 409,
     CharaCardProfileSetting = 410,
     PvPMKSRankRating = 411,
@@ -473,7 +473,7 @@ public enum AgentId : uint {
     Class2JobHotbar = 433,
     VVDNotebook = 434,
     VVDFinder = 435,
-    Unk436 = 436, // 7.4
+    VVDVoteRoute = 436, // 7.4
     TofuList = 437,
     TofuPreview = 438,
     TofuEdit = 439,
@@ -525,6 +525,6 @@ public enum AgentId : uint {
     EventTutorial = 485,
     ConfigCharacterChatLogMiniTalk = 486,
     ToggleContextMenu = 487,
-    Unk488 = 488, // new in 7.3
-    Unk489 = 489, // new in 7.4
+    Unk488 = 488, // new in 7.3 - ColorPicker? used by ConfigCharacterChatLogMiniTalk
+    Unk489 = 489, // new in 7.4 - ConfigShareMain? most likely not fully implemented yet. also opens WebURL#31: https://sqex.to/OOrr1
 }

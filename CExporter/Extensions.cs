@@ -78,7 +78,7 @@ public static partial class TypeExtensions {
         var builder = builderPooled.Builder;
         var name = type switch {
             _ when type == typeof(void) => shouldLower ? type.Name.ToLower() : type.Name,
-            _ when type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => shouldLower ? type.Name.ToLower().Replace("byte", "char") : type.Name.Replace("byte", "char"),
+            _ when type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => shouldLower ? type.Name.ToLower() : type.Name,
             _ when type == typeof(char) => "wchar_t",
             _ when type == typeof(bool) => "char",
             _ when type == typeof(float) => "float",
@@ -213,6 +213,7 @@ public static partial class TypeExtensions {
         var pack = type.StructLayoutAttribute?.Pack ?? 8;
         if (pack == 0) pack = 8;
         var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        if (fields.Length == 0) return 1;
         return fields.Max(t => Math.Min(pack, t.FieldType.PackSize()));
     }
 
