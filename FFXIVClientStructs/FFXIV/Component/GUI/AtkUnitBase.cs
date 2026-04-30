@@ -195,7 +195,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [MemberFunction("E8 ?? ?? ?? ?? 41 C1 EF")]
     public partial AtkTextNode* GetTextNodeById(uint nodeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 77")]
+    [MemberFunction("F6 81 ?? ?? ?? ?? ?? 44 8B D2 74 ?? 85 D2 74 ?? 48 8B 41 ?? 45 33 C9 48 85 C0 74 ?? 44 8B 40 ?? 45 85 C0 74 ?? 33 C9 45 85 C0 74 ?? 4C 8B 58 ?? 49 8B 14 CB 44 39 52 ?? 74 ?? FF C1 41 3B C8 72 ?? EB ?? 4C 8B CA 4D 85 C9 74 ?? 66 41 83 79 ?? ?? 75 ?? 49 8B C1 C3 33 C0 C3 CC CC CC CC CC CC 48 83 EC ?? 45 33 C0 44 8B DA F6 81 ?? ?? ?? ?? ?? 74 ?? 85 D2 74 ?? 48 8B 41 ?? 45 8B C8 48 85 C0 74 ?? 44 8B 50 ?? 45 85 D2 74 ?? 48 89 1C 24 41 8B C8 48 8B 58 ?? 66 0F 1F 84 00 ?? ?? ?? ?? 8B C1 48 8B 14 C3 44 39 5A ?? 74 ?? FF C1 41 3B CA 72 ?? EB ?? 4C 8B CA 48 8B 1C 24 4D 85 C9 74 ?? 66 41 83 79 ?? ?? 75 ?? 49 8B 89 ?? ?? ?? ?? 48 85 C9 74 ?? 41 0F B7 81 ?? ?? ?? ?? 48 C1 E0 ?? 48 03 41 ?? 74 ?? 4C 8B 00 49 8B C0 48 83 C4 ?? C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24")]
     public partial AtkImageNode* GetImageNodeById(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 3C 36")]
@@ -204,7 +204,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 FF 48 89 43")]
     public partial AtkComponentList* GetComponentListById(uint nodeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 31")]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 DD")]
     public partial AtkComponentBase* GetComponentByNodeId(uint nodeId);
 
     public AtkComponentNode* GetComponentNodeById(uint nodeId) {
@@ -235,13 +235,13 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
 
     /// <param name="arrayType">0 for StringArrayData or 1 for NumberArrayData</param>
     /// <param name="arrayIndex">The index in AtkArrayDataHolder</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 06 41 B9")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 03 4C 8B C5 BA")]
     public partial void SubscribeAtkArrayData(byte arrayType, byte arrayIndex);
 
     /// <param name="arrayType">0 for StringArrayData or 1 for NumberArrayData</param>
     /// <param name="arrayIndex">The index in AtkArrayDataHolder</param>
     /// <param name="clean">Resets all values to default, also frees managed strings</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 45 33 C9 8D 56 01")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? BF ?? ?? ?? ?? 48 8D 44 24 ?? 44 8B D7")]
     public partial void UnsubscribeAtkArrayData(byte arrayType, byte arrayIndex, bool clean = false);
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 41 B9 ?? ?? ?? ??"), GenerateStringOverloads]

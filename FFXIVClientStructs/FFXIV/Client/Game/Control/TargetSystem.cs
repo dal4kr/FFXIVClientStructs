@@ -56,7 +56,7 @@ public unsafe partial struct TargetSystem {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 48 83 C4 30 5F C3 8B 83")]
     public partial bool SetHardTarget(GameObject* hardTargetObject, bool ignoreTargetModes = false, bool a4 = false, int a5 = 0);
 
-    [MemberFunction("40 53 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 8B 05")]
+    [MemberFunction("40 53 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 48 63 05")]
     public partial void HandleTargetingKeybinds();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B C3 74 ?? B0 01")]
@@ -74,7 +74,7 @@ public unsafe partial struct TargetSystem {
     [MemberFunction("E9 ?? ?? ?? ?? 48 8B 01 FF 50 08 48 8B C8")]
     public partial ulong InteractWithObject(GameObject* obj, bool checkLineOfSight = true);
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 94")]
+    [MemberFunction("E9 ?? ?? ?? ?? 8B C0 48 8D 0D ?? ?? ?? ?? 45 33 C9")]
     public partial void OpenObjectInteraction(GameObject* obj);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 85 C0 74 50 48 8B CB")]

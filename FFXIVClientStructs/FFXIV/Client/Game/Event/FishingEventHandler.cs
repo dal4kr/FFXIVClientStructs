@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [GenerateInterop]
 [Inherits<EventHandler>, Inherits<AtkModuleInterface.AtkEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x230)]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 89 8B", 3, 276)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 89 8B", 3, 277)]
 public unsafe partial struct FishingEventHandler {
     [FieldOffset(0x1C0)] private byte Unk220;
     [FieldOffset(0x1C8)] public FishingState State;
@@ -82,21 +82,22 @@ public unsafe partial struct FishingEventHandler {
     //[FieldOffset( 0x284 )] private ulong Unk284; // Unaligned, but it disassembles as a qword in the constructor, so idk.
 
     // see FishingHookStrength if you want to observe hooks. Other values have a lot of overlap with FishingState, and there's standing vs sitting differences
-    [VirtualFunction(275)]
+    [VirtualFunction(276)]
     public partial void PlayAnimation(Character.Character* chara, ushort actionTimelineId, nint a4);
 
     /// <summary>
     /// Changes the currently equipped bait.
     /// </summary>
     /// <param name="baitId">ItemId of bait to change to.</param>
-    public AtkValue* ChangeBait(int baitId) {
+    public AtkValue ChangeBait(int baitId) {
         var returnValue = new AtkValue();
         var baitValue = stackalloc AtkValue[2];
         baitValue[0].Type = AtkValueType.Int;
         baitValue[0].Int = baitId;
         baitValue[1].Type = AtkValueType.Bool;
         baitValue[1].Bool = false;
-        return ReceiveEvent(&returnValue, baitValue, 2, 2);
+        ReceiveEvent(&returnValue, baitValue, 2, 2);
+        return returnValue;
     }
 }
 
@@ -107,7 +108,7 @@ public enum FishingHookStrength {
 }
 
 [Flags]
-public enum FishingBaitFlags : int {
+public enum FishingBaitFlags {
     Normal = 0,
     AmbitiousLure = 0x1,
     ModestLure = 0x2,
@@ -115,7 +116,7 @@ public enum FishingBaitFlags : int {
     Swimbait = 0x20,
 }
 
-public enum FishingState : int {
+public enum FishingState {
     None = 0,
     CastingOut = 1,
     /// <remarks>

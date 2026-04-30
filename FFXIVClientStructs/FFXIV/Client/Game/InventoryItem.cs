@@ -142,7 +142,7 @@ public unsafe partial struct InventoryItem : ICreatable<InventoryItem> {
     public partial ushort GetCondition();
 
     /// <summary>Gets the crafter's content id from the original InventoryItem or itself if not symbolic.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? EB 04 49 8B 47 20")]
+    [MemberFunction("40 53 48 83 EC ?? 80 79 ?? ?? 48 8B D9 74 ?? 0F B7 51 ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0")]
     public partial ulong GetCrafterContentId();
 
     /// <summary>Gets the stain from the original InventoryItem or itself if not symbolic.</summary>

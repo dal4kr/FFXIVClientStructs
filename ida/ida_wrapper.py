@@ -966,6 +966,8 @@ class IdaInterface(BaseIdaInterface):
             ec = idc.add_struc_member(sid.get_tid(), name, offset, flag, typeid, nbytes)
             if ec != ida_typeinf.TERR_OK:
                 return False
+            
+            sid.get_type_by_tid(sid.get_tid())
 
             return True
 

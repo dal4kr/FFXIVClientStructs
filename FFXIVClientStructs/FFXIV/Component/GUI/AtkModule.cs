@@ -3,7 +3,6 @@ using FFXIVClientStructs.FFXIV.Client.System.Input.SoftKeyboards;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
-using static FFXIVClientStructs.FFXIV.Component.GUI.AtkUnitManager;
 using TextServiceEvent = FFXIVClientStructs.FFXIV.Client.System.Input.TextServiceInterface.TextServiceEvent;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
@@ -14,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Client::System::Input::TextServiceInterface::TextServiceEvent
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkModuleInterface>, Inherits<AtkExternalInterface>, Inherits<TextServiceEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x82C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x82E0)]
 public unsafe partial struct AtkModule {
     public delegate AtkValue* CallbackHandlerDelegate(AtkModule* thisPtr, AtkValue* returnValue, AtkValue* values, uint valueCount);
 
@@ -39,28 +38,25 @@ public unsafe partial struct AtkModule {
     [FieldOffset(0x72B8)] public StdMap<uint, AddonCallbackEntry> AddonCallbackMapping; // Key is UnitBase->Id
     [FieldOffset(0x72C8)] public AtkMessageBoxManager* AtkMessageBoxManager;
     [FieldOffset(0x72D0)] public TextService TextService;
-
-    // TODO: Review this CN patch
-
     [FieldOffset(0x7300 - 0x10)] public AtkTextInput TextInput;
-    [FieldOffset(0x7FC8 - 0x10)] internal Utf8String Unk7FA8;
-    [FieldOffset(0x8030 - 0x10)] internal Utf8String Unk8010;
-    [FieldOffset(0x8098 - 0x10)] internal Utf8String Unk8078;
-    [FieldOffset(0x8100 - 0x10)] internal Utf8String Unk80E0;
+    [FieldOffset(0x7FE8 - 0x10)] internal Utf8String Unk7FE8;
+    [FieldOffset(0x8050 - 0x10)] internal Utf8String Unk8050;
+    [FieldOffset(0x80B8 - 0x10)] internal Utf8String Unk80B8;
+    [FieldOffset(0x8120 - 0x10)] internal Utf8String Unk8120;
 
     // probably an #IFDEF WINDOWS here or something specifically creating a Steam keyboard.
     // hope they don't add more soft keyboards later!
-    [FieldOffset(0x8170 - 0x10)] public SteamGamepadSoftKeyboard SoftKeyboardDevice;
+    [FieldOffset(0x8190 - 0x10)] public SteamGamepadSoftKeyboard SoftKeyboardDevice;
 
-    [FieldOffset(0x8288 - 0x10), FixedSizeArray(isString: true)] internal FixedSizeArray16<byte> _currentUIScene;
-    [FieldOffset(0x8298 - 0x10), FixedSizeArray(isString: true)] internal FixedSizeArray16<byte> _loadingUIScene;
+    [FieldOffset(0x82A8 - 0x10), FixedSizeArray(isString: true)] internal FixedSizeArray16<byte> _currentUIScene;
+    [FieldOffset(0x82B8 - 0x10), FixedSizeArray(isString: true)] internal FixedSizeArray16<byte> _loadingUIScene;
 
-    [FieldOffset(0x82B0 - 0x10)] internal ushort ScreenWidth; // maybe UI dimensions?
-    [FieldOffset(0x82B2 - 0x10)] internal ushort ScreenHeight;
-    [FieldOffset(0x82B4 - 0x10)] public bool EnableUiDraw;
+    [FieldOffset(0x82D0 - 0x10)] internal ushort ScreenWidth; // maybe UI dimensions?
+    [FieldOffset(0x82D2 - 0x10)] internal ushort ScreenHeight;
+    [FieldOffset(0x82D4 - 0x10)] public bool EnableUiDraw;
 
-    [FieldOffset(0x82B8 - 0x10)] public bool EnableUiInput;
-    [FieldOffset(0x82B9 - 0x10)] public bool IsHudInitialized;
+    [FieldOffset(0x82D8 - 0x10)] public bool EnableUiInput;
+    [FieldOffset(0x82D9 - 0x10)] public bool IsHudInitialized;
 
     [VirtualFunction(44)]
     public partial AddonStatus GetAddonStatus(uint addonId);

@@ -373,24 +373,34 @@ if api is None:
                 if struct.virtual_functions:
                     self.create_struct_type(fullname + "_vtbl")
 
-            def create_struct_member_fill(self, struct_name, offset):
-                # type: (str, int) -> None
-                s = self.get_struct(self.get_struct_id(struct_name))
+            def create_struct_member_fill(self, s, offset):
+                # type: (object, int) -> None
                 prev_size = self.get_struct_size(s)
                 if self.full_padding:
-                    flag = self.get_idc_type_from_size(prev_size)
-                    size = self.get_size_from_idc_type(flag)
-                    if size > offset - prev_size:
-                        flag = self.get_idc_type_from_size(
-                            offset - prev_size, prev_size
-                        )
-                        size = self.get_size_from_idc_type(flag)
+                    while offset > prev_size:
+                        size = offset - prev_size
+                        flag = self.get_idc_type_from_size(prev_size)
+                        element_size = self.get_size_from_idc_type(flag)
+                        if element_size > size:
+                            flag = self.get_idc_type_from_size(size, prev_size)
+                            element_size = self.get_size_from_idc_type(flag)
+                        fill_size = element_size
+                        if element_size == 8:
+                            fill_size = size - (size % element_size)
 
-                    self.create_struct_member(
-                        s, "field_{0:X}".format(prev_size), prev_size, flag, None, size
-                    )
+                        result = self.create_struct_member(
+                            s,
+                            "field_{0:X}".format(prev_size),
+                            prev_size,
+                            flag,
+                            None,
+                            fill_size,
+                        )
+                        if result is False or (result is not True and result != 0):
+                            raise RuntimeError("Failed to add padding at 0x{0:X}".format(prev_size))
+                        prev_size = self.get_struct_size(s)
                 else:
-                    self.create_struct_member(
+                    result = self.create_struct_member(
                         s,
                         "field_{0:X}".format(prev_size),
                         prev_size,
@@ -398,6 +408,8 @@ if api is None:
                         None,
                         offset - prev_size,
                     )
+                    if result is False or (result is not True and result != 0):
+                        raise RuntimeError("Failed to add padding at 0x{0:X}".format(prev_size))
 
             def create_struct_members(self, struct):
                 # type: (DefinedStruct) -> None
@@ -424,7 +436,7 @@ if api is None:
                     prev_size = self.get_struct_size(s)
                     while offset > prev_size:
                         contiguous_fields = False
-                        self.create_struct_member_fill(fullname, offset)
+                        self.create_struct_member_fill(s, offset)
                         prev_size = self.get_struct_size(s)
 
                     field_is_base = field.base and contiguous_fields
@@ -507,7 +519,7 @@ if api is None:
                 if struct.size is not None and struct.size != 0:
                     prev_size = self.get_struct_size(s)
                     while struct.size > prev_size:
-                        self.create_struct_member_fill(fullname, struct.size)
+                        self.create_struct_member_fill(s, struct.size)
                         prev_size = self.get_struct_size(s)
 
                 idaapi.end_type_updating(idaapi.UTP_STRUCT)

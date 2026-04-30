@@ -1,6 +1,3 @@
-using System.Runtime.CompilerServices;
-using FFXIVClientStructs.FFXIV.Client.System.Memory;
-
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 public enum AtkValueType {
@@ -32,7 +29,7 @@ public enum AtkValueType {
 /// </summary>
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe partial struct AtkValue : IDisposable {
+public unsafe partial struct AtkValue {
     [FieldOffset(0x0)] public AtkValueType Type;
 
     // union field
@@ -55,15 +52,6 @@ public unsafe partial struct AtkValue : IDisposable {
     }
 
     public AtkValue(AtkValue* other) => CtorCopy(other);
-
-    public void Dtor(bool free) => Dispose(free);
-
-    void IDisposable.Dispose() => Dispose(false);
-
-    private void Dispose(bool free) {
-        Dtor();
-        if (free) IMemorySpace.Free((AtkValue*)Unsafe.AsPointer(ref this));
-    }
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 83 CB ?? C7 45")]
     public partial AtkValue* CtorCopy(AtkValue* other);
@@ -111,13 +99,13 @@ public unsafe partial struct AtkValue : IDisposable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? EB 5C")]
     public partial bool SetVectorValue(uint index, AtkValue* value);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 83 C6 02 FF C7"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4E ?? FF C7"), GenerateStringOverloads]
     public partial bool SetVectorString(uint index, CStringPointer value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 8B 8E")]
     public partial bool CopyVectorValue(uint index, AtkValue* outValue);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 89 75 F7")]
+    [MemberFunction("40 56 41 56 41 57 48 83 EC ?? 4C 8B 71")]
     private partial void ReleaseManagedMemoryInternal();
 
     // The game probably uses a macro for this, because it always

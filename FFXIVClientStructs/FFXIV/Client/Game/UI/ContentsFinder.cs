@@ -61,7 +61,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
     public DateTime GetEnteredQueueDateTime() => DateTime.UnixEpoch.AddSeconds(EnteredQueueTimestamp);
     public DateTime GetQueueReadyDateTime() => DateTime.UnixEpoch.AddSeconds(QueueReadyTimestamp);
 
-    [MemberFunction("40 53 57 41 57 48 83 EC 30 0F B6 41 55")]
+    [MemberFunction("40 53 56 57 41 57 48 83 EC ?? 0F B6 41")]
     public partial void ProcessInfoState(ContentsFinderQueueState newState, QueueInfoState* newInfoState);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 13 44 0F B6 C7")]
@@ -76,8 +76,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 8B FA 48 8B D9 45 84 C0")]
     public partial void UpdateQueueState(ContentsFinderQueueState newState, bool beganQueue);
 
-    //[MemberFunction("4C 8B DC 55 41 54 41 56 49 8D 6B ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 80 79 ?? 00")]
-    [MemberFunction("4C 8B DC 55 56 41 57 49 8D 6B ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 80 79 ?? ?? 44 0F B6 FA")]
+    [MemberFunction("E8 ?? ?? ?? ?? B0 01 45 88 A7 ?? ?? ?? ?? E9 ?? ?? ?? ?? CC")]
     public partial void QueueRoulette(byte contentRouletteId, byte a3 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? B0 ?? 45 88 A7 ?? ?? ?? ?? E9 ?? ?? ?? ?? 45 0F B6 87")]
