@@ -104,8 +104,8 @@ public unsafe partial struct UIModule {
     [FieldOffset(0xB9B30)] internal RaptureShellModule RaptureShellModule;
     [FieldOffset(0xBAD80)] internal PronounModule PronounModule;
 
-    [FieldOffset(0xBAD20)] internal UI3DModule UI3DModule;
-    [FieldOffset(0xD2260)] internal RaptureAtkModule RaptureAtkModule;
+    [FieldOffset(0xBB130)] internal UI3DModule UI3DModule;
+    [FieldOffset(0xD2670)] internal RaptureAtkModule RaptureAtkModule;
     [FieldOffset(0xFCFB0)] internal InfoModule InfoModule;
     [FieldOffset(0xFEC28)] internal UIModuleHelpers UIModuleHelpers;
     [FieldOffset(0xFEC78)] public Utf8String AddonSheetName;
