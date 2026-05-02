@@ -1937,6 +1937,11 @@ enums:
     "HousingInteriorPlacedItems6": 25008
     "HousingInteriorPlacedItems7": 25009
     "HousingInteriorPlacedItems8": 25010
+    "HousingInteriorPlacedItems9": 25011
+    "HousingInteriorPlacedItems10": 25012
+    "HousingInteriorPlacedItems11": 25013
+    "HousingInteriorPlacedItems12": 25014
+    "HousingExteriorPlacedItems2": 25200
     "HousingExteriorStoreroom": 27000
     "HousingInteriorStoreroom1": 27001
     "HousingInteriorStoreroom2": 27002
@@ -1946,6 +1951,10 @@ enums:
     "HousingInteriorStoreroom6": 27006
     "HousingInteriorStoreroom7": 27007
     "HousingInteriorStoreroom8": 27008
+    "HousingInteriorStoreroom9": 27009
+    "HousingInteriorStoreroom10": 27010
+    "HousingInteriorStoreroom11": 27011
+    "HousingExteriorStoreroom2": 27200
 - type: Client::UI::Misc::PerformanceModule::PerformanceSetting1Flag
   name: PerformanceSetting1Flag
   underlying: byte
@@ -4121,7 +4130,7 @@ enums:
     "OccultCrescent": 61
     "Unknown62": 62
     "Seasonal3": 63
-    "Unknown64": 64
+    "AirForceOne": 64
 - type: Client::Game::GcArmyMemberFlag
   name: GcArmyMemberFlag
   underlying: byte
@@ -4250,16 +4259,6 @@ enums:
     "Invalid": 0
     "Requested": 1
     "Loaded": 2
-- type: Client::Game::WKS::WKSManager::MissionRank
-  name: MissionRank
-  underlying: int
-  namespace: Client.Game.WKS
-  flags: False
-  values:
-    "None": 0
-    "Bronze": 1
-    "Silver": 2
-    "Gold": 3
 - type: Client::Game::WKS::WKSMechaEventFlag
   name: WKSMechaEventFlag
   underlying: unsigned int
@@ -4847,10 +4846,9 @@ enums:
     "Aetherflow1": 1
     "Aetherflow2": 2
     "Aetherflow": 3
-    "IfritAttuned": 4
-    "TitanAttuned": 8
-    "GarudaAttuned": 12
-    "PhoenixReady": 16
+    "PhoenixPrimed": 4
+    "SolarBahamutFirstPrimed": 8
+    "SolarBahamutSecondPrimed": 12
     "IfritReady": 32
     "TitanReady": 64
     "GarudaReady": 128
@@ -6719,17 +6717,17 @@ enums:
   namespace: Client.UI.Agent
   flags: True
   values:
-    "None": 0
-    "DutyCompletion": 1
-    "Practice": 2
-    "Loot": 4
+    "None": 1
+    "DutyCompletion": 2
+    "Practice": 4
+    "Loot": 8
 - type: Client::UI::Agent::AgentLookingForGroup::CompletionStatus
   name: CompletionStatus
   underlying: byte
   namespace: Client.UI.Agent
   flags: True
   values:
-    "None": 0
+    "None": 1
     "DutyComplete": 2
     "DutyIncomplete": 4
     "DutyCompleteWeeklyUnclaimed": 8
@@ -6904,6 +6902,17 @@ enums:
     "Valid": 1
     "InvalidVersion": 2
     "InvalidCustomizeData": 3
+- type: Client::Game::WKS::WKSManager::MissionRank
+  name: MissionRank
+  underlying: int
+  namespace: Client.Game.WKS
+  flags: False
+  values:
+    "None": 0
+    "Bronze": 1
+    "Silver": 2
+    "Gold": 3
+    "Failed": 5
 - type: Client::Game::UI::NpcYell::NpcYellOutputFlags
   name: NpcYellOutputFlags
   underlying: byte
@@ -12084,7 +12093,7 @@ structs:
   name: TitleList
   namespace: Client.Game
   union: False
-  size: 133
+  size: 128
   fields:
   - type: byte
     name: UnlockedTitles
@@ -13641,12 +13650,12 @@ structs:
   name: NoteBookDivisionIdsArray
   namespace: Client.Game.UI
   union: False
-  size: 132
+  size: 134
   fields:
   - type: unsigned __int16
     name: NoteBookDivisionIds
     offset: 0
-    size: 66
+    size: 67
     is_string: False
   member_functions: []
 - type: Client::Game::UI::RecipeNote::RecipeCrystal
@@ -13782,6 +13791,55 @@ structs:
   size: 104
   fields: []
   virtual_functions: []
+  member_functions: []
+- type: Client::Game::WKS::WKSManager::WKSState
+  name: WKSState
+  namespace: Client.Game.WKS
+  union: False
+  size: 4232
+  fields:
+  - type: unsigned __int16
+    name: DevGrade
+    offset: 10
+  - type: unsigned __int16
+    name: CurrentFateControlRowId
+    offset: 16
+  - type: unsigned __int16
+    name: CurrentFateId
+    offset: 18
+  - type: unsigned __int16
+    name: CurrentMissionUnitRowId
+    offset: 3632
+  - type: unsigned int
+    name: CurrentScore
+    offset: 3644
+  - type: Client::Game::WKS::WKSManager::MissionRank
+    name: CurrentRank
+    offset: 3648
+  - type: unsigned __int16
+    name: CollectedTotal
+    offset: 3654
+  - type: byte
+    name: CollectedIndividual
+    offset: 3656
+  - type: unsigned int
+    name: FishingBait
+    offset: 3700
+  - type: byte
+    name: MissionCompletionFlags
+    offset: 3713
+    size: 213
+    is_string: False
+  - type: byte
+    name: MissionGoldFlags
+    offset: 3926
+    size: 213
+    is_string: False
+  - type: int
+    name: Scores
+    offset: 4140
+    size: 11
+    is_string: False
   member_functions: []
 - type: Client::Game::WKS::WKSMechaEventStageHandlerBase
   name: WKSMechaEventStageHandlerBase
@@ -15998,7 +16056,6 @@ structs:
   - type: wchar_t*
     name: LongStringPtr
     offset: 520
-  virtual_functions: []
   member_functions: []
 - type: Client::System::File::FileHandle
   name: FileHandle
@@ -24145,7 +24202,7 @@ structs:
   size: 80
   fields:
   - type: Client::UI::AddonHudLayoutScreen*
-    name: hudLayoutScreen
+    name: HudLayoutScreen
     offset: 32
   - type: Component::GUI::AtkUnitBase*
     name: SelectedAtkUnit
@@ -25173,6 +25230,14 @@ structs:
       name: uintParam
     - type: __int64
       name: packet
+  - name: IsUIReady
+    offset: 1040
+    return_type: char
+    parameters:
+    - type: Client::UI::UIModuleInterface*
+      name: this
+    - type: char
+      name: ignoreHudInitialized
   - name: ChangeUIMode
     offset: 1048
     return_type: void
@@ -29088,6 +29153,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: IsUIReady
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Component::GUI::AtkModuleInterface*
+      name: this
+    - type: char
+      name: ignoreHudInitialized
   - name: GetNumberArrayData
     offset: 72
     return_type: Component::GUI::NumberArrayData*
@@ -29234,8 +29307,6 @@ structs:
       name: this
     - type: Component::GUI::AtkCursor::CursorType
       name: cursorType
-  - name: IsUIReady
-    offset: 32
   - name: EnsureNumberArray
     offset: 48
   - name: EnsureStringArray
@@ -38511,7 +38582,7 @@ structs:
   name: RecipeData
   namespace: Client.Game.UI
   union: False
-  size: 1136
+  size: 1152
   fields:
   - type: Client::Game::UI::RecipeNote::RecipeEntry*
     name: Recipes
@@ -38526,15 +38597,15 @@ structs:
     is_string: False
   - type: unsigned __int16
     name: SelectedIndex
-    offset: 1112
+    offset: 1128
   - type: byte
     name: NumAvailableNoteBookDivisions
-    offset: 1119
+    offset: 1135
     size: 8
     is_string: False
   - type: byte
     name: NumAvailableSecretNoteBookDivisions
-    offset: 1127
+    offset: 1143
     size: 8
     is_string: False
   member_functions: []
@@ -45252,12 +45323,12 @@ structs:
     name: AtkEventInterface
     offset: 0
     base: true
-  - type: char
-    name: Unk8
-    offset: 8
   - type: Client::UI::UIModuleInterface*
     name: UIModuleInterface
     offset: 16
+  - type: Component::GUI::AtkModuleInterface::AtkEventInterface*
+    name: OpenerEventInterface
+    offset: 24
   - type: unsigned int
     name: AddonId
     offset: 32
@@ -59732,116 +59803,6 @@ structs:
     name: IsFreeAetheryte
     offset: 28
   member_functions: []
-- type: Client::Game::WKS::WKSManager
-  name: WKSManager
-  namespace: Client.Game.WKS
-  union: False
-  size: 4688
-  fields:
-  - type: Client::Game::Character::CharacterManagerInterface
-    name: CharacterManagerInterface
-    offset: 0
-    base: true
-  - type: unsigned __int16
-    name: TerritoryId
-    offset: 24
-  - type: unsigned __int16
-    name: DevGrade
-    offset: 90
-  - type: unsigned __int16
-    name: CurrentFateControlRowId
-    offset: 96
-  - type: unsigned __int16
-    name: CurrentFateId
-    offset: 98
-  - type: unsigned __int16
-    name: CurrentMissionUnitRowId
-    offset: 3712
-  - type: unsigned int
-    name: CurrentScore
-    offset: 3724
-  - type: Client::Game::WKS::WKSManager::MissionRank
-    name: CurrentRank
-    offset: 3728
-  - type: unsigned __int16
-    name: CollectedTotal
-    offset: 3734
-  - type: byte
-    name: CollectedIndividual
-    offset: 3736
-  - type: unsigned int
-    name: FishingBait
-    offset: 3780
-  - type: byte
-    name: MissionCompletionFlags
-    offset: 3793
-    size: 213
-    is_string: False
-  - type: byte
-    name: MissionGoldFlags
-    offset: 4006
-    size: 213
-    is_string: False
-  - type: int
-    name: Scores
-    offset: 4220
-    size: 11
-    is_string: False
-  - type: __int64
-    name: UnkStruct10F8
-    offset: 4344
-  - type: __int64
-    name: UnkStruct1100
-    offset: 4352
-  - type: Client::Game::WKS::WKSMechaEventModule*
-    name: MechaEventModule
-    offset: 4360
-  - type: __int64
-    name: UnkStruct1110
-    offset: 4368
-  - type: __int64
-    name: UnkStruct1118
-    offset: 4376
-  - type: __int64
-    name: EmergencyInfoModule
-    offset: 4384
-  - type: __int64
-    name: UnkStruct1128
-    offset: 4392
-  - type: __int64
-    name: UnkStruct1130
-    offset: 4400
-  - type: Client::Game::WKS::WKSMissionModule*
-    name: MissionModule
-    offset: 4408
-  - type: Client::Game::WKS::WKSResearchModule*
-    name: ResearchModule
-    offset: 4416
-  - type: __int64
-    name: UnkStruct1148
-    offset: 4424
-  - type: __int64
-    name: UnkStruct1150
-    offset: 4432
-  - type: StdVector<Client::Game::WKS::WKSModuleBase*>
-    name: Modules
-    offset: 4440
-  virtual_functions:
-  - name: Dtor
-    offset: 40
-    return_type: Client::Game::Character::CharacterManagerInterface*
-    parameters:
-    - type: Client::Game::WKS::WKSManager*
-      name: this
-    - type: byte
-      name: freeFlags
-  member_functions: []
-  static_members:
-  - signature: 48 89 05 ?? ?? ?? ?? 48 8B F8
-    relative_follow_offsets:
-    - 3
-    is_pointer: True
-    return_type: Client::Game::WKS::WKSManager
 - type: Client::Graphics::Kernel::PVShader
   name: PVShader
   namespace: Client.Graphics.Kernel
@@ -80318,6 +80279,77 @@ structs:
     - type: Client::Game::WKS::WKSContentInventoryContainer*
       name: this
   member_functions: []
+- type: Client::Game::WKS::WKSManager
+  name: WKSManager
+  namespace: Client.Game.WKS
+  union: False
+  size: 4688
+  fields:
+  - type: Client::Game::Character::CharacterManagerInterface
+    name: CharacterManagerInterface
+    offset: 0
+    base: true
+  - type: unsigned __int16
+    name: TerritoryId
+    offset: 24
+  - type: Client::Game::WKS::WKSManager::WKSState
+    name: State
+    offset: 80
+  - type: __int64
+    name: UnkStruct10F8
+    offset: 4344
+  - type: __int64
+    name: UnkStruct1100
+    offset: 4352
+  - type: Client::Game::WKS::WKSMechaEventModule*
+    name: MechaEventModule
+    offset: 4360
+  - type: __int64
+    name: UnkStruct1110
+    offset: 4368
+  - type: __int64
+    name: UnkStruct1118
+    offset: 4376
+  - type: __int64
+    name: EmergencyInfoModule
+    offset: 4384
+  - type: __int64
+    name: UnkStruct1128
+    offset: 4392
+  - type: __int64
+    name: UnkStruct1130
+    offset: 4400
+  - type: Client::Game::WKS::WKSMissionModule*
+    name: MissionModule
+    offset: 4408
+  - type: Client::Game::WKS::WKSResearchModule*
+    name: ResearchModule
+    offset: 4416
+  - type: __int64
+    name: UnkStruct1148
+    offset: 4424
+  - type: __int64
+    name: UnkStruct1150
+    offset: 4432
+  - type: StdVector<Client::Game::WKS::WKSModuleBase*>
+    name: Modules
+    offset: 4440
+  virtual_functions:
+  - name: Dtor
+    offset: 40
+    return_type: Client::Game::Character::CharacterManagerInterface*
+    parameters:
+    - type: Client::Game::WKS::WKSManager*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
+  static_members:
+  - signature: 48 89 05 ?? ?? ?? ?? 48 8B F8
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Game::WKS::WKSManager
 - type: Client::Game::WKS::WKSMechaEventMapMarker
   name: WKSMechaEventMapMarker
   namespace: Client.Game.WKS
@@ -88198,8 +88230,8 @@ structs:
   - type: char
     name: IsRequestUnfulfilled
     offset: 168
-  - type: char
-    name: IsCabinetCached
+  - type: byte
+    name: CabinetState
     offset: 169
   - type: char
     name: IsRetainerManagerReady
@@ -102520,7 +102552,7 @@ structs:
     - type: Client::System::Resource::Handle::ResourceHandle*
       name: this
   - signature: E8 ?? ?? ?? ?? 0F B6 43 1B
-    return_type: char
+    return_type: Client::System::Resource::Handle::ResourceHandle*
     name: IncRef
     parameters:
     - type: Client::System::Resource::Handle::ResourceHandle*
@@ -105803,6 +105835,7 @@ structs:
   - type: Common::Component::Excel::LinkList<Component::Excel::RingBufferExcelPageRowResolver::RowWrapperList>
     name: LinkedList
     offset: 0
+    base: true
   - type: Component::Excel::ExcelRowDescriptor
     name: RowDescriptor
     offset: 24
@@ -114163,7 +114196,7 @@ structs:
   name: EventSceneModule
   namespace: Client.Game.Event
   union: False
-  size: 14808
+  size: 15584
   fields:
   - type: Client::Game::Event::EventSceneModuleUsualImpl
     name: EventSceneModuleUsualImpl
@@ -141210,7 +141243,7 @@ structs:
   name: AddonHudLayoutScreen
   namespace: Client.UI
   union: False
-  size: 2432
+  size: 2448
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -141221,10 +141254,10 @@ structs:
     offset: 736
   - type: Component::GUI::AtkComponentNode*
     name: SelectedOverlayNode
-    offset: 1368
+    offset: 1568
   - type: Client::UI::MoveableAddonInfoStruct*
     name: SelectedAddon
-    offset: 1992
+    offset: 2392
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -148127,7 +148160,7 @@ structs:
   name: AddonMiragePrismPrismBox
   namespace: Client.UI
   union: False
-  size: 5176
+  size: 5184
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -163282,7 +163315,7 @@ structs:
   name: AddonCharacterClass
   namespace: Client.UI
   union: False
-  size: 2216
+  size: 2264
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -163291,31 +163324,31 @@ structs:
   - type: Component::GUI::AtkComponentBase*
     name: ClassComponents
     offset: 568
-    size: 33
+    size: 34
     is_string: False
   - type: Component::GUI::AtkComponentButton*
     name: TabsNode
-    offset: 832
-  - type: Component::GUI::AtkTextNode*
-    name: CurrentXPTextNode
     offset: 840
   - type: Component::GUI::AtkTextNode*
-    name: MaxXPTextNode
+    name: CurrentXPTextNode
     offset: 848
   - type: Component::GUI::AtkTextNode*
-    name: CurrentDesynthesisLevelTextNode
+    name: MaxXPTextNode
     offset: 856
   - type: Component::GUI::AtkTextNode*
-    name: MaxDesynthesisLevelTextNode
+    name: CurrentDesynthesisLevelTextNode
     offset: 864
+  - type: Component::GUI::AtkTextNode*
+    name: MaxDesynthesisLevelTextNode
+    offset: 872
   - type: Client::UI::AddonCharacterClass::ClassEntry
     name: ClassEntries
-    offset: 872
-    size: 33
+    offset: 880
+    size: 34
     is_string: False
   - type: int
     name: TabIndex
-    offset: 2208
+    offset: 2256
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -173916,7 +173949,7 @@ structs:
   name: AddonTripleTriad
   namespace: Client.UI
   union: False
-  size: 4096
+  size: 4056
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -174400,6 +174433,22 @@ structs:
   - type: Client::UI::Agent::HudStatus*
     name: Status
     offset: 96
+  - type: int
+    name: SystemMenuCommandIds
+    offset: 272
+    size: 20
+    is_string: False
+  - type: int
+    name: SystemMenuEntryCount
+    offset: 356
+  - type: unsigned int
+    name: SystemMenuAddonId
+    offset: 360
+  - type: Client::System::String::Utf8String
+    name: SystemMenuStrings
+    offset: 976
+    size: 20
+    is_string: False
   - type: unsigned int
     name: CastBarAddonId
     offset: 3056
@@ -176732,7 +176781,7 @@ structs:
   name: AddonAdventureNoteBook
   namespace: Client.UI
   union: False
-  size: 1616
+  size: 1632
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -176740,7 +176789,7 @@ structs:
     base: true
   - type: Client::UI::TabController
     name: TabController
-    offset: 1424
+    offset: 1440
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -185194,8 +185243,11 @@ structs:
     name: TargetSystem
     offset: 400
   - type: char
+    name: IsWalkingDuringAutorun
+    offset: 29976
+  - type: char
     name: IsWalking
-    offset: 30259
+    offset: 30263
   - type: unsigned int
     name: LocalPlayerEntityId
     offset: 30360
@@ -192868,7 +192920,7 @@ structs:
   name: AddonPvPCharacter
   namespace: Client.UI
   union: False
-  size: 3352
+  size: 3392
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -192877,11 +192929,11 @@ structs:
   - type: Client::UI::AddonPvPCharacter::ClassEntry
     name: ClassEntries
     offset: 600
-    size: 21
+    size: 23
     is_string: False
   - type: Client::UI::PreviewController
     name: PreviewController
-    offset: 3152
+    offset: 3200
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -202394,6 +202446,12 @@ structs:
       name: this
     - type: int
       name: exitCode
+  - signature: E8 ?? ?? ?? ?? 33 C0 E9 ?? ?? ?? ?? 48 8B 05
+    return_type: void
+    name: ExitFromWindow
+    parameters:
+    - type: Client::System::Framework::Framework*
+      name: this
   - signature: E8 ?? ?? ?? ?? 80 7B 1D 01
     return_type: Client::UI::UIModule*
     name: GetUIModule
@@ -220653,7 +220711,7 @@ structs:
   name: EventFramework
   namespace: Client.Game.Event
   union: False
-  size: 17664
+  size: 18432
   fields:
   - type: Client::Game::Event::EventHandlerModule
     name: EventHandlerModule
@@ -220669,37 +220727,37 @@ structs:
     offset: 432
   - type: int
     name: LoadState
-    offset: 15352
+    offset: 16152
   - type: Common::Lua::LuaState*
     name: LuaState
-    offset: 15392
+    offset: 16160
   - type: Common::Lua::LuaThread
     name: LuaThread
-    offset: 15400
+    offset: 16168
   - type: Client::Game::Event::EventState
     name: EventState1
-    offset: 15488
+    offset: 16256
   - type: Client::Game::Event::EventState
     name: EventState2
-    offset: 15584
+    offset: 16352
   - type: Client::Game::Object::GameObjectId
     name: SceneGameObjectId
-    offset: 15632
+    offset: 16400
   - type: __int16
     name: Scene
-    offset: 15640
+    offset: 16408
   - type: unsigned __int16
     name: SceneFlags
-    offset: 15648
+    offset: 16416
   - type: Client::Game::Event::SceneData
     name: SceneData
-    offset: 15656
+    offset: 16424
   - type: Client::Game::Event::DailyQuestMap
     name: DailyQuests
-    offset: 17112
+    offset: 17880
   - type: Client::Game::GameMain::Festival
     name: Festivals
-    offset: 17514
+    offset: 18282
     size: 8
     is_string: False
   member_functions:
@@ -221054,6 +221112,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: IsUIReady
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Component::GUI::AtkModule*
+      name: this
+    - type: char
+      name: ignoreHudInitialized
   - name: GetNumberArrayData
     offset: 72
     return_type: Component::GUI::NumberArrayData*
@@ -222960,6 +223026,14 @@ structs:
       name: this
     - type: byte
       name: freeFlags
+  - name: IsUIReady
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Client::UI::RaptureAtkModule*
+      name: this
+    - type: char
+      name: ignoreHudInitialized
   - name: GetNumberArrayData
     offset: 72
     return_type: Component::GUI::NumberArrayData*
@@ -224591,6 +224665,14 @@ structs:
       name: uintParam
     - type: __int64
       name: packet
+  - name: IsUIReady
+    offset: 1040
+    return_type: char
+    parameters:
+    - type: Client::UI::UIModule*
+      name: this
+    - type: char
+      name: ignoreHudInitialized
   - name: ChangeUIMode
     offset: 1048
     return_type: void

@@ -14,29 +14,31 @@ public unsafe partial struct WKSManager {
 
     [FieldOffset(0x18)] public ushort TerritoryId;
 
+    [FieldOffset(0x50)] private WKSState State; // TODO: use this instead of the fields
+
     /// <remarks> RowId of WKSDevGrade sheet. </remarks>
-    [FieldOffset(0x5A)] public ushort DevGrade;
+    [FieldOffset(0x5A), CExporterIgnore] public ushort DevGrade;
 
     /// <remarks> For Hub upgrades. RowId of WKSFateControl sheet. </remarks>
-    [FieldOffset(0x60)] public ushort CurrentFateControlRowId;
+    [FieldOffset(0x60), CExporterIgnore] public ushort CurrentFateControlRowId;
     /// <remarks> For Hub upgrades. Id of Fate in FateManager. </remarks>
-    [FieldOffset(0x62)] public ushort CurrentFateId;
+    [FieldOffset(0x62), CExporterIgnore] public ushort CurrentFateId;
 
     /// <remarks> RowId of WKSMissionUnit sheet. </remarks>
-    [FieldOffset(0xE80)] public ushort CurrentMissionUnitRowId;
+    [FieldOffset(0xE80), CExporterIgnore] public ushort CurrentMissionUnitRowId;
 
-    [FieldOffset(0xE8C)] public uint CurrentScore;
-    [FieldOffset(0xE90)] public MissionRank CurrentRank;
+    [FieldOffset(0xE8C), CExporterIgnore] public uint CurrentScore;
+    [FieldOffset(0xE90), CExporterIgnore] public MissionRank CurrentRank;
 
-    [FieldOffset(0xE96)] public ushort CollectedTotal;
-    [FieldOffset(0xE98)] public byte CollectedIndividual;
+    [FieldOffset(0xE96), CExporterIgnore] public ushort CollectedTotal;
+    [FieldOffset(0xE98), CExporterIgnore] public byte CollectedIndividual;
 
-    [FieldOffset(0xEC4)] public uint FishingBait;
+    [FieldOffset(0xEC4), CExporterIgnore] public uint FishingBait;
 
-    [FieldOffset(0xED1), FixedSizeArray] internal FixedSizeArray213<byte> _missionCompletionFlags;
-    [FieldOffset(0xFA6), FixedSizeArray] internal FixedSizeArray213<byte> _missionGoldFlags;
+    [FieldOffset(0xED1), FixedSizeArray, CExporterIgnore] internal FixedSizeArray213<byte> _missionCompletionFlags;
+    [FieldOffset(0xFA6), FixedSizeArray, CExporterIgnore] internal FixedSizeArray213<byte> _missionGoldFlags;
 
-    [FieldOffset(0x107C), FixedSizeArray] internal FixedSizeArray11<int> _scores; // cosmic class scores
+    [FieldOffset(0x107C), FixedSizeArray, CExporterIgnore] internal FixedSizeArray11<int> _scores; // cosmic class scores
 
     [FieldOffset(0x10F8)] private void* UnkStruct10F8;
     [FieldOffset(0x1100)] private void* UnkStruct1100;
@@ -62,5 +64,32 @@ public unsafe partial struct WKSManager {
         Silver,
         Gold,
         Failed = 5,
+    }
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1088)]
+    internal partial struct WKSState {
+        /// <remarks> RowId of WKSDevGrade sheet. </remarks>
+        [FieldOffset(0x0A)] public ushort DevGrade;
+
+        /// <remarks> For Hub upgrades. RowId of WKSFateControl sheet. </remarks>
+        [FieldOffset(0x10)] public ushort CurrentFateControlRowId;
+        /// <remarks> For Hub upgrades. Id of Fate in FateManager. </remarks>
+        [FieldOffset(0x12)] public ushort CurrentFateId;
+
+        /// <remarks> RowId of WKSMissionUnit sheet. </remarks>
+        [FieldOffset(0xE30)] public ushort CurrentMissionUnitRowId;
+
+        [FieldOffset(0xE3C)] public uint CurrentScore;
+        [FieldOffset(0xE40)] public MissionRank CurrentRank;
+
+        [FieldOffset(0xE46)] public ushort CollectedTotal;
+        [FieldOffset(0xE48)] public byte CollectedIndividual;
+
+        [FieldOffset(0xE74)] public uint FishingBait;
+
+        [FieldOffset(0xE81), FixedSizeArray(isBitArray: true, bitCount: 1704)] internal FixedSizeArray213<byte> _missionCompletionFlags;
+        [FieldOffset(0xF56), FixedSizeArray(isBitArray: true, bitCount: 1704)] internal FixedSizeArray213<byte> _missionGoldFlags;
+        [FieldOffset(0x102C), FixedSizeArray] internal FixedSizeArray11<int> _scores; // cosmic class scores
     }
 }

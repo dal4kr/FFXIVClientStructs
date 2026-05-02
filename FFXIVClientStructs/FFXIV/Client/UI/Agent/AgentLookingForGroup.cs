@@ -163,15 +163,15 @@ public unsafe partial struct AgentLookingForGroup {
 
     [Flags]
     public enum Objective : byte {
-        None = 0,
-        DutyCompletion = 1 << 0,
-        Practice = 1 << 1,
-        Loot = 1 << 2,
+        None = 1 << 0,
+        DutyCompletion = 1 << 1,
+        Practice = 1 << 2,
+        Loot = 1 << 3,
     }
 
     [Flags]
     public enum CompletionStatus : byte {
-        None = 0,
+        None = 1 << 0,
         DutyComplete = 1 << 1,
         DutyIncomplete = 1 << 2,
         DutyCompleteWeeklyUnclaimed = 1 << 3,
