@@ -4830,6 +4830,7 @@ classes:
         base: Component::GUI::AtkEventListener
     vfuncs:
       5: Update
+      7: GetAddonCollision
       8: SetAddonVisibility
       9: GetAddonStatus
       10: RefreshAddon
@@ -7289,10 +7290,10 @@ classes:
       92: ResolveDecalPath
       93: ResolveVfxPath
       94: ResolveEidPath
-      95: GetDyeFlorSlot
+      95: GetDyeForSlot
       96: GetSkeletonCount
       101: CreateDeformer
-      102: CreateRenderModelForMDL
+      102: CreateRenderModel
       108: IsFreeCompanyCrestVisibleOnSlot
       109: SetFreeCompanyCrestVisibleOnSlot
       110: SetFreeCompanyCrest
@@ -12640,6 +12641,7 @@ classes:
       0x14055B270: OpenListing
       0x14055B190: OpenListingByContentId
       0x14055C0A0: RequestListingsUpdate
+      0x14055C400: RequestCategoryListings
       0x14055E680: PopulateListingData
   Client::UI::Agent::AgentContentsMvp:
     vtbls:

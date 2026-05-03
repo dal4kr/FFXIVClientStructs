@@ -58,7 +58,7 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x308)] public SlotStagingArea* PerSlotStagingArea;
 
-    [FieldOffset(0x350)] public Material** Materials; // size = SlotCount * MaterialsPerSlot
+    [FieldOffset(0x350)] public MaterialResourceHandle** Materials; // size = SlotCount * MaterialsPerSlot
 
     [FieldOffset(0x358)] public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
 
@@ -99,13 +99,22 @@ public unsafe partial struct CharacterBase {
 
     public Span<Pointer<Model>> ModelsSpan => new(Models, SlotCount);
     public Span<Pointer<Texture>> ColorTableTexturesSpan => new(ColorTableTextures, SlotCount * MaterialsPerSlot);
-    public Span<Pointer<Material>> MaterialsSpan => new(Materials, SlotCount * MaterialsPerSlot);
+    public Span<Pointer<MaterialResourceHandle>> MaterialsSpan => new(Materials, SlotCount * MaterialsPerSlot);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 08 48 8B D0 4C 8B 01")]
     public static partial CharacterBase* Create(uint modelId, CustomizeData* customize, EquipmentModelId* equipData /* 10 times, 80 byte */, byte unk);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 F6 C7 01 74 3A 40 F6 C7 04 75 27 48 85 DB 74 2F 48 8B 05 ?? ?? ?? ?? 48 8B D3 48 8B 48 30")]
     public partial void Destroy();
+
+    /// <summary>
+    /// Sets up the given's slot <see cref="Models"/> and/or <see cref="Materials"/> from the resources newly loaded in <see cref="PerSlotStagingArea"/>.
+    /// Can also perform other setup tasks on the slot, such as <see cref="ColorTableTextures"/>.
+    /// </summary>
+    /// <param name="slot">The slot to set up.</param>
+    /// <returns>Unknown yet. The typing is as conservative as possible.</returns>
+    [MemberFunction("89 54 24 ?? 55 56 41 56 48 81 EC")]
+    public partial nint SetupSlotModel(uint slot);
 
     [VirtualFunction(50)]
     public partial ModelType GetModelType();
@@ -374,6 +383,16 @@ public unsafe partial struct CharacterBase {
     }
     #endregion
 
+    [VirtualFunction(95)]
+    public partial byte GetDyeForSlot(uint slotIndex, uint dyeIndex);
+
+    // Returns a deformer pointer. The deformer struct hasn't been mapped yet.
+    [VirtualFunction(101)]
+    public partial nint CreateDeformer(uint slotIndex);
+
+    [VirtualFunction(102)]
+    public partial Model* CreateRenderModel(uint slotIndex, ModelResourceHandle* modelResourceHandle, nint deformer /* return value of CreateDeformer */);
+
     [VirtualFunction(108)]
     public partial bool IsFreeCompanyCrestVisibleOnSlot(byte slot);
 
@@ -394,10 +413,13 @@ public unsafe partial struct CharacterBase {
         [FieldOffset(0xF8)] public ResourceHandle* AnimationExchangeTable;
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
-    public struct SlotStagingArea {
+    public partial struct SlotStagingArea {
         [FieldOffset(0x08)] public ModelResourceHandle* ModelResourceHandle;
+        [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray10<Pointer<MaterialResourceHandle>> _materialResourceHandles;
         [FieldOffset(0x68)] public MaterialResourceHandle* SkinMaterialResourceHandle;
+        [FieldOffset(0xD0)] public StagingAreaFlags Flags;
     }
 
     [Flags]
@@ -414,5 +436,11 @@ public unsafe partial struct CharacterBase {
         DemiHuman = 2,
         Monster = 3,
         Weapon = 4,
+    }
+
+    [Flags]
+    public enum StagingAreaFlags : uint {
+        HasModel = 1u << 1,
+        HasMaterials = 1u << 3,
     }
 }
