@@ -50,11 +50,13 @@ public unsafe partial struct InstanceContentOceanFishing {
 
     // Row ID for IKDPlayerMissionCondition sheet
     // Description and required amount can be extracted from sheet
+    // TODO: make this an array of 3
     [FieldOffset(0x25C8)] public uint Mission1Type;
     [FieldOffset(0x25CC)] public uint Mission2Type;
     [FieldOffset(0x25D0)] public uint Mission3Type;
 
     // Progress can be larger than the mission's required amount
+    // TODO: make this an array of 3
     [FieldOffset(0x25D4)] public ushort Mission1Progress;
     [FieldOffset(0x25D6)] public ushort Mission2Progress;
     [FieldOffset(0x25D8)] public ushort Mission3Progress;

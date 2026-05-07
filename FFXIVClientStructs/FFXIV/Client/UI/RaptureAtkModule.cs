@@ -61,22 +61,24 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x2A810 - 0x10)] public uint InventoryItemCacheSlotCount;
     [FieldOffset(0x2A814 - 0x10)] public uint GilCap;
 
-    [FieldOffset(0x2A858 - 0x10)] public uint LocalPlayerClassJobId;
-    [FieldOffset(0x2A85C - 0x10)] public uint LocalPlayerLevel;
+    [FieldOffset(0x2A878 - 0x10)] public uint LocalPlayerClassJobId;
+    [FieldOffset(0x2A87C - 0x10)] public uint LocalPlayerLevel;
 
-    [FieldOffset(0x2A865 - 0x10)] public bool QuickGatheringEnabled;
+    [FieldOffset(0x2A885 - 0x10)] public bool QuickGatheringEnabled;
 
-    [FieldOffset(0x2A8D0 - 0x10)] internal ExcelSheet* AddonParamSheet;
-    [FieldOffset(0x2A8D8 - 0x10)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
+    [FieldOffset(0x2A88B - 0x10)] public bool QTEActive;
 
-    [FieldOffset(0x2A8F4 - 0x10)] public uint LoginSummonCompanionId;
-    [FieldOffset(0x2A8F8 - 0x10)] public float LoginSummonCompanionCountdown;
+    [FieldOffset(0x2A8F0 - 0x10)] internal ExcelSheet* AddonParamSheet;
+    [FieldOffset(0x2A8F8 - 0x10)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
+
+    [FieldOffset(0x2A914 - 0x10)] public uint LoginSummonCompanionId;
+    [FieldOffset(0x2A918 - 0x10)] public float LoginSummonCompanionCountdown;
     /// <remarks> Only for Region 5 </remarks>
-    [FieldOffset(0x2A8FC - 0x10)] public float HourTimer;
+    [FieldOffset(0x2A91C - 0x10)] public float HourTimer;
     /// <remarks> Only for Region 5 </remarks>
-    [FieldOffset(0x2A900 - 0x10)] public int HoursPlayed;
+    [FieldOffset(0x2A920 - 0x10)] public int HoursPlayed;
 
-    [FieldOffset(0x2A918 - 0x10)] internal nint ShellCommands; // only 1 function to open links?
+    [FieldOffset(0x2A938 - 0x10)] internal nint ShellCommands; // only 1 function to open links?
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 0F BF 81 ?? ?? ?? ?? 8B FA")]
     public partial bool ChangeUiMode(uint uiMode);

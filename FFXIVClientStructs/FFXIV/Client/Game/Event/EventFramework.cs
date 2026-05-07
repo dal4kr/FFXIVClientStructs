@@ -111,6 +111,9 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8D B7 ?? ?? ?? ?? 80 A7")]
     public partial void ProcessInitializeScene(GameObject* gameObject, EventId eventId, short scene, ulong sceneFlags, uint* sceneData, byte sceneDataCount);
 
+    [MemberFunction("40 53 57 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 41 8B F9")]
+    public partial void ProcessDirectorUpdate(EventId eventId, uint category, uint arg1, uint arg2, uint arg3, uint arg4, uint arg5, uint arg6);
+
     private T* GetInstanceContentDirector<T>(InstanceContentType instanceContentType) where T : unmanaged {
         var instanceDirector = GetInstanceContentDirector();
         if (instanceDirector == null || instanceDirector->InstanceContentType != instanceContentType)

@@ -21,12 +21,13 @@ public unsafe partial struct SoundManager {
     [FieldOffset(0x31)] public bool Disabled;
     [FieldOffset(0x34)] public float MasterVolume;
     [FieldOffset(0x38)] public float ActiveVolume;
-    [FieldOffset(0x3C), FixedSizeArray] internal FixedSizeArray19<float> _volume;
-    [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume2; // All are 1.0f
-    [FieldOffset(0xD4), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume3; // All are 1.0f
-    [FieldOffset(0x120), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume4; // All are 1.0f
-    [FieldOffset(0x16C), FixedSizeArray] internal FixedSizeArray19<bool> _busMuted;
-    [FieldOffset(0x17F), FixedSizeArray] internal FixedSizeArray19<bool> _busAlwaysOn;
+    [FieldOffset(0x3C), FixedSizeArray] internal FixedSizeArray21<float> _volume;
+    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume2; // All are 1.0f
+    [FieldOffset(0xE4), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume3; // All are 1.0f
+    [FieldOffset(0x138), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume4; // All are 1.0f
+    [FieldOffset(0x18C), FixedSizeArray] internal FixedSizeArray21<float> _unkVolume5;
+    [FieldOffset(0x1E0), FixedSizeArray] internal FixedSizeArray21<bool> _busMuted;
+    [FieldOffset(0x1F5), FixedSizeArray] internal FixedSizeArray21<bool> _busAlwaysOn;
 
     [FieldOffset(0x220)] public SoundDataMemory* SoundDataPool; // This points to +8 bytes into the allocated memory.
     [FieldOffset(0x228)] public SoundData* InactiveSoundDataListHead;

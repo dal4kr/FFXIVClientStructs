@@ -655,9 +655,43 @@ classes:
        - ea: 0x14212B358
     vfuncs:
       0: Dtor
+      4: ReportError
     funcs:
       0x1404A98C0: RequestCharacterData # no xrefs
+  Application::Network::LobbyClient::LobbyLoginOperation:
+    vtbls:
+      - ea: 0x14249C820
+        base: Application::Network::LobbyClient::LobbyOperation
+    funcs:
+      0x141D269F0: ctor
+  Application::Network::LobbyClient::ServiceLoginOperation:
+    vtbls:
+      - ea: 0x14249C848
+        base: Application::Network::LobbyClient::LobbyOperation
+  Application::Network::LobbyClient::CharaMakeOperation:
+    vtbls:
+      - ea: 0x14249C870
+        base: Application::Network::LobbyClient::LobbyOperation
+  Application::Network::LobbyClient::GameLoginOperation:
+    vtbls:
+      - ea: 0x14249C898
+        base: Application::Network::LobbyClient::LobbyOperation
+  Application::Network::LobbyClient::LobbyOperation:
+    vtbls:
+      - ea: 0x14249D418
+    vfuncs:
+      # 0:
+      # 1: OnReceive? or OnDetach?
+      # 2:
+      # 3:
+      4: Dtor
+    funcs:
+      0x141D3F710: ctor
+      0x141D3F760: Finalizer
   Client::Network::LobbyClient::LobbyCharacterRequestCallback:
+    vtbls:
+      - ea: 0x14212C878
+        base: Application::Network::LobbyClient::LobbyRequestCallback
     funcs:
       0x14014E380: ctor # inlined (7.3)
   Client::Game::UI::ContentInterface:
@@ -1854,6 +1888,7 @@ classes:
       0x140848130: Terminate
       0x1408481C0: Update
       0x14084D730: ProcessPacket
+      0x140850140: AddChapter
   Client::Game::InventoryManager:
     instances:
       - ea: 0x142AC3810
@@ -3398,6 +3433,7 @@ classes:
       0x140C34E00: CancelQueue
       0x140C35060: SetQueuedLanguages
       0x140C35760: UpdateQueueState
+      0x140C35840: OnQueueWithdrawn
       0x140C35B00: ProcessInfoState
       0x140C35FE0: SetQueuedJobAndRoulette
       0x140C36010: SetQueuedContentFinderConditions
@@ -3445,6 +3481,9 @@ classes:
     vtbls:
       - ea: 0x1421B9AD8
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    funcs:
+      0x140C428A0: Activate
+      0x140C42A40: Deactivate
   Client::Game::UI::Emj:
     instances:
       - ea: 0x142AE3680
@@ -4897,6 +4936,7 @@ classes:
       0x1400ED450: OpenSelectOk2
       0x1400F1700: ShowScreenImage
       0x1400F47B0: ShowTextGimmickHint
+      0x1400F81D0: ToggleQTE
       0x1400F8890: SetCursorVisibility
       0x1400FD8D0: OpenDawnStory
       0x1400FD900: OpenDawn
@@ -6297,6 +6337,8 @@ classes:
       0x1419D6CF0: HandleMarketBoardOfferingsPacket
       0x1419D6DB0: HandleMarketBoardPurchasePacket
       0x1419D7860: HandleMarketBoardHistoryPacket
+      0x141A2B470: HandleQueueUpdatePacket
+      0x141A2B5D0: HandleQueueInfoStatePacket
       0x141A2B620: HandleContentsFinderNotificationPacket
 #fail   0x140A151E0: HandleApplyIdScramblePacket
   Client::Network::NetworkModulePacketReceiverCallback:
@@ -6501,6 +6543,7 @@ classes:
 #oldfail      0x140CEE2C0: Finalizer
       0x1404D4200: UpdateLobbyUIStage
       0x1404D5360: UpdateCharaSelectDisplay
+      0x1404D7560: SendLoginRequestPacket
       0x1404D7690: SetDataCenter
       0x1404DB960: OpenTitle
 #oldfail       0x1402E8BB0: OpenTitleDCWorldMap
@@ -6515,6 +6558,7 @@ classes:
       0x1404E1650: CloseDialog
       0x1404E2380: ShowCharacterNotFoundWarning
       0x1404E2B00: GetLobbyText
+      0x1404E83A0: UpdateLoginPosition
       0x1405C2AC0: SetupLobbyCamera
   Client::UI::Agent::LobbyData:
     funcs:
@@ -7616,6 +7660,7 @@ classes:
       0x140470C30: CreateInstance
       0x140470EF0: ctor
       0x140472A70: CreateCutSceneController
+      0x140472050: IsCutScenePlaying
     instances:
       - ea: 0x142A92EF8
         pointer: true
@@ -9631,12 +9676,12 @@ classes:
       216: ShowTalkSubtitle
       217: HideTalkSubtitle
       218: ShowAdventureNotice
+      222: RotateLinkshellHistory
       223: SetLinkshellCycle
-      224: RotateLinkshellHistory
+      224: RotateCrossLinkshellHistory
       225: SetCrossWorldLinkshellCycle
-      226: RotateCrossLinkshellHistory
-      242: ShowRaceCountdownStart
-      243: ShowRaceCountdownEnd_2
+      239: ShowRaceCountdownStart
+      240: ShowRaceCountdownEnd_2
       248: ShouldLimitFps # new in 7.3
   Client::UI::UIModule:
     vtbls:
@@ -15228,6 +15273,7 @@ classes:
       6: Terminate
       7: IsUnlocked
       40: ProcessYield
+      61: ProcessDirectorUpdate
       159: CancelInteraction
       205: GetTitle # lua function "GetEventHandlerTitle"
       207: GetEventId
@@ -17503,6 +17549,9 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x141A2F750: ctor
+      0x141A30C80: IsOceanFishingFinished # static
+      0x141A30CC0: GetMissionType # static
+      0x141A30D10: GetMissionProgress # static
   Client::Game::InstanceContent::InstanceContentTripleTriad: # Triple Triad Open Tournament / Triple Triad Invitational Parlor
     vtbls:
       - ea: 0x1423E7A48
