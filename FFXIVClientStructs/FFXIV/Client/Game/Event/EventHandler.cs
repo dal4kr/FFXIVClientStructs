@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 using FFXIVClientStructs.FFXIV.Common.Lua;
+using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
@@ -27,6 +28,15 @@ public unsafe partial struct EventHandler {
 
     [VirtualFunction(40)]
     public partial void ProcessYield(short scene, byte yieldId, int* intParams, byte intParamCount);
+
+    [VirtualFunction(59)]
+    public partial void ProcessFormatStringCallback(bool success, Utf8String* str, ulong callbackParam);
+
+    [VirtualFunction(60)]
+    public partial void ProcessActionTimelineCallback(Character.Character* character, ushort actionTimelineId, ulong callbackParam);
+
+    // [VirtualFunction(76)]
+    // public partial void ProcessListenItemCallback(?);
 
     [VirtualFunction(159)]
     public partial void CancelInteraction();
@@ -63,12 +73,21 @@ public unsafe partial struct EventHandler {
 
     [VirtualFunction(270)]
     public partial int GetRecommendedLevel();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 FF 87")]
+    public partial bool QueueFormatStringCallback(Utf8String* str, StdDeque<TextParameter>* parameters, ulong callbackParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 4D ?? 8B C1")]
+    public partial bool QueueActionTimelineCallback(Character.Character* character, ushort actionTimelineId, ulong callbackParam);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public struct EventHandlerInfo {
     [FieldOffset(0x00)] public EventId EventId;
     [FieldOffset(0x04)] public byte Flags;
+    [FieldOffset(0x08)] public FormatStringCallback FormatStringCallback; // FormatStringCallback<EventHandler>
+    [FieldOffset(0x18)] public ActionTimelineCallback ActionTimelineCallback; // ActionTimelineCallback<EventHandler>
+    [FieldOffset(0x28)] public ListenItemCallback ListenItemCallback; // ListenItemCallback<EventHandler>
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x160)]

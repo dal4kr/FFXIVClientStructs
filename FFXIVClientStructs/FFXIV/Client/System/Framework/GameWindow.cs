@@ -28,11 +28,11 @@ public unsafe partial struct GameWindow {
     [FieldOffset(0xB8)] private byte* cmdLine;
 
     public Span<CStringPointer> ArgumentsSpan => new(Arguments, ArgumentCount);
-    
-    public string GetArgument(ulong idx) => 
+
+    public string GetArgument(ulong idx) =>
         Marshal.PtrToStringUTF8(idx >= (ulong)ArgumentCount ? nint.Zero : (nint)Arguments[idx].Value) ?? string.Empty;
 
-    public ulong GetAid() 
+    public ulong GetAid()
     {
         var idString = Marshal.PtrToStringUTF8((nint)SndaID) ?? string.Empty;
         return ulong.TryParse(idString, out var result) ? result : 0;

@@ -27,6 +27,20 @@ This project would not be possible without significant work from many members of
 
 [Too many](https://github.com/aers/FFXIVClientStructs/graphs/contributors) to list.
 
+> [!IMPORTANT]
+> The following information will have slight inaccuracies due to generator changes introduced to the project with Dawntrail
+> 
+> This is in the process of being updated
+
+## For CN
+### RaptureAtkModule.cs
+> ```
+> public AgentUpdateFlags AgentUpdateFlag;
+> ……
+> internal FixedSizeArray50<NamePlateInfo> _namePlateInfoEntries;
+> ```
+均需要-0x10
+
 ## For Library Users
 
 ### Signature Resolution

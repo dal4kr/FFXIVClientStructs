@@ -83,7 +83,7 @@ public unsafe partial struct FishingEventHandler {
 
     // see FishingHookStrength if you want to observe hooks. Other values have a lot of overlap with FishingState, and there's standing vs sitting differences
     [VirtualFunction(276)]
-    public partial void PlayAnimation(Character.Character* chara, ushort actionTimelineId, nint a4);
+    public partial bool PlayAnimation(Character.Character* chara, ushort actionTimelineId, ulong callbackParam);
 
     /// <summary>
     /// Changes the currently equipped bait.
