@@ -27,6 +27,8 @@ public unsafe partial struct RecipeNote {
 
     [FieldOffset(0x12A)] public uint ActiveCraftRequiresMeisterSoulCrystal;
 
+    [FieldOffset(0xB0C)] public bool IsRecipeListReady;
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x480)]
     public partial struct RecipeData {
@@ -39,7 +41,7 @@ public unsafe partial struct RecipeNote {
         [FieldOffset(0x477), FixedSizeArray] internal FixedSizeArray8<byte> _numAvailableSecretNoteBookDivisions; // index is CraftType
 
         public Span<RecipeEntry> RecipesSpan => new(Recipes, RecipeCount);
-        public RecipeEntry* SelectedRecipe => SelectedIndex < RecipeCount ? Recipes + SelectedIndex : null;
+        public RecipeEntry* SelectedRecipe => Instance()->IsRecipeListReady && SelectedIndex < RecipeCount ? Recipes + SelectedIndex : null;
     }
 
     [GenerateInterop]

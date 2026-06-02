@@ -391,7 +391,7 @@ public unsafe partial struct CharacterBase {
     public partial nint CreateDeformer(uint slotIndex);
 
     [VirtualFunction(102)]
-    public partial Model* CreateRenderModel(uint slotIndex, ModelResourceHandle* modelResourceHandle, nint deformer /* return value of CreateDeformer */);
+    public partial Model* CreateRenderModel(ModelResourceHandle* modelResourceHandle, nint deformer /* return value of CreateDeformer */);
 
     [VirtualFunction(108)]
     public partial bool IsFreeCompanyCrestVisibleOnSlot(byte slot);

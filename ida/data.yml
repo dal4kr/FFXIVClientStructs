@@ -227,6 +227,7 @@ functions:
   0x1409AA6C0: ToObjStrId
   0x1409AA780: ToActStrId
   0x140C14D30: GenerateEquippedItemsChecksum # for Banners; unused
+  0x140C27800: HasReachedExpansionMaxLevel
   0x140E88EF0: IsExportedGatheringPointTimed  # static, value of ExportedGatheringPoint.GatheringPointType
   0x140FBD580: ConvertRawToMapPosX
   0x140FBD610: ConvertRawToMapPosY
@@ -1985,6 +1986,7 @@ classes:
       0x140867DA0: GetLinkedItem
       0x1408682C0: GetConditionPercentage
       0x140868300: GetStain
+      0x1408683B0: SetStain
       0x1408683D0: GetMateriaCount
       0x1408684D0: IsMarketable
       0x140896530: GetCrafterContentId
@@ -2192,6 +2194,7 @@ classes:
       0x140E17B80: GetMovingHousingObject
       0x140E18180: SetTemporaryObject
       0x140E18240: SetTemporaryObjectStain
+      0x140E17390: DepositItemInStoreroom
   Client::Game::HouseId:
     funcs:
       0x140E1EF60: GetWardIndex
@@ -2814,8 +2817,10 @@ classes:
       0x140314420: Update # inlined in static since 7.0
       0x140314AC0: GetResourceAsync
       0x140314D70: GetResourceSync
-      0x1403192D0: FindResourceHandle
       0x140319EC0: Initialize
+  Client::System::Resource::ResourceGraph:
+    funcs:
+      0x1403192D0: FindResourceHandle
   Client::Game::UI::DirectorTodo:
     funcs:
       0x140C0D490: SetDirector
@@ -4091,6 +4096,8 @@ classes:
       0x142081C70: ctor
       0x142081B80: ctor_From
       0x142081CA0: Finalizer
+    vfuncs:
+      0: Dtor
   Component::Excel::ExcelModuleInterface:
     vtbls:
       - ea: 0x14211C050
@@ -4687,6 +4694,8 @@ classes:
         base: Common::Component::Excel::LinkList<Common::Component::Excel::ExcelSheet>
     funcs:
       0x14207B380: ctor
+      0x14207CAE0: AddWaiter
+      0x14207E7D0: RemoveWaiter
   Component::Excel::ExcelPage:
     funcs:
       0x1420828D0: ctor  # (ExcelPage* this, ExcelDataPagination* exhPageInfo, ExcelSheetContainer* pOwner)
@@ -4842,6 +4851,7 @@ classes:
     funcs:
       0x1400D9390: Finalizer
       0x1400D9F40: ExecuteCommandInner
+      0x1400DAAF0: EvaluateTextCommand
   Component::GUI::AtkEventListener:
     vtbls:
       - ea: 0x142128D60
@@ -4968,6 +4978,7 @@ classes:
       0x140104590: OnUpdate_NameplateCastbars
       0x1401056F0: IncRefNumberArrayData
       0x140105740: IncRefStringArrayData
+      0x140108860: FormatSeIconCharNumber
       0x1401092F0: GetStaticAddonName
       0x14010A4A0: RegisterAddonAllocators
       0x140117390: UpdateBattleCharaNameplates
@@ -9106,6 +9117,7 @@ classes:
       0x1406F37D0: GetOutdoorPlotExteriorData # static
       0x1406F3850: SetOutdoorPlotExteriorData # static
       0x1406F38B0: SetOutdoorPlotExterior # static
+      0x1406F40C0: SetInteriorFixture # static
   Client::LayoutEngine::LayoutManager:
     vtbls:
       - ea: 0x1421760C0
@@ -11298,6 +11310,7 @@ classes:
         base: Client::Game::Character::ContainerInterface
     funcs:
       0x1408C85C0: CalculateFloatHeight
+      0x1408c9440: LoadTiltData
   Client::Game::Character::ReaperShroudContainer:
     vtbls:
       - ea: 0x14218C850
@@ -11970,6 +11983,9 @@ classes:
   Client::UI::Agent::AgentInventoryContext::InventoryContextEvent:
     vtbls:
       - ea: 0x142164CD0
+    vfuncs:
+      0: HandleCallback
+      1: HandleClose
   Client::UI::Agent::AgentInventoryContext:
     vtbls:
       - ea: 0x142164CE0
@@ -11983,6 +11999,10 @@ classes:
       0x140496180: OpenForItemSlot
       0x1404964E0: DiscardItem
       0x1404981A0: LowerItemQuality
+      0x1404963A0: SetContextCallbackInfo
+      0x1404976E0: GetContextCallbackInfo
+      0x140496480: TryOpenCustomItemContextMenu
+      0x1404977B0: AddContextItem
   Client::UI::Agent::AgentGlassesContext:
     vtbls:
       - ea: 0x142165960
@@ -13023,7 +13043,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1410B3740: ctor
-      0x14097F230: RefreshDeckEdit
+      0x1410B8B80: RefreshDeckEdit
   Client::UI::Agent::AgentTripleTriadCoinExchange:
     vtbls:
       - ea: 0x1421F4530
@@ -14089,13 +14109,13 @@ classes:
       0x140D9B100: ctor
   Client::UI::Agent::AgentInclusionShop:
     vtbls:
-      - ea: 0x1421EE1B8
+      - ea: 0x1421F1DE8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14102C830: ctor
   Client::UI::Agent::AgentCollectablesShop:
     vtbls:
-      - ea: 0x1421F1DE8
+      - ea: 0x1421EE1B8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140F3B610: ctor
@@ -14309,6 +14329,32 @@ classes:
     vtbls:
       - ea: 0x1421ED560
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
+  Client::UI::Agent::AgentContentsFinderInterface:
+    funcs:
+      0x140C29C90: ctor
+      0x140C29D20: CancelWaiters
+      0x140C29E10: SetAgent
+      0x140C29E20: LoadContentFinderCondition
+      0x140C2A520: LoadContentRoulette
+      0x140C2A090: LoadInstanceContent
+      0x140C2A7F0: GetReceivedRewardCount
+      0x140C2A870: GetMaxReceivedRewardCount
+  Client::UI::Agent::AgentContentsFinderReward:
+    funcs:
+      0x140ACCCA0: ctor
+      0x140F04A70: Finalize
+      0x140F04B80: Clear
+  Client::UI::Agent::AgentContentsFinderInterface::RewardsContainer:
+    funcs:
+      0x140ACFEB0: Finalize
+      0x140C5A5B0: ctor
+      0x140C5EE40: CopyFrom
+      0x140C607D0: Clear
+  Client::UI::Agent::AgentContentsFinderInterface::RewardsData:
+    funcs:
+      0x140ACCC30: ctor
+      0x140AD7B40: Clear
+      0x140FA61F0: CopyFrom
   Client::UI::Agent::AgentMap::MapMarkerStructSearchName:
     vtbls:
       - ea: 0x1421F0FC0
@@ -16387,11 +16433,22 @@ classes:
       0x140B80DB0: GetCrystallineConflictDirector
       0x140B80DE0: GetFrontlinesDirector
       0x140B80E10: GetRivalWingDirector
+      0x140B80E40: GetDeepDungeonDirector
       0x140B80E70: GetTreasureHuntDungeonDirector
       0x140B80EA0: GetTourismDirector
       0x140B80ED0: GetTripleTriadDirector
       0x140B80FB0: GetSkyIslandDirector
+      0x140B80F00: GetInstanceContentDirectorType22 # related to XBM
+      0x140B80F30: GetInstanceContentDirectorType23
+      0x140B80F60: GetPvPInstanceContentDirector # either of: CrystallineConflict, Frontlines or RivalWing
       0x140B80FE0: GetPublicContentDirector
+      0x140B81010: GetPublicContentEureka
+      0x140B81040: GetPublicContentFallGuys
+      0x140B811D0: GetCraftLeveClientEventHandler
+      0x140B811E0: GetCraftEventHandler
+      0x140B811F0: GetExitRangeEventHandler
+      0x140B81200: GetFishingEventHandler
+      0x140B81210: HasQuestBattleDirector
       0x140B81070: GetContentDirector
       0x140B81080: GetQuestBattleDirector
       0x140B810D0: GetGoldSaucerDirector
@@ -17638,6 +17695,7 @@ classes:
         base: Client::Game::InstanceContent::PublicContentDirector
     funcs:
       0x140BB3290: ctor
+      0x140BB1F60: GetState # static
   Client::Game::InstanceContent::PublicContentRising:
     vtbls:
       - ea: 0x1421ACD80

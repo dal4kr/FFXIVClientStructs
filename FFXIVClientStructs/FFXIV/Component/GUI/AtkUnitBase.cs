@@ -73,6 +73,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     [FieldOffset(0x1C0)] public float HideTransitionScale;
     [FieldOffset(0x1C4)] public float Scale;
     [BitField<bool>(nameof(EnableFilter), 2)]
+    [BitField<bool>(nameof(IgnoreUIDisplayMode), 4)] // if true, addon contents will remain visible when UI is hidden via Toggle UI Display Mode
     [BitField<bool>(nameof(DisableUserScaling), 11)] // sets Scale to 1.0
     [BitField<bool>(nameof(DisableUnfocusedCloseOnEsc), 20)] // if true, won't close on esc when unfocused
     [BitField<bool>(nameof(IsScalingWithGlobalUIScale), 21)] // multiplies scale by g_GlobalUIScale
@@ -153,6 +154,9 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
 
     /// <summary> Disables the "Scale Window" option in the title bar context menu </summary>
     public partial bool DisableUserScaling { get; set; }
+
+    /// <summary> Forces the addon to remain visible (but uninteractable) when using Toggle UI Display Mode </summary>
+    public partial bool IgnoreUIDisplayMode { get; set; }
 
     public uint DepthLayer {
         get => BitOps.GetBits(Flags198, 16, 0b1111u);
@@ -245,7 +249,7 @@ public unsafe partial struct AtkUnitBase : ICreatable<AtkUnitBase> {
     public partial void UnsubscribeAtkArrayData(byte arrayType, byte arrayIndex, bool clean = false);
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 41 B9 ?? ?? ?? ??"), GenerateStringOverloads]
-    public partial bool LoadUldByName(CStringPointer name, byte a3 = 0, uint a4 = 6);
+    public partial bool LoadUldByName(CStringPointer name, byte a3 = 0, uint a4 = 6); // TODO: a4 type should be ResourceCategory default to `ResourceCategory.Ui`
 
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 10 0D ?? ?? ?? ?? 45 33 C9 F3 0F 59 0D")]
     public partial void SetOpenTransition(float duration, short offsetX, short offsetY, float scale);

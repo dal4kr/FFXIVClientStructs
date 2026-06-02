@@ -64,7 +64,9 @@ public unsafe partial struct PartyListNumberArray {
         /// </summary>
         [FieldOffset(38 * 4)] public int CastTime;
         [FieldOffset(39 * 4)] public int CastId;
+        [Obsolete("Use EntityId Instead.")]
         [FieldOffset(41 * 4)] public int ContentId;
+        [FieldOffset(41 * 4)] public uint EntityId;
         [FieldOffset(42 * 4)] public bool Targetable;
     }
 }

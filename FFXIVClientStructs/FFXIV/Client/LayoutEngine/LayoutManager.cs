@@ -133,11 +133,15 @@ public struct OutdoorPlotFixtureData {
     [FieldOffset(0x02)] public byte StainId;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x84)]
-public unsafe struct IndoorAreaLayoutData {
+public partial struct IndoorAreaLayoutData {
+    // [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray20<short> _unk0; // 4x 5 shorts like IndoorFloorLayoutData below, but all -1
     [FieldOffset(0x28)] public IndoorFloorLayoutData Floor0;
     [FieldOffset(0x3C)] public IndoorFloorLayoutData Floor1;
     [FieldOffset(0x50)] public IndoorFloorLayoutData Floor2;
+    [FieldOffset(0x64)] public IndoorFloorLayoutData Exterior; // 1: Windows, 2: Door
+    [FieldOffset(0x78), FixedSizeArray] internal FixedSizeArray5<byte> _exteriorStains;
     [FieldOffset(0x80)] public float LightLevel;
 }
 

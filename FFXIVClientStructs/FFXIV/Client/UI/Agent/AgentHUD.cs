@@ -175,10 +175,10 @@ public enum AgentHudExpFlag : byte {
     None = 0,
     Unk1 = 1 << 0,
     Synced = 1 << 1,
-    Unk2 = 1 << 2,
+    ExpLocked = 1 << 2,
     MaxLevel = 1 << 3,
     InEureka = 1 << 4,
-    Unk5 = 1 << 5, // In TerritoryIntendedUse 61?
+    InOccultCrescent = 1 << 5,
 }
 
 public enum MainCommandOperation {

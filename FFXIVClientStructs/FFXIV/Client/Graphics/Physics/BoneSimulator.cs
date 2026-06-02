@@ -43,4 +43,8 @@ public unsafe partial struct BoneSimulator {
     /// <remarks> Called when IsTimeIntegrating is false. </remarks>
     [MemberFunction("40 53 55 57 41 54 41 56 48 83 EC ?? 4C 89 AC 24")]
     public partial void UpdateWithoutIntegration(BonePhysicsModule* bonePhysicsModule);
+
+    /// <remarks> Reset this bone simulator. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 77 ?? 48 8D 8E")]
+    public partial void Reset();
 }

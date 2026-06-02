@@ -14,31 +14,31 @@ public unsafe partial struct WKSManager {
 
     [FieldOffset(0x18)] public ushort TerritoryId;
 
-    [FieldOffset(0x50)] private WKSState State; // TODO: use this instead of the fields
+    [FieldOffset(0x50)] public WKSState State;
 
     /// <remarks> RowId of WKSDevGrade sheet. </remarks>
-    [FieldOffset(0x5A), CExporterIgnore] public ushort DevGrade;
+    [FieldOffset(0x5A), Obsolete("Use State.DevGrade")] public ushort DevGrade;
 
     /// <remarks> For Hub upgrades. RowId of WKSFateControl sheet. </remarks>
-    [FieldOffset(0x60), CExporterIgnore] public ushort CurrentFateControlRowId;
+    [FieldOffset(0x60), Obsolete("Use State.CurrentFateControlRowId")] public ushort CurrentFateControlRowId;
     /// <remarks> For Hub upgrades. Id of Fate in FateManager. </remarks>
-    [FieldOffset(0x62), CExporterIgnore] public ushort CurrentFateId;
+    [FieldOffset(0x62), Obsolete("Use State.CurrentFateId")] public ushort CurrentFateId;
 
     /// <remarks> RowId of WKSMissionUnit sheet. </remarks>
-    [FieldOffset(0xE80), CExporterIgnore] public ushort CurrentMissionUnitRowId;
+    [FieldOffset(0xE80), Obsolete("Use State.CurrentMissionUnitRowId")] public ushort CurrentMissionUnitRowId;
 
-    [FieldOffset(0xE8C), CExporterIgnore] public uint CurrentScore;
-    [FieldOffset(0xE90), CExporterIgnore] public MissionRank CurrentRank;
+    [FieldOffset(0xE8C), Obsolete("Use State.CurrentScore")] public uint CurrentScore;
+    [FieldOffset(0xE90), Obsolete("Use State.CurrentRank")] public MissionRank CurrentRank;
 
-    [FieldOffset(0xE96), CExporterIgnore] public ushort CollectedTotal;
-    [FieldOffset(0xE98), CExporterIgnore] public byte CollectedIndividual;
+    [FieldOffset(0xE96), Obsolete("Use State.CollectedTotal")] public ushort CollectedTotal;
+    [FieldOffset(0xE98), Obsolete("Use State.CollectedIndividual")] public byte CollectedIndividual;
 
-    [FieldOffset(0xEC4), CExporterIgnore] public uint FishingBait;
+    [FieldOffset(0xEC4), Obsolete("Use State.FishingBait")] public uint FishingBait;
 
-    [FieldOffset(0xED1), FixedSizeArray, CExporterIgnore] internal FixedSizeArray213<byte> _missionCompletionFlags;
-    [FieldOffset(0xFA6), FixedSizeArray, CExporterIgnore] internal FixedSizeArray213<byte> _missionGoldFlags;
+    [FieldOffset(0xED1), FixedSizeArray, Obsolete("Use State.MissionCompletionFlags")] internal FixedSizeArray213<byte> _missionCompletionFlags;
+    [FieldOffset(0xFA6), FixedSizeArray, Obsolete("Use State.MissionGoldFlags")] internal FixedSizeArray213<byte> _missionGoldFlags;
 
-    [FieldOffset(0x107C), FixedSizeArray, CExporterIgnore] internal FixedSizeArray11<int> _scores; // cosmic class scores
+    [FieldOffset(0x107C), FixedSizeArray, Obsolete("Use State.Scores")] internal FixedSizeArray11<int> _scores; // cosmic class scores
 
     [FieldOffset(0x10F8)] private void* UnkStruct10F8;
     [FieldOffset(0x1100)] private void* UnkStruct1100;
@@ -54,9 +54,9 @@ public unsafe partial struct WKSManager {
     [FieldOffset(0x1150)] private void* UnkStruct1150;
     [FieldOffset(0x1158)] public StdVector<Pointer<WKSModuleBase>> Modules;
 
-    public bool IsMissionCompleted(uint missionUnitId) => MissionCompletionFlags.CheckBitInSpan(missionUnitId);
+    public bool IsMissionCompleted(uint missionUnitId) => State.MissionCompletionFlags.CheckBitInSpan(missionUnitId);
 
-    public bool IsMissionGolded(uint missionUnitId) => MissionGoldFlags.CheckBitInSpan(missionUnitId);
+    public bool IsMissionGolded(uint missionUnitId) => State.MissionGoldFlags.CheckBitInSpan(missionUnitId);
 
     public enum MissionRank {
         None,
@@ -68,7 +68,7 @@ public unsafe partial struct WKSManager {
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x1088)]
-    internal partial struct WKSState {
+    public partial struct WKSState {
         /// <remarks> RowId of WKSDevGrade sheet. </remarks>
         [FieldOffset(0x0A)] public ushort DevGrade;
 
