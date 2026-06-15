@@ -223342,7 +223342,7 @@ structs:
     name: Sequence
     offset: 744
   - type: byte
-    name: Unknown2E9
+    name: Unk2E9
     offset: 745
   - type: byte
     name: UnionData
