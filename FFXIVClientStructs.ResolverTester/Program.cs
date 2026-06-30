@@ -1,43 +1,45 @@
-using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using FFXIVClientStructs.ResolverTester;
 using InteropGenerator.Runtime;
+using YamlDotNet.Serialization.NamingConventions;
 
 var gamePath = args.Length > 0 ? args[0] : @"C:\Program Files (x86)\FINAL FANTASY XIV - KOREA\game\ffxiv_dx11.exe";
 
-using var reader = new PEReader(File.OpenRead(gamePath));
-var textHeader = reader.PEHeaders.SectionHeaders[0];
+using PEReader reader = new PEReader(File.OpenRead(gamePath));
+SectionHeader textHeader = reader.PEHeaders.SectionHeaders[0];
 
-var relocateFile = new Span<byte>(new byte[reader.PEHeaders.PEHeader!.SizeOfImage]);
+Span<byte> relocFile = new Span<byte>(new byte[reader.PEHeaders.PEHeader!.SizeOfImage]);
 
-reader.GetSectionData(textHeader.Name).GetContent().CopyTo(relocateFile.Slice(textHeader.VirtualAddress, textHeader.VirtualSize));
+reader.GetSectionData(textHeader.Name).GetContent().CopyTo(relocFile.Slice(textHeader.VirtualAddress, textHeader.VirtualSize));
 unsafe {
-    fixed (byte* bytes = relocateFile) {
+    fixed (byte* bytes = relocFile) {
 
         Resolver.GetInstance.Setup(new IntPtr(bytes),
-            relocateFile.Length,
+            relocFile.Length,
             textHeader.VirtualAddress,
             textHeader.VirtualSize);
 
         var watch = new Stopwatch();
         watch.Start();
-        Addresses.Register();
+        FFXIVClientStructs.Interop.Generated.Addresses.Register();
+        Resolver.GetInstance.Resolve();
+        watch.Stop();
 
-        var addresses = Resolver.GetInstance.Addresses.ToList();
-        var matchResults = new ConcurrentDictionary<Address, List<nint>>();
+        foreach (var addr in Resolver.GetInstance.Addresses.Where(addr => addr.Value != 0))
+            addr.Value = addr.Value - new IntPtr(bytes);
+        //Console.WriteLine($"Resolved in {watch.ElapsedMilliseconds}ms");
 
-        var textSectionOffset = textHeader.VirtualAddress;
-        var textSectionSize = textHeader.VirtualSize;
-        var bytesPtr = (nint)bytes;
+        var totalSigCount = Resolver.GetInstance.Addresses.Count;
+        var resolvedCount = Resolver.GetInstance.Addresses.Count(sig => sig.Value != 0);
+        Console.WriteLine($"Resolved count: {resolvedCount} ({((float)resolvedCount / totalSigCount) * 100}%)");
 
-        Parallel.ForEach(addresses,
-            new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
-            address => {
-                var pattern = ParseSignature(address.String);
-                var matches = new List<nint>();
+        Console.WriteLine("\n=== Broken Signatures ===");
+        var unresolvedSigs = Resolver.GetInstance.Addresses.Where(sig => sig.Value == 0);
+        foreach (var sig in unresolvedSigs)
+            Console.WriteLine($"[FAIL] {sig.Name}: {sig.String}");
 
         foreach (Address address in Resolver.GetInstance.Addresses)
             Console.WriteLine($"{address.Name} {address.Value:X}");
@@ -92,22 +94,11 @@ foreach (Address addr in Resolver.GetInstance.Addresses) {
             continue;
         }
 
-                matchResults[address] = matches;
-            });
-
-        watch.Stop();
-
-        var totalSigCount = addresses.Count;
-        var resolvedUnique = matchResults.Count(kvp => kvp.Value.Count == 1);
-        var ambiguousCount = matchResults.Count(kvp => kvp.Value.Count > 1);
-        var failedCount = matchResults.Count(kvp => kvp.Value.Count == 0);
-
-        Console.WriteLine("\n=== 扫描结果统计 ===");
-        Console.WriteLine($"总计: {totalSigCount} 个特征码");
-        Console.WriteLine($"成功 (唯一匹配): {resolvedUnique} 个 ({(double)resolvedUnique / totalSigCount * 100:F1}%)");
-        Console.WriteLine($"多结果 (需修复): {ambiguousCount} 个 ({(double)ambiguousCount / totalSigCount * 100:F1}%)");
-        Console.WriteLine($"失败 (未匹配): {failedCount} 个 ({(double)failedCount / totalSigCount * 100:F1}%)");
-        Console.WriteLine($"耗时: {watch.ElapsedMilliseconds}ms");
+        if (address != addr.Value) {
+            failedOutputs.Add($"{addr.Name} - {addr.String} resolved to {addr.Value:X}, data.yml has {address:X}");
+            failedSigs += 1;
+            continue;
+        }
 
         matchedSigs += 1;
         continue;
@@ -168,15 +159,14 @@ foreach (Address addr in Resolver.GetInstance.Addresses) {
         continue;
     }
 
-static unsafe bool MatchesPatternOptimized(byte* memory, (byte value, bool isWildcard)[] pattern) {
-    fixed (void* patternPtr = pattern) {
-        var patternData = ((byte value, bool isWildcard)*)patternPtr;
-        for (var i = 0; i < pattern.Length; i++) {
-            if (!patternData[i].isWildcard && memory[i] != patternData[i].value)
-                return false;
-        }
+    if (dataAddress != addr.Value) {
+        failedOutputs.Add($"{addr.Name} - {addr.String} resolved to {addr.Value:X}, data.yml has {dataAddress:X}");
+        failedSigs += 1;
+        continue;
     }
-    return true;
+
+    matchedSigs += 1;
+
 }
 
 var sb = new StringBuilder();
