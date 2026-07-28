@@ -15,7 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Common::Configuration::ConfigBase::ChangeEventInterface
 [GenerateInterop]
 [Inherits<AtkModule>, Inherits<ChangeEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2A940)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2A950)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 8F ?? ?? ?? ?? 48 89 07", 3)]
 public unsafe partial struct RaptureAtkModule {
     public static RaptureAtkModule* Instance() {

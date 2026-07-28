@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game.Network;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
@@ -137,8 +138,10 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(163)] public partial void LoadScreenShowUi(WarpType warpType, bool a3, bool a4);
     // [VirtualFunction(165)] public partial ??? AnnounceHowTo(???);
     // [VirtualFunction(167)] public partial ??? HideHowTo(???);
-    [VirtualFunction(169)] public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
-    [VirtualFunction(170)] public partial void HideGoldSaucerReward();
+    [VirtualFunction(169)] public partial void ShowFateReward(FateRewardPacket* packet, FateRewardPacket.ItemReward* items, uint itemCount);
+    [VirtualFunction(169), Obsolete("Wrong parameters. Use ShowFateReward", true)] public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
+    [VirtualFunction(170)] public partial void HideFateReward();
+    [VirtualFunction(170), Obsolete("Renamed to HideFateReward")] public partial void HideGoldSaucerReward();
     // [VirtualFunction(171)] public partial ??? HideGoldSaucerReward_2(???);
     [VirtualFunction(176)] public partial void ShowHousingHarvest(uint itemId, int amount, uint image = 0);
     // [VirtualFunction(178)] public partial ??? OpenMiniGame(???);
@@ -180,7 +183,7 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(242)] public partial ??? ShowRaceCountdownStart(???);
     // [VirtualFunction(243)] public partial ??? ShowRaceCountdownEnd_2(???);
 
-    [VirtualFunction(247)] public partial bool ShouldLimitFps();
+    [VirtualFunction(248)] public partial bool ShouldLimitFps();
 }
 
 public enum UIModulePacketType {

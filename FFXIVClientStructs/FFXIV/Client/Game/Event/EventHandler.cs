@@ -16,6 +16,10 @@ public unsafe partial struct EventHandler {
     [FieldOffset(0x20)] public EventHandlerInfo Info;
     [FieldOffset(0x5C)] public uint IconId;
 
+    [FieldOffset(0x64)] public EventType EventType;
+    [FieldOffset(0x68)] public uint EventParam;
+    [FieldOffset(0x6C)] private byte EventUnk20; // EventState.Unk20
+    [FieldOffset(0x70)] public GameObject* EventGameObject;
     [FieldOffset(0x78)] public short Scene; // OnScene%05u
     [FieldOffset(0x80)] public GameObject* SceneGameObject;
     [FieldOffset(0x88)] public SceneFlag SceneFlags;
@@ -34,6 +38,12 @@ public unsafe partial struct EventHandler {
 
     [VirtualFunction(0)]
     public partial EventHandler* Dtor(byte freeFlags);
+
+    [VirtualFunction(20)]
+    public partial void ProcessEnterTerritory(ushort territoryTypeId);
+
+    [VirtualFunction(25)]
+    public partial void ProcessUIEvent(UIEventType type);
 
     [VirtualFunction(40)]
     public partial void ProcessYield(short scene, byte yieldId, int* intParams, byte intParamCount);
@@ -62,6 +72,22 @@ public unsafe partial struct EventHandler {
     [VirtualFunction(209)]
     public partial uint GetNameplateIconForObject(GameObject* gameObject);
 
+    /// <summary>Changes the currently playing timelines based on the difference between oldSharedTimelineState and newSharedTimelineState.</summary>
+    /// <param name="gameObject">The game object to update.</param>
+    /// <param name="oldSharedTimelineState">The new SharedTimelineState value.</param>
+    /// <param name="newSharedTimelineState">The old SharedTimelineState value.</param>
+    /// <param name="timelineIndices">Seems to modify newSharedTimelineState in in some EventHandlers.</param>
+    [VirtualFunction(253)]
+    public partial void UpdateSharedTimelineState(GameObject* gameObject, ushort oldSharedTimelineState, ushort newSharedTimelineState, ulong timelineIndices);
+
+    /// <summary>Changes the currently playing timelines based on a bitmask.</summary>
+    /// <param name="gameObject">The game object to update.</param>
+    /// <param name="sharedTimelineState">The new SharedTimelineState value.</param>
+    /// <param name="bitmask">The new timeline bitmask.</param>
+    /// <param name="unused">Unused and can be left empty.</param>
+    [VirtualFunction(254)]
+    public partial void UpdateTimelinesByBitmask(GameObject* gameObject, uint sharedTimelineState, uint bitmask, ulong unused);
+
     [VirtualFunction(258)]
     public partial void GetDescription(Utf8String* outDescription);
 
@@ -85,6 +111,9 @@ public unsafe partial struct EventHandler {
 
     [VirtualFunction(270)]
     public partial int GetRecommendedLevel();
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 41 0F B6 C0 41 8B F9")]
+    public partial void DispatchEvent(GameObject* gameObject, EventType eventType, uint eventParam);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 FF 87")]
     public partial bool QueueFormatStringCallback(Utf8String* str, StdDeque<TextParameter>* parameters, ulong callbackParam);
@@ -566,4 +595,15 @@ public enum SceneFlag : ulong {
 
     SetEObjBase = SetBase & ~InvisEObj,
     SetInvisBase = SetBase | InvisAll,
+}
+
+public enum EventType : byte {
+    EnterTerritory = 15, // EventParam: TerritoryType Id
+    UIEvent = 21, // EventParam: UIEventType
+}
+
+public enum UIEventType {
+    TitleDeedHouseShop = 1, // UI_EVENT_TITLE_DEED_HOUSE_SHOP
+    GroupPose = 2, // UI_EVENT_GROUP_POSE
+    IdleCamera = 3, // UI_EVENT_IDLE_CAMERA
 }
