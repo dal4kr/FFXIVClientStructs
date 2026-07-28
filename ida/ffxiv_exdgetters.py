@@ -169,54 +169,90 @@ if api is None:
 
             def create_struct(self, name, fields):
                 idaapi.begin_type_updating(idaapi.UTP_STRUCT)
-                struct_id = self.get_struct_id(name)
-                if struct_id == idaapi.BADADDR:
-                    struct_id = self.create_struct_type(name)
-                else:
-                    self.remove_struct_members(struct_id)
-                struct_type = self.get_struct(struct_id)
-                for [index, [type, name]] in fields.items():
-                    if (
-                        self.get_idc_type_from_ida_type(
-                            self.clean_struct_name(type)
-                        )
-                        == self.get_struct_flag()
-                    ):
-                        type = self.clean_struct_name(type)
-                        self.create_struct_member(
-                            struct_type,
-                            name,
-                            index,
-                            self.get_idc_type_from_ida_type(type),
-                            self.get_struct_opinfo_from_type(type),
-                            self.get_size_from_ida_type(type),
-                        )
-                    elif (
-                        self.get_idc_type_from_ida_type(type)
-                        == self.get_enum_flag()
-                    ):
-                        self.create_struct_member(
-                            struct_type,
-                            name,
-                            index,
-                            self.get_idc_type_from_ida_type(type),
-                            self.get_enum_opinfo_from_type(type),
-                            self.get_size_from_ida_type(type),
-                        )
+                try:
+                    struct_id = self.get_struct_id(name)
+                    if struct_id == idaapi.BADADDR:
+                        struct_id = self.create_struct_type(name)
                     else:
-                        self.create_struct_member(
-                            struct_type,
-                            name,
-                            index,
-                            self.get_idc_type_from_ida_type(type),
-                            None,
-                            self.get_size_from_ida_type(type),
+                        self.remove_struct_members(struct_id)
+                    struct_type = self.get_struct(struct_id)
+                    offsets = sorted(fields)
+                    for position, index in enumerate(offsets):
+                        field_type, field_name = fields[index]
+                        field_type = self.clean_struct_name(field_type)
+                        struct_id = self.get_struct_id(field_type)
+                        enum_id = self.get_enum_id(field_type)
+                        apply_type_info = True
+                        if struct_id != idaapi.BADADDR:
+                            self.create_struct_member(
+                                struct_type,
+                                field_name,
+                                index,
+                                self.get_struct_flag(),
+                                self.get_struct_opinfo_from_type(field_type),
+                                self.get_size_from_ida_type(field_type),
+                            )
+                        elif enum_id != idaapi.BADADDR:
+                            self.create_struct_member(
+                                struct_type,
+                                field_name,
+                                index,
+                                self.get_enum_flag(),
+                                self.get_enum_opinfo_from_type(field_type),
+                                self.get_size_from_ida_type(field_type),
+                            )
+                        else:
+                            field_flag = self.get_idc_type_from_ida_type(field_type)
+                            field_size = self.get_size_from_ida_type(field_type)
+                            if (
+                                field_flag == self.get_struct_flag()
+                                or field_size == 0
+                            ):
+                                tinfo = self.get_tinfo_from_type(field_type)
+                                field_size = (
+                                    tinfo.get_size() if tinfo is not None else 0
+                                )
+                                if (
+                                    field_size <= 0
+                                    or field_size == ida_typeinf.BADSIZE
+                                ):
+                                    next_offset = (
+                                        offsets[position + 1]
+                                        if position + 1 < len(offsets)
+                                        else index + 1
+                                    )
+                                    field_size = max(1, next_offset - index)
+                                    apply_type_info = False
+                                self.create_struct_member(
+                                    struct_type,
+                                    field_name,
+                                    index,
+                                    ida_bytes.byte_flag(),
+                                    None,
+                                    field_size,
+                                )
+                            else:
+                                self.create_struct_member(
+                                    struct_type,
+                                    field_name,
+                                    index,
+                                    field_flag,
+                                    None,
+                                    field_size,
+                                )
+                        meminfo = self.get_struct_member_by_name(
+                            struct_type, field_name
                         )
-                    meminfo = self.get_struct_member_by_name(struct_type, name)
-                    self.set_struct_member_info(
-                        struct_type, meminfo, 0, self.get_tinfo_from_type(type), 0
-                    )
-                idaapi.end_type_updating(idaapi.UTP_STRUCT)
+                        if meminfo is not None and apply_type_info:
+                            self.set_struct_member_info(
+                                struct_type,
+                                meminfo,
+                                0,
+                                self.get_tinfo_from_type(field_type),
+                                0,
+                            )
+                finally:
+                    idaapi.end_type_updating(idaapi.UTP_STRUCT)
 
             def set_func_name(self, ea, name, cmt):
                 ida_name.set_name(ea, name)

@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Client::System::Input::TextServiceInterface::TextServiceEvent
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkModuleInterface>, Inherits<AtkExternalInterface>, Inherits<TextServiceEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x82F0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x82F0 - 0x10)]
 public unsafe partial struct AtkModule {
     public delegate AtkValue* CallbackHandlerDelegate(AtkModule* thisPtr, AtkValue* returnValue, AtkValue* values, uint valueCount);
 

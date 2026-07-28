@@ -756,8 +756,8 @@ class IdaInterface(BaseIdaInterface):
                 ida_nalt.opinfo_t: opinfo_t created from the structure type string.
             """
             opinf = ida_nalt.opinfo_t()
-            opinf.tid = ida_typeinf.get_named_type_tid(raw_type)
-
+            opinf.tid = self.get_struct_id(raw_type)
+            
             return opinf
 
         def get_enum_opinfo_from_type(self, raw_type: str):
@@ -902,7 +902,7 @@ class IdaInterface(BaseIdaInterface):
             Returns:
                 int: The struct id
             """
-            return ida_typeinf.get_named_type_tid(name)
+            return idc.get_struc_id(name)
 
         def get_struct(self, sid: int) -> ida_typeinf.tinfo_t:
             """Get the struct
@@ -955,14 +955,15 @@ class IdaInterface(BaseIdaInterface):
                 typeid = -1
 
             if isinstance(typeid, idaapi.opinfo_t):
+                tid = typeid.ec.tid if flag == ida_bytes.enum_flag() else typeid.tid
                 tinfo = ida_typeinf.tinfo_t()
-                if tinfo.get_type_by_tid(typeid.tid):
+                if tinfo.get_type_by_tid(tid):
                     nbytes = tinfo.get_size()
                 else:
-                    raise ValueError("Cannot find type with tid {0}".format(typeid.tid))
-
-                typeid = typeid.tid
-
+                    raise ValueError("Cannot find type with tid {0}".format(tid))
+                
+                typeid = tid
+            
             ec = idc.add_struc_member(sid.get_tid(), name, offset, flag, typeid, nbytes)
             if ec != ida_typeinf.TERR_OK:
                 return False

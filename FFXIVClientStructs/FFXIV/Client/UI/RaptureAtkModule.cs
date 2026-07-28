@@ -15,7 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Common::Configuration::ConfigBase::ChangeEventInterface
 [GenerateInterop]
 [Inherits<AtkModule>, Inherits<ChangeEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2A950)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2A950 - 0x10)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 8F ?? ?? ?? ?? 48 89 07", 3)]
 public unsafe partial struct RaptureAtkModule {
     public static RaptureAtkModule* Instance() {
@@ -23,8 +23,6 @@ public unsafe partial struct RaptureAtkModule {
         return uiModule == null ? null : uiModule->GetRaptureAtkModule();
     }
 
-    //[FieldOffset(0x8300 - 0x10)] public GameUIScene UIScene;
-    //[FieldOffset(0x8302 - 0x10)] public GameUIMode UIMode;
     [FieldOffset(0x8310 - 0x10)] public GameUIScene UIScene;
     [FieldOffset(0x8312 - 0x10)] public GameUIMode UIMode;
 
@@ -40,50 +38,9 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x12330 - 0x10)] public StdVector<Utf8String> AddonNames;
     [FieldOffset(0x12348 - 0x10)] public AddonConfig* AddonConfigPtr;
 
-    //[FieldOffset(0x12342 - 0x10)] public AtkCursor.CursorType CursorType;
     [FieldOffset(0x12352 - 0x10)] public AtkCursor.CursorType CursorType;
 
-    //// [FieldOffset(0x12348)] public ProhibitModule ProhibitModule;
-    //[FieldOffset(0x123E0 - 0x10)] public int AudioClientRpcTagSize;
-
-    //[FieldOffset(0x123E8 - 0x10)] public char* AudioClientRpcTag;
-    //[FieldOffset(0x123F0 - 0x10)] public UIModule* UIModulePtr;
-    //[FieldOffset(0x123F8 - 0x10)] public RaptureLogModule* RaptureLogModulePtr;
-    //[FieldOffset(0x12400 - 0x10)] public AgentModule AgentModule;
-    //[FieldOffset(0x13418 - 0x10)] public RaptureHotbarModule* RaptureHotbarModulePtr;
-    //[FieldOffset(0x13420 - 0x10)] public RaptureAtkUnitManager RaptureAtkUnitManager;
-    //[FieldOffset(0x1D150 - 0x10)] public RaptureAtkColorDataManager RaptureAtkColorDataManager;
-
-    //[FieldOffset(0x1D3D0 - 0x10)] public int NameplateInfoCount;
-    //[FieldOffset(0x1D3D8 - 0x10), FixedSizeArray] internal FixedSizeArray50<NamePlateInfo> _namePlateInfoEntries;
-
-    //[FieldOffset(0x24850 - 0x10), FixedSizeArray] internal FixedSizeArray18<CrystalCache> _crystalItemCache;
-    //[FieldOffset(0x25300 - 0x10)] public ItemCache* KeyItemCache; // ptr to 120 entries
-    //[FieldOffset(0x25308 - 0x10)] public ItemCache* EquippedItemCache; // ptr to 14 entries
-    //[FieldOffset(0x25310 - 0x10), FixedSizeArray] internal FixedSizeArray160<ItemCache> _inventoryItemCache; // only 140 slots are processed, unused?
-    //[FieldOffset(0x2A810 - 0x10)] public uint InventoryItemCacheSlotCount;
-    //[FieldOffset(0x2A814 - 0x10)] public uint GilCap;
-
-    //[FieldOffset(0x2A878 - 0x10)] public uint LocalPlayerClassJobId;
-    //[FieldOffset(0x2A87C - 0x10)] public uint LocalPlayerLevel;
-
-    //[FieldOffset(0x2A885 - 0x10)] public bool QuickGatheringEnabled;
-
-    //[FieldOffset(0x2A88B - 0x10)] public bool QTEActive;
-
-    //[FieldOffset(0x2A8F0 - 0x10)] internal ExcelSheet* AddonParamSheet;
-    //[FieldOffset(0x2A8F8 - 0x10)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
-
-    //[FieldOffset(0x2A914 - 0x10)] public uint LoginSummonCompanionId;
-    //[FieldOffset(0x2A918 - 0x10)] public float LoginSummonCompanionCountdown;
-    ///// <remarks> Only for Region 5 </remarks>
-    //[FieldOffset(0x2A91C - 0x10)] public float HourTimer;
-    ///// <remarks> Only for Region 5 </remarks>
-    //[FieldOffset(0x2A920 - 0x10)] public int HoursPlayed;
-
-    //[FieldOffset(0x2A938 - 0x10)] internal nint ShellCommands; // only 1 function to open links?
-
-    // [FieldOffset(0x12358)] public ProhibitModule ProhibitModule;
+    // [FieldOffset(0x12358 - 0x10)] public ProhibitModule ProhibitModule;
     [FieldOffset(0x123F0 - 0x10)] public int AudioClientRpcTagSize;
 
     [FieldOffset(0x123F8 - 0x10)] public char* AudioClientRpcTag;

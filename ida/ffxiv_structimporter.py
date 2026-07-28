@@ -360,10 +360,12 @@ if api is None:
             def delete_struct(self, struct):
                 # type: (DefinedStruct) -> None
                 idaapi.begin_type_updating(idaapi.UTP_STRUCT)
-                fullname = self.clean_struct_name(struct.type)
-                self.delete_struct_members(fullname)
-                self.delete_struct_members(fullname + "_vtbl")
-                idaapi.end_type_updating(idaapi.UTP_STRUCT)
+                try:
+                    fullname = self.clean_struct_name(struct.type)
+                    self.delete_struct_members(fullname)
+                    self.delete_struct_members(fullname + "_vtbl")
+                finally:
+                    idaapi.end_type_updating(idaapi.UTP_STRUCT)
 
             def create_struct(self, struct):
                 # type: (DefinedStruct) -> None
@@ -411,118 +413,165 @@ if api is None:
                     if result is False or (result is not True and result != 0):
                         raise RuntimeError("Failed to add padding at 0x{0:X}".format(prev_size))
 
+            def get_unresolved_field_size(self, struct, field):
+                # type: (DefinedStruct, DefinedStructField) -> int
+                offsets = [
+                    candidate.offset
+                    for candidate in struct.fields
+                    if candidate.offset > field.offset
+                ]
+                if offsets:
+                    return min(offsets) - field.offset
+                if struct.size is not None and struct.size > field.offset:
+                    return struct.size - field.offset
+                return 1
+
             def create_struct_members(self, struct):
                 # type: (DefinedStruct) -> None
                 idaapi.begin_type_updating(idaapi.UTP_STRUCT)
-                fullname = self.clean_struct_name(struct.type)
-                s = self.get_struct(self.get_struct_id(fullname))
+                try:
+                    fullname = self.clean_struct_name(struct.type)
+                    s = self.get_struct(self.get_struct_id(fullname))
 
-                if struct.virtual_functions != None and (
-                    struct.fields == [] or struct.fields[0].offset > 0
-                ):
-                    self.create_struct_member(
-                        s, "__vftable", 0, ida_bytes.qword_flag(), None, 8
-                    )
-                    type = fullname + "_vtbl*" if struct.virtual_functions else "void**"
-                    meminfo = self.get_struct_member_by_name(s, "__vftable")
-                    self.set_struct_member_info(
-                        s, meminfo, 0, self.get_tinfo_from_type(type), 0, False
-                    )
-
-                contiguous_fields = True
-                for field in struct.fields:
-                    offset = field.offset
-
-                    prev_size = self.get_struct_size(s)
-                    while offset > prev_size:
-                        contiguous_fields = False
-                        self.create_struct_member_fill(s, offset)
-                        prev_size = self.get_struct_size(s)
-
-                    field_is_base = field.base and contiguous_fields
-                    field_name = (
-                        field.name
-                        if not field_is_base
-                        else "baseclass_{0:X}".format(offset)
-                    )
-                    field_type = self.clean_name(field.type)
-                    if field_type == "__fastcall":
-                        self.create_struct_member(
-                            s,
-                            field_name,
-                            offset,
-                            self.get_idc_type_from_ida_type("__int64"),
-                            None,
-                            self.get_size_from_ida_type("__int64"),
-                        )
-                        field_type = self.clean_name(field.return_type)
-                        field_type = field_type + "(__fastcall* " + field_name + ")("
-                        for param in field.parameters:
-                            field_type = field_type + self.clean_name(param.type) + ""
-                            field_type = field_type + param.name + ","
-                        field_type = field_type[:-2] + ")"
-                    elif (
-                        self.get_idc_type_from_ida_type(
-                            self.clean_struct_name(field_type)
-                        )
-                        == self.get_struct_flag()
-                    ):
-                        field_type = self.clean_struct_name(field_type)
-                        self.create_struct_member(
-                            s,
-                            field_name,
-                            offset,
-                            self.get_idc_type_from_ida_type(field_type),
-                            self.get_struct_opinfo_from_type(field_type),
-                            self.get_size_from_ida_type(field_type),
-                        )
-                    elif (
-                        self.get_idc_type_from_ida_type(field_type)
-                        == self.get_enum_flag()
+                    if struct.virtual_functions != None and (
+                        struct.fields == [] or struct.fields[0].offset > 0
                     ):
                         self.create_struct_member(
-                            s,
-                            field_name,
-                            offset,
-                            self.get_idc_type_from_ida_type(field_type),
-                            self.get_enum_opinfo_from_type(field_type),
-                            self.get_size_from_ida_type(field_type),
+                            s, "__vftable", 0, ida_bytes.qword_flag(), None, 8
                         )
-                    else:
-                        self.create_struct_member(
-                            s,
-                            field_name,
-                            offset,
-                            self.get_idc_type_from_ida_type(field_type),
-                            None,
-                            self.get_size_from_ida_type(field_type),
-                        )
-
-                    meminfo = self.get_struct_member_by_name(s, field_name)
-                    if meminfo is not None:
-                        if field_is_base:
-                            if idaapi.IDA_SDK_VERSION >= 900:
-                                meminfo.set_baseclass()
-                            else:
-                                meminfo.props |= self.get_base_class_flag()
-
-                        array_size = field.size if hasattr(field, "size") else 0
+                        type = fullname + "_vtbl*" if struct.virtual_functions else "void**"
+                        meminfo = self.get_struct_member_by_name(s, "__vftable")
                         self.set_struct_member_info(
-                            s,
-                            meminfo,
-                            0,
-                            self.get_tinfo_from_type(field_type, array_size),
-                            0,
-                            field.is_string if hasattr(field, "is_string") and (field_type == "char" or field_type == "wchar_t") else False
+                            s, meminfo, 0, self.get_tinfo_from_type(type), 0, False
                         )
 
-                if struct.size is not None and struct.size != 0:
-                    prev_size = self.get_struct_size(s)
-                    while struct.size > prev_size:
-                        self.create_struct_member_fill(s, struct.size)
-                        prev_size = self.get_struct_size(s)
+                    contiguous_fields = True
+                    for field in struct.fields:
+                        offset = field.offset
 
-                idaapi.end_type_updating(idaapi.UTP_STRUCT)
+                        prev_size = self.get_struct_size(s)
+                        while offset > prev_size:
+                            contiguous_fields = False
+                            self.create_struct_member_fill(s, offset)
+                            prev_size = self.get_struct_size(s)
+
+                        field_is_base = field.base and contiguous_fields
+                        field_name = (
+                            field.name
+                            if not field_is_base
+                            else "baseclass_{0:X}".format(offset)
+                        )
+                        field_type = self.clean_name(field.type)
+                        array_size = field.size if hasattr(field, "size") else 0
+                        apply_type_info = True
+                        if field_type == "__fastcall":
+                            self.create_struct_member(
+                                s,
+                                field_name,
+                                offset,
+                                self.get_idc_type_from_ida_type("__int64"),
+                                None,
+                                self.get_size_from_ida_type("__int64"),
+                            )
+                            field_type = "{0}(__fastcall* {1})({2})".format(
+                                self.clean_name(field.return_type),
+                                field_name,
+                                ", ".join(
+                                    "{0} {1}".format(
+                                        self.clean_name(param.type), param.name
+                                    )
+                                    for param in field.parameters
+                                ),
+                            )
+                        else:
+                            field_type = self.clean_struct_name(field_type)
+                            struct_id = self.get_struct_id(field_type)
+                            enum_id = self.get_enum_id(field_type)
+                            if struct_id != idaapi.BADADDR:
+                                self.create_struct_member(
+                                    s,
+                                    field_name,
+                                    offset,
+                                    self.get_struct_flag(),
+                                    self.get_struct_opinfo_from_type(field_type),
+                                    self.get_size_from_ida_type(field_type),
+                                )
+                            elif enum_id != idaapi.BADADDR:
+                                self.create_struct_member(
+                                    s,
+                                    field_name,
+                                    offset,
+                                    self.get_enum_flag(),
+                                    self.get_enum_opinfo_from_type(field_type),
+                                    self.get_size_from_ida_type(field_type),
+                                )
+                            else:
+                                field_flag = self.get_idc_type_from_ida_type(field_type)
+                                field_size = self.get_size_from_ida_type(field_type)
+                                if (
+                                    field_flag == self.get_struct_flag()
+                                    or field_size == 0
+                                ):
+                                    tinfo = self.get_tinfo_from_type(
+                                        field_type, array_size
+                                    )
+                                    field_size = (
+                                        tinfo.get_size() if tinfo is not None else 0
+                                    )
+                                    if (
+                                        field_size <= 0
+                                        or field_size == ida_typeinf.BADSIZE
+                                    ):
+                                        field_size = self.get_unresolved_field_size(
+                                            struct, field
+                                        )
+                                        apply_type_info = False
+                                    self.create_struct_member(
+                                        s,
+                                        field_name,
+                                        offset,
+                                        ida_bytes.byte_flag(),
+                                        None,
+                                        field_size,
+                                    )
+                                else:
+                                    self.create_struct_member(
+                                        s,
+                                        field_name,
+                                        offset,
+                                        field_flag,
+                                        None,
+                                        field_size,
+                                    )
+
+                        meminfo = self.get_struct_member_by_name(s, field_name)
+                        if meminfo is not None:
+                            if field_is_base:
+                                if idaapi.IDA_SDK_VERSION >= 900:
+                                    meminfo.set_baseclass()
+                                else:
+                                    meminfo.props |= self.get_base_class_flag()
+
+                            if apply_type_info:
+                                self.set_struct_member_info(
+                                    s,
+                                    meminfo,
+                                    0,
+                                    self.get_tinfo_from_type(field_type, array_size),
+                                    0,
+                                    field.is_string
+                                    if hasattr(field, "is_string")
+                                    and (field_type == "char" or field_type == "wchar_t")
+                                    else False,
+                                )
+
+                    if struct.size is not None and struct.size != 0:
+                        prev_size = self.get_struct_size(s)
+                        while struct.size > prev_size:
+                            self.create_struct_member_fill(s, struct.size)
+                            prev_size = self.get_struct_size(s)
+                finally:
+                    idaapi.end_type_updating(idaapi.UTP_STRUCT)
 
             def create_vtable(self, struct):
                 # type: (DefinedStruct) -> None
@@ -546,12 +595,14 @@ if api is None:
                     if meminfo is None:
                         raise RuntimeError("Failed to find member {0} in struct {1}".format(field_name, fullname))
 
-                    field_type = self.clean_name(virt_func.return_type)
-                    field_type = field_type + "(__fastcall* " + field_name + ")("
-                    for param in virt_func.parameters:
-                        field_type = field_type + self.clean_name(param.type) + " "
-                        field_type = field_type + param.name + ","
-                    field_type = field_type[:-1] + ")"
+                    field_type = "{0}(__fastcall* {1})({2})".format(
+                        self.clean_name(virt_func.return_type),
+                        field_name,
+                        ", ".join(
+                            "{0} {1}".format(self.clean_name(param.type), param.name)
+                            for param in virt_func.parameters
+                        ),
+                    )
 
                     self.set_struct_member_info(
                         s, meminfo, 0, self.get_tinfo_from_type(field_type), 0, False
