@@ -9865,7 +9865,7 @@ classes:
       - ea: 0x142179C40
         base: Client::LayoutEngine::IManagerBase
     funcs:
-      # 0x14060DD90: ctor # inlined in CreateSingleton
+      0x14070C370: ctor # inlined in CreateSingleton
       0x14070C550: CreateSingleton
       0x14070D5E0: LoadPrefetchLayout
       0x14070D990: UnloadManagerLayout
@@ -9876,6 +9876,8 @@ classes:
       0x1407114F0: ResolveRsvString
       0x1407115F0: AddRsfEntry
       0x140711920: ResolveRsfEntry
+      0x14070D7F0: UnloadLayouts
+      0x14070D1A0: LoadLayout
       0x140754AE0: UnloadPrefetchLayout
       0x140754B50: ActiveLayoutReady # static
       0x140754B80: ActiveLayoutStreamed # static
@@ -9996,6 +9998,8 @@ classes:
     vtbls:
       - ea: 0x14217FF70
         base: Client::LayoutEngine::ILayoutInstance
+    vfuncs:
+      78: GetMarkerSize
   Client::LayoutEngine::Layer::CharacterLayoutInstance:
     vtbls:
       - ea: 0x14217A120
@@ -10018,6 +10022,14 @@ classes:
     vtbls:
       - ea: 0x142180E60
         base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::PathLayoutInstance::ControlPointData:
+    vtbls:
+      - ea: 0x14233CF60
+    vfuncs:
+      0: dtor
+      1: GetPointPosition
+      4: GetCount
+      6: GetPointId
   Client::LayoutEngine::Layer::BgPartsLayoutInstance:
     vtbls:
       - ea: 0x14217B5E0
@@ -10171,6 +10183,26 @@ classes:
     vtbls:
       - ea: 0x14217C6F0
         base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::VolumetricCloudLayoutInstance:
+    vtbls:
+      - ea: 0x14217CBD0
+        base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Layer::EventEffectRangeLayoutInstance:
+    vtbls:
+      - ea: 0x14217E220
+        base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
+  Client::LayoutEngine::Layer::GameContentsRangeLayoutInstance:
+    vtbls:
+      - ea: 0x14217DFA8
+        base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
+  Client::LayoutEngine::Layer::ShowHideRangeLayoutInstance:
+    vtbls:
+      - ea: 0x14217DD30
+        base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
+  Client::LayoutEngine::Layer::WaterRangeLayoutInstance:
+    vtbls:
+      - ea: 0x14217DAB8
+        base: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
   Client::LayoutEngine::Group::TimeLineLayoutInstance:
     vtbls:
       - ea: 0x1421815C8
@@ -12892,6 +12924,7 @@ classes:
       0x140F386A0: ctor
       0x140F38E00: CanUseEmote
       0x140F38CF0: ExecuteEmote
+      0x140F389C0: SearchForEmote
   Client::UI::Agent::AgentMacro:
     vtbls:
       - ea: 0x1421F5328
@@ -15056,6 +15089,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14102D2F0: ctor
+      0x1410318F0: SelectCategory
   Client::UI::Agent::AgentCollectablesShop:
     vtbls:
       - ea: 0x1421F1BC8
@@ -16379,6 +16413,7 @@ classes:
       0x140B54880: QueueFormatStringCallback
       0x140B54930: QueueActionTimelineCallback
       0x140B55B80: DispatchEvent
+      0x140B54470: LoadCustomDefineSheet
     vfuncs:
       0: dtor
       6: Terminate

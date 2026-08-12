@@ -755,7 +755,8 @@ if api is None:
                 else:
                     decl[0] = f"struct __attribute__((packed)) {fullname} "
                 if len(inherits_from) > 0:
-                    decl[0] += f": {", ".join(inherits_from)}"
+                    inheritances = ", ".join(inherits_from)
+                    decl[0] += f": {inheritances}"
                 
                 decl[0] += " {"
                 
@@ -975,10 +976,30 @@ if api is None:
                     size = int(struct.vtable_size / 8)
                 else:
                     size = int(self.get_struct_size(s) / 8)
-                for i in range(size):
-                    if self.get_struct_member_id(s, i * 8) == idc.BADADDR:
-                        name = "vf{0}".format(i)
 
+                for i in range(size):
+                    offset = i * 8
+                    member_id = self.get_struct_member_id(s, offset)
+                    if idaapi.IDA_SDK_VERSION >= 900:
+                        udm_idx, udm = s.get_udm_by_offset(offset * 8)
+
+                        # srclang ends up with gap UDMs in VFTs that need to be deleted and filled back out as vf## placeholders
+                        is_vft_gap = (
+                            udm is not None
+                            and udm.name.startswith("gap")
+                            and udm.type.dstr().startswith("_BYTE[")
+                        )
+                        if is_vft_gap:
+                            result = s.del_udm(udm_idx)
+                            if result == ida_typeinf.TERR_OK:
+                                member_id = idc.BADADDR
+                            else:
+                                print(
+                                    f"Error: failed to delete VFT gap UDM {fullname}.{udm.name} "
+                                    f"at slot {i}: {ida_typeinf.tinfo_errstr(result)}"
+                                )
+                    if member_id == idc.BADADDR:
+                        name = "vf{0}".format(i)
                         fallback_name = self.get_fallback_vfunc_name(struct.type, i)
                         if fallback_name:
                             name = fallback_name
