@@ -44,7 +44,7 @@ public unsafe partial struct GuildleveAssignmentEventHandler {
     [FieldOffset(0x6C0)] public StdVector<GuildleveAssignmentCategoryList> AssignmentLists;
     // No idea about this one. Showed ids (probably leve ids)
     //[FieldOffset(0x6D8)] private StdMap<ushort, GuildleveLeveInfo> LeveInfoMap;
-    // No idea if the following three are correct. They temporarily get set when you open a new tab when it is loaded. 
+    // No idea if the following three are correct. They temporarily get set when you open a new tab when it is loaded.
     [FieldOffset(0x6E8)] private StdVector<ushort> PendingLeveIds;
     [FieldOffset(0x700)] private long PendingLeveCursor;
     [FieldOffset(0x708)] private ExcelSheet* PendingSheet;

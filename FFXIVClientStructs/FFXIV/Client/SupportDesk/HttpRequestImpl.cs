@@ -31,7 +31,6 @@ public unsafe partial struct HttpRequestImpl {
     [MemberFunction("48 85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 56 57")]
     public static partial void StatusCallback(void* requestHandle, HttpRequestImpl* context, uint internetStatus, void* statusInformation, uint statusInformationLength);
 }
-
 public enum HttpRequestStage {
     Unk0 = 0,
     /// <remarks> Set during BeginRequest. </remarks>
@@ -56,4 +55,3 @@ public enum HttpRequestStage {
     /// <remarks> Set for WINHTTP_CALLBACK_STATUS_SECURE_FAILURE. </remarks>
     SecureFailure = 14,
 }
-
