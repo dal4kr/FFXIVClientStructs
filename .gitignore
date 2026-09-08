@@ -439,3 +439,6 @@ FodyWeavers.xsd
 
 ida/data.global.yml
 ida/unresolved.txt
+
+# Local agent instructions
+/AGENTS.md
