@@ -319,11 +319,12 @@ enums:
     "IsMacro": 64
     "IsGlamoured": 128
     "IsRecipe": 256
-    "IsIconLoading": 512
-    "IsBeingDragged": 1024
-    "Unk2048": 2048
-    "IsDisabled": 4096
-    "Unk8192": 8192
+    "IsCommandPanelShortcut": 512
+    "IsIconLoading": 1024
+    "IsBeingDragged": 2048
+    "HasComboBorder": 4096
+    "IsDisabled": 8192
+    "Unk14": 16384
 - type: Component::GUI::InputCallbackResult
   name: InputCallbackResult
   underlying: int
@@ -2767,7 +2768,7 @@ enums:
     "PhantomAction": 59
     "MKDTrait": 60
     "Unk61": 61
-    "Unk62": 62
+    "XBMPet": 62
     "Unk63": 63
     "XBMBattleMonster": 64
 - type: Client::UI::Agent::AlarmSoundEffect
@@ -3674,6 +3675,17 @@ enums:
   values:
     "RightStick": 0
     "LeftStick": 1
+- type: Client::System::Input::KeyStateFlags
+  name: KeyStateFlags
+  underlying: int
+  namespace: Client.System.Input
+  flags: True
+  values:
+    "None": 0
+    "Down": 1
+    "Pressed": 2
+    "Released": 4
+    "Held": 8
 - type: Client::System::Input::GamepadButtonsFlags
   name: GamepadButtonsFlags
   underlying: unsigned __int16
@@ -3697,17 +3709,6 @@ enums:
     "R3": 8192
     "Select": 16384
     "Start": 32768
-- type: Client::System::Input::KeyStateFlags
-  name: KeyStateFlags
-  underlying: int
-  namespace: Client.System.Input
-  flags: True
-  values:
-    "None": 0
-    "Down": 1
-    "Pressed": 2
-    "Released": 4
-    "Held": 8
 - type: Client::System::Framework::ClientPlatform
   name: ClientPlatform
   underlying: int
@@ -17134,10 +17135,10 @@ structs:
     is_string: False
   - type: Client::Graphics::Kernel::ConstantBuffer*
     name: LegacyBodyDecalColorCBuffer
-    offset: 1008
+    offset: 1016
   - type: Client::Graphics::Kernel::ConstantBuffer*
     name: FreeCompanyCrestColorCBuffer
-    offset: 1016
+    offset: 1024
   virtual_functions: []
   member_functions: []
   static_members:
@@ -17814,7 +17815,7 @@ structs:
       name: targetId
     - type: char
       name: isRecorded
-  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B D3
+  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0 ?? 48 8B D3 E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F
     return_type: void
     name: HandlePrepareZoningPacket
     parameters:
@@ -17894,7 +17895,7 @@ structs:
       name: targetId
     - type: Client::Game::Network::InventoryItemPacket*
       name: packet
-  - signature: E8 ?? ?? ?? ?? EB ?? 83 F8 ?? 75 ?? 48 8D 53
+  - signature: E8 ?? ?? ?? ?? EB ?? 3D ?? ?? ?? ?? 75 ?? 48 8D 53 ?? 81 FE
     return_type: void
     name: HandleInventoryItemPacket
     parameters:
@@ -17992,7 +17993,7 @@ structs:
       name: entityId
     - type: Client::Game::Network::ActorCastPacket*
       name: packet
-  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 0F B6 43
+  - signature: E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 48 8B CB E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 8B 4F ?? 41 B0
     return_type: void
     name: HandleMapEffectPacket
     parameters:
@@ -19187,7 +19188,63 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::System::Input::KeyboardDeviceInterface*
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
+  - name: Update
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
+    - type: float
+      name: dt
+  - name: Deinitialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
+  - name: GetData
+    offset: 32
+    return_type: Client::System::Input::KeyboardInputData*
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
+  - name: ResetState
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
+    - type: char
+      name: clearDown
+  - name: SendKey
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
+    - type: Client::System::Input::SeVirtualKey
+      name: key
+  - name: GetIsKeyboardConnected
+    offset: 56
+    return_type: char
+    parameters:
+    - type: Client::System::Input::KeyboardDeviceInterface*
+      name: this
   member_functions: []
 - type: Client::System::Input::KeyboardInputData
   name: KeyboardInputData
@@ -19219,6 +19276,52 @@ structs:
   virtual_functions:
   - name: dtor
     offset: 0
+    return_type: Client::System::Input::MouseDeviceInterface*
+    parameters:
+    - type: Client::System::Input::MouseDeviceInterface*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::System::Input::MouseDeviceInterface*
+      name: this
+  - name: Update
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDeviceInterface*
+      name: this
+    - type: float
+      name: dt
+  - name: Deinitialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDeviceInterface*
+      name: this
+  - name: GetData
+    offset: 32
+    return_type: Client::System::Input::CursorInputData*
+    parameters:
+    - type: Client::System::Input::MouseDeviceInterface*
+      name: this
+  - name: ResetState
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDeviceInterface*
+      name: this
+  - name: SetAcquired
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDeviceInterface*
+      name: this
+    - type: char
+      name: acquired
   member_functions: []
 - type: Client::System::Input::PadDeviceInterface
   name: PadDeviceInterface
@@ -19227,6 +19330,48 @@ structs:
   size: 24
   fields: []
   virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::System::Input::PadDeviceInterface*
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+    - type: Client::System::Configuration::SystemConfig*
+      name: systemConfig
+    - type: char
+      name: a3
+  - name: Update
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+  - name: Deinitialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+  - name: GetNumberOfDevices
+    offset: 32
+    return_type: int
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
+  - name: GetData
+    offset: 40
+    return_type: Client::System::Input::GamepadInputData*
+    parameters:
+    - type: Client::System::Input::PadDeviceInterface*
+      name: this
   - name: SetVibration
     offset: 104
     return_type: void
@@ -19237,14 +19382,6 @@ structs:
       name: rightMotorSpeed
     - type: int
       name: leftMotorSpeed
-  - name: Poll
-    offset: 16
-    return_type: __int64
-    parameters:
-    - type: Client::System::Input::PadDeviceInterface*
-      name: this
-  - name: dtor
-    offset: 0
   member_functions: []
 - type: Client::System::Input::SoftKeyboardDeviceInterface
   name: SoftKeyboardDeviceInterface
@@ -20212,7 +20349,7 @@ structs:
     size: 64
     is_string: False
   member_functions:
-  - signature: E8 ?? ?? ?? ?? F7 C3
+  - signature: E8 ?? ?? ?? ?? 0F 5A D6
     return_type: Client::System::String::Utf8String*
     name: ctor
     parameters:
@@ -47329,6 +47466,14 @@ structs:
       name: priority
     - type: Client::System::Framework::Task*
       name: task
+  - signature: E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 85 C9 74 ?? F3 0F 10 8B
+    return_type: void
+    name: ExecuteAllTasks
+    parameters:
+    - type: Client::System::Framework::TaskManager*
+      name: this
+    - type: float*
+      name: dt
   static_members:
   - signature: 4C 89 35 ?? ?? ?? ?? ?? ?? ?? 39 0D
     relative_follow_offsets:
@@ -58943,7 +59088,7 @@ structs:
     - type: Client::UI::Misc::TofuHelper*
       name: this
   member_functions:
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 07 48 8B CF FF 90 ?? ?? ?? ?? 48 8B D6 48 8B 48 ?? E8 ?? ?? ?? ?? EB
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 07 48 8B CF FF 90 ?? ?? ?? ?? 48 8B D6 48 8B 48 ?? E8 ?? ?? ?? ?? E9
     return_type: void
     name: HandleStartSharingPacket
     parameters:
@@ -93153,10 +93298,86 @@ structs:
     name: RepeatCounter
     offset: 8
     base: true
+  - type: Client::System::Framework::GameWindow*
+    name: GameWindow
+    offset: 40
+  - type: char
+    name: IsKeyboardConnected
+    offset: 48
+  - type: Client::System::Threading::Thread*
+    name: UnkThread
+    offset: 56
   virtual_functions:
   - name: dtor
     offset: 0
+    return_type: Client::System::Input::KeyboardDeviceInterface*
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
+  - name: Update
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
+    - type: float
+      name: dt
+  - name: Deinitialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
+  - name: GetData
+    offset: 32
+    return_type: Client::System::Input::KeyboardInputData*
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
+  - name: ResetState
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
+    - type: char
+      name: clearDown
+  - name: SendKey
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
+    - type: Client::System::Input::SeVirtualKey
+      name: key
+  - name: GetIsKeyboardConnected
+    offset: 56
+    return_type: char
+    parameters:
+    - type: Client::System::Input::KeyboardDevice*
+      name: this
   member_functions: []
+  static_member_functions:
+  - signature: 48 89 5C 24 ?? 55 56 57 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 4D 8B F9
+    return_type: void
+    name: ProcessKeyboardInputMessage
+    parameters:
+    - type: __int64
+      name: hWnd
+    - type: unsigned int
+      name: uMsg
+    - type: __int64
+      name: wParam
+    - type: __int64
+      name: lParam
 - type: Client::System::Input::MouseDevice
   name: MouseDevice
   namespace: Client.System.Input
@@ -93171,9 +93392,76 @@ structs:
     name: RepeatCounter
     offset: 8
     base: true
-  virtual_functions: []
+  - type: LPDIRECTINPUTDEVICE8A
+    name: DirectInputDevice
+    offset: 48
+  - type: char
+    name: IsAcquired
+    offset: 56
+  - type: Client::System::Framework::GameWindow*
+    name: GameWindow
+    offset: 64
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::System::Input::MouseDeviceInterface*
+    parameters:
+    - type: Client::System::Input::MouseDevice*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::System::Input::MouseDevice*
+      name: this
+  - name: Update
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDevice*
+      name: this
+    - type: float
+      name: dt
+  - name: Deinitialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDevice*
+      name: this
+  - name: GetData
+    offset: 32
+    return_type: Client::System::Input::CursorInputData*
+    parameters:
+    - type: Client::System::Input::MouseDevice*
+      name: this
+  - name: ResetState
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDevice*
+      name: this
+  - name: SetAcquired
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::System::Input::MouseDevice*
+      name: this
+    - type: char
+      name: acquired
   member_functions: []
   static_member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 49 8B D8 C6 05
+    return_type: void
+    name: ProcessMouseInputMessage
+    parameters:
+    - type: __int64
+      name: hWnd
+    - type: unsigned int
+      name: uMsg
+    - type: __int64
+      name: wParam
   - signature: 89 0D ?? ?? ?? ?? 89 15 ?? ?? ?? ?? C6 05 ?? ?? ?? ?? 01 C3
     return_type: void
     name: ScheduleCursorMove
@@ -101465,7 +101753,7 @@ structs:
       name: newGearsetId
     - type: int
       name: gearsetId
-  - signature: E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? 0F B6 F8
+  - signature: E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? 0F B6 F8 E8 ?? ?? ?? ?? 40 84 FF
     return_type: char
     name: RenameGearset
     parameters:
@@ -108606,8 +108894,53 @@ structs:
   - type: Client::System::Input::GamepadInputData
     name: GamepadInputData
     offset: 120
+  - type: Client::System::Configuration::SystemConfig*
+    name: SystemConfig
+    offset: 1080
   vtable_size: 216
   virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Client::System::Input::PadDeviceInterface*
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Initialize
+    offset: 8
+    return_type: char
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+    - type: Client::System::Configuration::SystemConfig*
+      name: systemConfig
+    - type: char
+      name: a3
+  - name: Update
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: Deinitialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: GetNumberOfDevices
+    offset: 32
+    return_type: int
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
+  - name: GetData
+    offset: 40
+    return_type: Client::System::Input::GamepadInputData*
+    parameters:
+    - type: Client::System::Input::PadDevice*
+      name: this
   - name: SetVibration
     offset: 104
     return_type: void
@@ -108618,12 +108951,6 @@ structs:
       name: rightMotorSpeed
     - type: int
       name: leftMotorSpeed
-  - name: Poll
-    offset: 16
-    return_type: __int64
-    parameters:
-    - type: Client::System::Input::PadDevice*
-      name: this
   member_functions: []
 - type: Client::System::Scheduler::Instance::LayoutSharedGroupObject
   name: LayoutSharedGroupObject
@@ -136032,12 +136359,12 @@ structs:
       name: this
   - signature: E8 ?? ?? ?? ?? EB ?? 41 8D 46
     return_type: void
-    name: SetIconDisableState
+    name: SetIconEnabled
     parameters:
     - type: Component::GUI::AtkComponentDragDrop*
       name: this
     - type: char
-      name: disabled
+      name: enabled
   - signature: E8 ?? ?? ?? ?? EB 18 66 C7 44 24
     return_type: void
     name: BeginDragDrop
@@ -149297,6 +149624,14 @@ structs:
       name: this
     - type: char
       name: enabled
+  - signature: E8 ?? ?? ?? ?? 8D 45 ?? B2
+    return_type: void
+    name: SetIsCommandPanelShortcut
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: char
+      name: enabled
   - signature: 44 8B 89 ?? ?? ?? ?? 4C 8B D1 41 8B C1
     return_type: void
     name: SetComboLevel
@@ -149307,6 +149642,24 @@ structs:
       name: enable
     - type: byte
       name: level
+  - signature: E8 ?? ?? ?? ?? 4D 8B 47 ?? 8D 45
+    return_type: void
+    name: SetComboBorder
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: char
+      name: enable
+    - type: char
+      name: forced
+  - signature: E8 ?? ?? ?? ?? 48 89 7E ?? BA ?? ?? ?? ?? 48 8B BF
+    return_type: void
+    name: SetUnk14
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: char
+      name: enabled
   - signature: E8 ?? ?? ?? ?? 45 33 F6 FF C6
     return_type: void
     name: SetOuterResNode
@@ -149327,7 +149680,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentIcon*
       name: this
-    - type: byte
+    - type: unsigned __int16
       name: labelId
     - type: Client::Graphics::ByteColor
       name: color
@@ -197929,6 +198282,465 @@ structs:
     - type: char
       name: a3
   member_functions: []
+- type: Client::UI::AddonSatisfactionList
+  name: AddonSatisfactionList
+  namespace: Client.UI
+  union: False
+  size: 728
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkResNode*
+    name: TabBar
+    offset: 568
+  - type: Component::GUI::AtkTextNode*
+    name: AllowancesText
+    offset: 576
+  - type: Component::GUI::AtkComponentButton*
+    name: CloseButton
+    offset: 584
+  - type: Component::GUI::AtkComponentList*
+    name: List
+    offset: 592
+  - type: unsigned int
+    name: NpcIds
+    offset: 600
+    size: 10
+    is_string: False
+  - type: Component::GUI::AtkComponentRadioButton*
+    name: Tabs
+    offset: 640
+    size: 9
+    is_string: False
+  - type: int
+    name: NpcCount
+    offset: 712
+  - type: int
+    name: TabIndex
+    offset: 716
+  - type: int
+    name: TabCount
+    offset: 720
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: Open
+    offset: 24
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: unsigned int
+      name: depthLayer
+  - name: Close
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: char
+      name: fireCallback
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: char
+      name: disableShowTransition
+    - type: unsigned int
+      name: unsetShowHideFlags
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: char
+      name: disableHideTransition
+    - type: char
+      name: callCloseCallback
+    - type: unsigned int
+      name: setShowHideFlags
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: __int16
+      name: value
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: __int16
+      name: value
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: __int16*
+      name: outX
+    - type: __int16*
+      name: outY
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: byte
+      name: alpha
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: float
+      name: scale
+    - type: char
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: unsigned __int16*
+      name: outWidth
+    - type: unsigned __int16*
+      name: outHeight
+    - type: char
+      name: scaled
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: collisionNode
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: HandleCursorTypeChange
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: ShouldIgnoreInputs
+    offset: 184
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: GetRootNode
+    offset: 192
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: GetWindowBounds
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: GetRootBounds
+    offset: 240
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: SetDepthLayer
+    offset: 248
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: unsigned int
+      name: depthLayerIndex
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: Focus
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: Initialize
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: Finalizer
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: Update
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: float
+      name: delta
+  - name: Draw
+    offset: 352
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 368
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 376
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: OnSetup
+    offset: 392
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRefresh
+    offset: 408
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRequestedUpdate
+    offset: 416
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: numberArrayData
+    - type: Component::GUI::StringArrayData**
+      name: stringArrayData
+  - name: FireCloseCallback
+    offset: 432
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: SetSizeFromConfig
+    offset: 448
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: float
+      name: width
+    - type: float
+      name: height
+  - name: HandleCustomInput
+    offset: 456
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: Component::GUI::AtkEventData::AtkInputData*
+      name: inputData
+  - name: OnFocusChange
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: char
+      name: isFocused
+  - name: OnScreenSizeChange
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: int
+      name: width
+    - type: int
+      name: height
+  - name: OnConfigLoaded
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: char
+      name: isInitialLoad
+  - name: OnMouseOver
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: OnMouseOut
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: IsFullyLoaded
+    offset: 528
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+  - name: PlaySoundEffect
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: int
+      name: soundEffectId
+  - name: HandleDPadInput
+    offset: 552
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: int
+      name: inputId
+    - type: char
+      name: a3
+  - name: HandleBackButtonInput
+    offset: 568
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: int
+      name: inputId
+    - type: char
+      name: a3
+  member_functions:
+  - signature: 40 56 48 83 EC ?? 48 8B F1 45 84 C0 75 ?? 3B 91 ?? ?? ?? ?? 0F 84 ?? ?? ?? ?? 8B 81
+    return_type: void
+    name: SetTab
+    parameters:
+    - type: Client::UI::AddonSatisfactionList*
+      name: this
+    - type: int
+      name: tabIndex
+    - type: char
+      name: force
 - type: Client::UI::AddonScreenInfoChild
   name: AddonScreenInfoChild
   namespace: Client.UI
@@ -236984,6 +237796,427 @@ structs:
     return_type: char
     parameters:
     - type: Client::UI::AddonXBMMonsterBookDetail*
+      name: this
+    - type: int
+      name: inputId
+    - type: char
+      name: a3
+  member_functions: []
+- type: Client::UI::AddonXBMMonsterNotebook
+  name: AddonXBMMonsterNotebook
+  namespace: Client.UI
+  union: False
+  size: 2176
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 1768
+  virtual_functions:
+  - name: dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: Open
+    offset: 24
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: unsigned int
+      name: depthLayer
+  - name: Close
+    offset: 32
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: char
+      name: fireCallback
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: char
+      name: disableShowTransition
+    - type: unsigned int
+      name: unsetShowHideFlags
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: char
+      name: disableHideTransition
+    - type: char
+      name: callCloseCallback
+    - type: unsigned int
+      name: setShowHideFlags
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: __int16
+      name: value
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: __int16
+      name: value
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: __int16*
+      name: outX
+    - type: __int16*
+      name: outY
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: byte
+      name: alpha
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: float
+      name: scale
+    - type: char
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: unsigned __int16*
+      name: outWidth
+    - type: unsigned __int16*
+      name: outHeight
+    - type: char
+      name: scaled
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: collisionNode
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: HandleCursorTypeChange
+    offset: 176
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: ShouldIgnoreInputs
+    offset: 184
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: GetRootNode
+    offset: 192
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: GetWindowBounds
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: GetRootBounds
+    offset: 240
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: SetDepthLayer
+    offset: 248
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: unsigned int
+      name: depthLayerIndex
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: Focus
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: Initialize
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: Finalizer
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: Update
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: float
+      name: delta
+  - name: Draw
+    offset: 352
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 368
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 376
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: OnSetup
+    offset: 392
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRefresh
+    offset: 408
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRequestedUpdate
+    offset: 416
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: numberArrayData
+    - type: Component::GUI::StringArrayData**
+      name: stringArrayData
+  - name: FireCloseCallback
+    offset: 432
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: SetSizeFromConfig
+    offset: 448
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: float
+      name: width
+    - type: float
+      name: height
+  - name: HandleCustomInput
+    offset: 456
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: Component::GUI::AtkEventData::AtkInputData*
+      name: inputData
+  - name: OnFocusChange
+    offset: 472
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: char
+      name: isFocused
+  - name: OnScreenSizeChange
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: int
+      name: width
+    - type: int
+      name: height
+  - name: OnConfigLoaded
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: char
+      name: isInitialLoad
+  - name: OnMouseOver
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: OnMouseOut
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: IsFullyLoaded
+    offset: 528
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+  - name: PlaySoundEffect
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: int
+      name: soundEffectId
+  - name: HandleDPadInput
+    offset: 552
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
+      name: this
+    - type: int
+      name: inputId
+    - type: char
+      name: a3
+  - name: HandleBackButtonInput
+    offset: 568
+    return_type: char
+    parameters:
+    - type: Client::UI::AddonXBMMonsterNotebook*
       name: this
     - type: int
       name: inputId
