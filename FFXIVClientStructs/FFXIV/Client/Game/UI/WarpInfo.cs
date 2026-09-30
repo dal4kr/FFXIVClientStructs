@@ -13,7 +13,7 @@ public unsafe partial struct WarpInfo {
     public static partial WarpInfo* Instance();
 
     [FieldOffset(0x00)] private uint State;
-    [FieldOffset(0x04)] private float Unk4;
+    [FieldOffset(0x04)] public float ElapsedTimeSinceLastWarp;
     [FieldOffset(0x08)] private float Unk8;
     [FieldOffset(0x0C)] public WarpType WarpType;
     [FieldOffset(0x10)] private ExitRangeLayoutInstance* ExitRange;
@@ -86,7 +86,7 @@ public enum WarpType {
     Unk2 = 2,
     Translate = 3, // name based on TownTranslate further down. seen when walking through ExitRange, changing wards in original housing zones
     Teleport = 4,
-    Unk5 = 5,
+    Revive = 5, // Revive by others
     Unk6 = 6,
     Return = 7,
     Resurrection = 8,

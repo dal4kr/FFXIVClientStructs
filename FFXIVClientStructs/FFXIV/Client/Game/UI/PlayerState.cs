@@ -83,7 +83,7 @@ public unsafe partial struct PlayerState {
     /// 1 = PlayStation Plus<br/>
     /// 2 = Nintendo Switch Online
     /// </remarks>
-    [FieldOffset(0x2E0), FixedSizeArray] internal FixedSizeArray2<ushort> _freeAetheryteIds;
+    [FieldOffset(0x2E0), FixedSizeArray] internal FixedSizeArray3<ushort> _freeAetheryteIds;
     [FieldOffset(0x2E0), Obsolete("Use FreeAetheryteIds[0]")] public ushort FreeAetheryteId;
     [FieldOffset(0x2E2), Obsolete("Use FreeAetheryteIds[1]")] public ushort FreeAetherytePSPlus;
     [FieldOffset(0x2E4), Obsolete("Use FreeAetheryteIds[2]")] public ushort FreeAetheryteNSO;
@@ -350,6 +350,12 @@ public unsafe partial struct PlayerState {
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B E8 F3 0F 10 35")]
     public partial uint GetCurrentClassJobNeededExp();
+
+    [MemberFunction("0F B6 51 7E 80 FA 24")]
+    public partial byte GetCurrentClassJobMaxLevel();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C8 66 3B F1")]
+    public partial byte GetCurrentClassJobContentMaxLevel();
 
     #region Unlocks
 
