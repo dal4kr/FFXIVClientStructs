@@ -82,6 +82,14 @@ public partial struct RaptureHotbarModule {
         /// <seealso cref="ApparentActionId"/>
         [FieldOffset(0xC9)] public HotbarSlotType ApparentSlotType;
 
+        /// <summary>
+        /// Uses general drag-and-drop types for <see cref="HotbarUIIntermediate.Type"/> instead of action-bar types.
+        /// </summary>
+        /// <remarks>
+        /// Set for Quick Panel slots. For example, Action uses 7 instead of 48.
+        /// </remarks>
+        [FieldOffset(0xCA)] public bool UsesGeneralDragDropType;
+
         /// Appears to be the "primary cost" of this action, mapping down to 0, 1, 2, 4, 5, 6, 7.
         ///
         /// Controls the color of the displayed cost when 0xCB is 1 or 2:
@@ -168,8 +176,20 @@ public partial struct RaptureHotbarModule {
         /// </summary>
         public bool IsEmpty => CommandId == 0;
 
+        /// <summary>
+        /// Initialize the slot (specifically the utf8string, then clearing).
+        /// </summary>
+        [MemberFunction("E8 ?? ?? ?? ?? 48 81 C6 E8 00 00 00 48 83 ED 01 75 ?? 49 8D B6")]
+        public partial HotbarSlot* Initialize();
+
         [MemberFunction("E8 ?? ?? ?? ?? EB 07 44 88 2F")]
         public partial void Set(UIModule* uiModule, HotbarSlotType type, uint id);
+
+        /// <summary>
+        /// Reset data in this hotbar slot.
+        /// </summary>
+        [MemberFunction("E8 ?? ?? ?? ?? 44 8B 0B 48 8B CD")]
+        public partial void Clear();
 
         /// <summary>
         /// Update the <see cref="CommandType"/> and <see cref="CommandId"/> of this hotbar slot. This method will only affect

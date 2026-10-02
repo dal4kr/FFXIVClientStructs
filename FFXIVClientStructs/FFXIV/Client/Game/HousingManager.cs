@@ -150,6 +150,9 @@ public unsafe partial struct HousingManager {
     [MemberFunction("E8 ?? ?? ?? ?? 88 45 38")]
     public static partial bool IsSubmarineExplorationExplored(byte point);
 
+    [MemberFunction("48 83 EC ?? 45 0F B6 C0 45 33 C9 0F B7 D2")]
+    public static partial void RequestWardInfo(ushort territoryType, byte wardIndex);
+
     public HousingTerritoryType GetCurrentHousingTerritoryType()
         => CurrentTerritory != null ? CurrentTerritory->GetTerritoryType() : HousingTerritoryType.None;
 }
