@@ -20,10 +20,10 @@ public unsafe partial struct AtkFontManager {
     [FieldOffset(0x50)] public uint SetupState;
 
     public const int FontSetCount = 6;
-    public Span<FontSet> FontSetSpan => FontSets is null ? Span<FontSet>.Empty : new(FontSets, FontSetCount);
-    public Span<Font> FontSpan => Fonts is null ? Span<Font>.Empty : new(Fonts, FontCount);
+    public Span<FontSet> FontSetSpan => FontSets is null ? Span<FontSet>.Empty : new Span<FontSet>(FontSets, FontSetCount);
+    public Span<Font> FontSpan => Fonts is null ? Span<Font>.Empty : new Span<Font>(Fonts, FontCount);
 
-    [MemberFunction("40 56 48 83 EC 60 66 3B 51 10 0F 83 ?? ?? ?? ?? 0F B7 C2 48 69 F0 F8 00 00 00")]
+    [MemberFunction("40 56 48 83 EC ?? 66 3B 51")]
     public partial int BuildFont(ushort index);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CF 4C 89 BF ?? ?? ?? ?? E8")]
@@ -72,7 +72,7 @@ public unsafe partial struct AtkFontManager {
     public enum FontFlags : byte {
         Built = 1 << 0,
         Ready = 1 << 1,
-        DirectIndex = 1 << 2,
+        DirectIndex = 1 << 2
     }
 
     /// <summary> The fonts of one <see cref="FontType"/>, and the state of the text being drawn with them. </summary>
@@ -92,13 +92,13 @@ public unsafe partial struct AtkFontManager {
 
         /// <summary>Looks a glyph up in a font of the set.</summary>
         /// <returns><c>null</c> if the font has none.</returns>
-        [MemberFunction("89 54 24 10 48 83 EC 38 41 F6 80 F2 00 00 00 04")]
+        [MemberFunction("89 54 24 ?? 48 83 EC ?? 41 F6 80")]
         public partial Glyph* GetGlyph(uint utf8Value, Font* font);
     }
 
     [Flags]
     public enum DrawFlags : uint {
-        Italic = 1 << 27,
+        Italic = 1 << 27
     }
 
     [GenerateInterop]

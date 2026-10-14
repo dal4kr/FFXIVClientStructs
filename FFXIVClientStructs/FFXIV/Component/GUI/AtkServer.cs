@@ -79,7 +79,7 @@ public unsafe partial struct AtkServer {
     [MemberFunction("48 85 C9 74 ?? E8 ?? ?? ?? ?? 84 C0 75 ?? B8 FF FF FF FF", 6)]
     public partial bool LoadShaders();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 54 24 30 8B 4C 24 4C 4C 8B 45 90 C1 EA 0C")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 65 48 8B 04 25 ?? ?? ?? ?? 4C 8B F2")]
     public partial void SetDrawState(DrawState* state, byte textureDivisor);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 65 48 8B 04 25 58 00 00 00 41 0F B6 F0 44 8B 0D ?? ?? ?? ?? 48 8B D9 8B EA")]
@@ -90,7 +90,7 @@ public unsafe partial struct AtkServer {
         FontEdge = 5,
         FontGlare = 6,
         FontHighlight = 7,
-        FontEmboss = 8,
+        FontEmboss = 8
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
