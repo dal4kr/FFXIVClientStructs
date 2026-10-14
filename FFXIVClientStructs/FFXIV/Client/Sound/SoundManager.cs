@@ -170,7 +170,7 @@ public unsafe partial struct SoundManager {
     public partial SoundData* PlayCutsceneVoSound(CStringPointer path); // Cutscene Vo
 
     /// <remarks> Uses <see cref="WeatherSoundData"/> field. </remarks>
-    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B D9 41 8B F0 48 8B 89"), GenerateStringOverloads]
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B D9 41 8B F0 48 8B 89 ?? ?? ?? ?? 48 8B FA 48 85 C9"), GenerateStringOverloads]
     public partial void PlayWeatherSound(CStringPointer path, uint fadeDuration);
 
     /// <summary>
