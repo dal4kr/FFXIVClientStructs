@@ -203,7 +203,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? F3 41 0F 11 06 80 3B")]
     public static partial float GetActionRange(uint actionId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 02 33 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 02 33 C0 4C 8D 9C 24")]
     public static partial uint GetActionInRangeOrLoS(uint actionId, GameObject* sourceObject, GameObject* targetObject);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 0F B6 CE E9")]
