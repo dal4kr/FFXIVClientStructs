@@ -1,33 +1,47 @@
-# 跨客户端导入
+# 跨客户端符号导入
 
-`ffxiv_crossclient.py` 在 IDA 外读取参考客户端、目标客户端、`data.yml` 和 `ffxiv_structs.yml`，生成目标客户端的命名数据。原有脚本与原有数据文件均不需要修改。
+将 FFCS 的函数名、虚表和结构声明导入其他版本或地区的客户端。先在 IDA 外生成目标客户端的数据，再在 IDA 内导入。需要检查源码中的字段偏移、结构大小和特征码时，参见 [客户端声明维护](README.client-update.md)。
 
-需要 Python 3.10 或更高版本，以及 `pefile`、`capstone`、`PyYAML`。IDA 中仍然需要上游命名、EXD 与结构导入脚本原本使用的依赖和名称配置。
+## 导入至 IDA
 
-## 生成国服数据
+### 运行要求
 
-在当前 `ida` 目录执行：
+- Python 3.10 及更高版本，以及 `pefile`、`capstone`、`PyYAML`。
+- IDA 9 及更高版本，并完成 FFCS 原有导入脚本所需的 Python 依赖和游戏数据路径配置。
+- 参考客户端和目标客户端的 `ffxiv_dx11.exe`，以及对应参考客户端的命名数据。
+
+### 运行过程
+
+1. 在本目录打开 PowerShell，安装 Python 依赖：
+
+```powershell
+python -m pip install pefile capstone PyYAML
+```
+
+2. 指定两个客户端，执行数据转换。以下示例从国际服 7.57hf1 生成国服 7.57 的命名数据，也用于国服版本更新配置中的 `data`：
 
 ```powershell
 $sourceClient = 'E:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn\clients\7.57hf1\ffxiv_dx11.exe'
 $targetClient = 'E:\Program Files (x86)\上海数龙科技有限公司\clients\7.57\ffxiv_dx11.exe'
+$data = '.\old\data_2026.10.16.0000.0000.yml'
 
-python -X utf8 -B .\ffxiv_crossclient.py --source $sourceClient --target $targetClient --output .\data.generated.yml --mapping .\crossclient.generated.json --report .\crossclient.report.json
+python -X utf8 -B .\ffxiv_crossclient.py --source $sourceClient --target $targetClient --data $data --output .\data.generated.yml --mapping .\crossclient.generated.json --report .\crossclient.report.json
 ```
 
-参考程序必须与输入的 `data.yml` 对应。`--data` 和 `--structs` 可以指定其他输入文件。输出路径不能与输入路径相同。
+替换客户端路径后即可使用。`--data` 必须与参考客户端对应；使用当前国际服客户端时，可指定 `data.yml`。结构声明默认读取本目录的 `ffxiv_structs.yml`，也可通过 `--structs` 指定其他文件。输出文件应与输入文件使用不同路径。
 
-映射文件按两个程序的 SHA-256 校验。再次执行相同命令会复用函数映射和双端原生声明解析结果；输入命名数据或结构数据发生变化时，只更新相应部分。首次生成过程中会分阶段保存缓存，中断后可以重新执行同一命令继续处理。更换客户端程序时，应为该程序组合选择新的映射文件。
+3. 检查本目录生成的文件：
 
-生成文件中的未解析地址会被省略。报告分别列出地址迁移未解析项、原生声明未解析项、地址对应冲突数量与双端签名定位分歧。冲突项同时计入未解析地址，不能将两者相加计算遗漏数量。不能将生成结果当成完整迁移成功的保证，应查看报告中的具体条目。
+| 文件 | 用途 |
+| --- | --- |
+| `data.generated.yml` | 目标客户端的命名数据，供 IDA 导入或声明维护脚本使用 |
+| `crossclient.generated.json` | 两端函数映射和解析缓存，保留后可复用 |
+| `crossclient.report.json` | 无法定位、地址冲突及签名定位分歧的具体条目 |
 
-## 在 IDA 中导入
+报告中未解析或存在冲突的地址不会写入命名数据，需要在 IDA 中继续定位。冲突已计入未解析项，无需重复统计。命令中断后可执行原命令继续处理；更换任一客户端时，应更换映射缓存的文件名。
 
-打开目标客户端对应的数据库，运行 `ffxiv_crossclient_ida.py`，选择生成的 `data.generated.yml`。入口核对数据库输入程序的 SHA-256，并根据数据库当前映像基址重定位。
+4. 在 IDA 中打开目标客户端，选择运行本目录的 `ffxiv_crossclient_ida.py`，在文件选择对话框中选择 `data.generated.yml`。脚本会核对客户端 SHA-256；不匹配时应重新选择数据库或生成数据。
 
-入口依次调用原有命名与结构导入逻辑；数据库尚未具有 EXD 基础类型时，才执行原有 EXD 步骤。游戏数据路径的要求与原有 FFCS 导入流程相同。结构导入建议选择 SrcLang。
+5. 按提示完成命名和结构导入，结构导入建议选择 SrcLang。缺少 EXD 基础类型时，脚本会先执行 EXD 导入，游戏数据路径沿用 FFCS 原有配置。等待脚本运行完成即可。
 
-导入不会替换磁盘上的 `data.yml` 或 `ffxiv_structs.yml`。未解析或存在定位冲突的地址不会被用于导入，请查看生成的报告。
-
-国际服也可使用同一个入口：将生成命令中的 `--target` 指向参考程序，并为它指定另一组输出文件。同一程序之间直接使用地址恒等关系。
-
+导入过程不修改磁盘上的 `data.yml` 和 `ffxiv_structs.yml`。需要向国际服导入时，同样执行上述过程；若两个客户端是同一文件，脚本会直接沿用原地址。

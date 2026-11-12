@@ -1,0 +1,19 @@
+{
+  "source": "E:/Program Files (x86)/SquareEnix/FINAL FANTASY XIV - A Realm Reborn/clients/7.57hf1/ffxiv_dx11.exe",
+  "target": "E:/Program Files (x86)/SquareEnix/FINAL FANTASY XIV - A Realm Reborn/clients/7.58/ffxiv_dx11.exe",
+  "roots": [
+    "../FFXIVClientStructs/FFXIV",
+    "../../../../DailyRoutines/src/lib/FFXIVClientStructs.Expansion/FFXIVClientStructs.Expansion/FFXIV"
+  ],
+  "baseline_root": "../FFXIVClientStructs/FFXIV",
+  "baseline_revision": "de9396c902fb23955b3d0a2f314c6cd81cf8aca8^1",
+  "baselines": [
+    {
+      "root": "../../../../DailyRoutines/src/lib/FFXIVClientStructs.Expansion/FFXIVClientStructs.Expansion/FFXIV",
+      "revision": "428bef528cb7763f900957852d4f813c29696d90"
+    }
+  ],
+  "data": "old/data_2026.10.16.0000.0000.yml",
+  "report": "update-global-7.58.json",
+  "cache": "update-global-7.58.cache.json"
+}

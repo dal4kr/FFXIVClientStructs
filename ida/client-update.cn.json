@@ -1,0 +1,28 @@
+{
+  "source": "E:/Program Files (x86)/上海数龙科技有限公司/clients/7.57/ffxiv_dx11.exe",
+  "target": "E:/Program Files (x86)/上海数龙科技有限公司/clients/7.58/ffxiv_dx11.exe",
+  "roots": [
+    "../FFXIVClientStructs/FFXIV",
+    "../../../../DailyRoutines/src/lib/FFXIVClientStructs.Expansion/FFXIVClientStructs.Expansion/FFXIV",
+    "../../../../DailyRoutines/src/DailyRoutines.Modules",
+    "../../../../DailyRoutines/src/DailyRoutines.ModulesPublic",
+    "../../../../DailyRoutines/src/DailyRoutines",
+    "../../../../DailyRoutines/src/lib/OmenTools",
+    "../../../../DailyRoutines/src/lib/KamiToolKit"
+  ],
+  "baseline_root": "../FFXIVClientStructs/FFXIV",
+  "baseline_revision": "de9396c902fb23955b3d0a2f314c6cd81cf8aca8^1",
+  "baselines": [
+    {
+      "root": "../../../../DailyRoutines/src/lib/FFXIVClientStructs.Expansion/FFXIVClientStructs.Expansion/FFXIV",
+      "revision": "428bef528cb7763f900957852d4f813c29696d90"
+    },
+    {
+      "root": "../../../../DailyRoutines/src/lib/OmenTools",
+      "revision": "a719bc3df38189377613df56136282a0f89add49"
+    }
+  ],
+  "data": "data.generated.yml",
+  "report": "update-cn-7.58.json",
+  "cache": "update-cn-7.58.cache.json"
+}

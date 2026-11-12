@@ -1,0 +1,13 @@
+{
+  "source": "E:/Program Files (x86)/SquareEnix/FINAL FANTASY XIV - A Realm Reborn/clients/7.58/ffxiv_dx11.exe",
+  "target": "E:/Program Files (x86)/上海数龙科技有限公司/clients/7.58/ffxiv_dx11.exe",
+  "roots": [
+    "../FFXIVClientStructs/FFXIV",
+    "../../../../DailyRoutines/src/lib/FFXIVClientStructs.Expansion/FFXIVClientStructs.Expansion/FFXIV"
+  ],
+  "data": "data.yml",
+  "source_index": "update-global-7.58.cache.target.json",
+  "target_index": "update-cn-7.58.cache.target.json",
+  "report": "update-global-to-cn-7.58.json",
+  "cache": "update-global-to-cn-7.58.cache.json"
+}

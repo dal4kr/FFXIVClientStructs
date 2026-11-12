@@ -154,6 +154,6 @@ public unsafe partial struct CharaViewPortrait {
         CharacterNotInFrame = 1 << 3,
 
         /// <remarks> LogMessage#5882: "Unable to save portrait. A weapon or accessory is interfering with the camera." </remarks>
-        Obstructed = 1 << 4,
+        Obstructed = 1 << 4
     }
 }

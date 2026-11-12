@@ -442,3 +442,6 @@ ida/unresolved.txt
 
 # Local agent instructions
 /AGENTS.md
+ida/crossclient.generated.json
+ida/crossclient.report.json
+ida/data.generated.yml
